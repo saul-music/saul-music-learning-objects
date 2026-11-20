@@ -22,10 +22,12 @@ actividad y su evaluación, más sus metadatos (subconjunto de IEEE LOM) para ca
 ## Paquetes
 
 - `packages/lo-*`: un OA por paquete (metadatos, lógica, vista, portada y README).
-- `packages/lo-kit`: lo común a los OA (introducción, cuestionario de alternativas, efectos de acierto y error,
-  resumen y teclado de piano).
+- `packages/lo-kit`: el juego común a los OA (pantalla de título, cuenta regresiva, marcador con puntos y combo,
+  fichas de respuesta, efectos de acierto y error, resultados con estrellas y récord, teclado de piano y
+  tipografía musical).
 - `packages/theme`: colores y tipografía de Acordia (copiados de `acordia_render`) y botones base.
-- `packages/audio`: sampler sobre Web Audio con las muestras de guitarra de nailon (FluidR3_GM, CC BY 3.0).
+- `packages/audio`: sampler sobre Web Audio con las muestras de guitarra de nailon (FluidR3_GM, CC BY 3.0) y
+  efectos de sonido sintetizados.
 - `apps/playground`: la galería (Vite), publicada en GitHub Pages por el pipeline.
 
 ## Desarrollo

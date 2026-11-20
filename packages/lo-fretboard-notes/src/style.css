@@ -12,15 +12,16 @@
 .lo-fn__board .string-num--target { fill: var(--ac-accent); font-weight: 600; }
 .lo-fn__board .string-num--top { text-anchor: middle; }
 .lo-fn__board .target { fill: transparent; stroke: transparent; stroke-width: 2; cursor: pointer; }
-.lo-fn__board .target:hover, .lo-fn__board .target:focus-visible { stroke: var(--ac-accent); fill: rgba(var(--ac-accent-rgb), .15); outline: none; }
-.lo-fn__board .mark text { font-size: 17px; font-weight: 600; pointer-events: none; }
+.lo-fn__board .target:hover, .lo-fn__board .target:focus-visible { stroke: var(--ac-accent); stroke-width: 3; fill: rgba(var(--ac-accent-rgb), .25); outline: none; }
+.lo-fn__board .mark text { font-family: var(--ac-font-music); font-size: 20px; pointer-events: none; }
+.lo-fn__board .mark--miss text { font-family: var(--ac-font-game); font-weight: 800; font-size: 16px; }
 .lo-fn__board .mark .dot { transform-box: fill-box; transform-origin: center; }
 .lo-fn__board .mark--source .dot { fill: var(--ac-fill); }
 .lo-fn__board .mark--source text { fill: var(--ac-on-fill); }
-.lo-fn__board .mark--answer .dot { fill: var(--ac-fill-2); }
-.lo-fn__board .mark--answer text { fill: var(--ac-on-fill-2); }
-.lo-fn__board .mark--miss .dot { fill: var(--ac-bg); stroke: var(--ac-fg-muted); stroke-width: 2; stroke-dasharray: 4 3; }
-.lo-fn__board .mark--miss text { fill: var(--ac-fg-muted); }
+.lo-fn__board .mark--answer .dot { fill: var(--ac-win); }
+.lo-fn__board .mark--answer text { fill: var(--ac-on-win); }
+.lo-fn__board .mark--miss .dot { fill: var(--ac-lose); stroke: var(--ac-lose-deep); stroke-width: 2; }
+.lo-fn__board .mark--miss text { fill: var(--ac-on-lose); }
 .lo-fn__board .mark--answer .dot, .lo-fn__board .mark--miss .dot { animation: lo-pop .45s cubic-bezier(.2, .8, .2, 1.3) both; }
 .lo-fn__board .pulse { fill: none; stroke: var(--ac-fill); stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: lo-fn-ripple 1.6s ease-out infinite; }
 .lo-fn__board-wrap.is-entering .string--target { animation: lo-fn-glow 1s .6s ease-in-out 2; }

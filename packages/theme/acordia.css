@@ -62,3 +62,45 @@
   --ac-fill-2:      var(--ac-jade-osc);
   --ac-on-fill-2:   var(--ac-marfil);
 }
+
+/* 4. Extensión de juego (O9) --------------------------------------------
+   Tipografía musical y colores de ganar/perder para los OA. No cambia la marca:
+   la amplía para el playground. Petaluma Script (SIL OFL 1.1, fonts/PetalumaScript-OFL.txt)
+   escribe notas y acordes con ♯ y ♭ reales; Noto Music (OFL, Google Fonts) dibuja figuras y claves. */
+@font-face {
+  font-family: "Petaluma Script";
+  src: url("./fonts/PetalumaScript.woff2") format("woff2");
+  font-display: swap;
+}
+:root {
+  --ac-font-music:   "Petaluma Script", "Noto Music", var(--ac-font-display);
+  --ac-font-symbols: "Noto Music", "Petaluma Script", serif;
+  --ac-font-game:    "Work Sans", system-ui, sans-serif;  /* marcador y carteles, en peso 800 */
+}
+:root,
+:root[data-theme="dark"] {
+  --ac-win:        var(--ac-jade);
+  --ac-win-rgb:    95, 179, 155;
+  --ac-win-deep:   var(--ac-jade-osc);
+  --ac-on-win:     var(--ac-noche);
+  --ac-lose:       #e2725b;            /* terracota del desierto */
+  --ac-lose-rgb:   226, 114, 91;
+  --ac-lose-deep:  #9c3f2c;
+  --ac-on-lose:    var(--ac-noche);
+  --ac-fill-deep:  var(--ac-oro-osc);  /* canto inferior de los botones de juego */
+  --ac-tile:       var(--ac-noche-2);
+  --ac-tile-deep:  #120e24;
+}
+:root[data-theme="light"] {
+  --ac-win:        var(--ac-jade-osc);
+  --ac-win-rgb:    46, 111, 94;
+  --ac-win-deep:   #1d4a3e;
+  --ac-on-win:     var(--ac-marfil);
+  --ac-lose:       #b5462f;
+  --ac-lose-rgb:   181, 70, 47;
+  --ac-lose-deep:  #7f2f1f;
+  --ac-on-lose:    var(--ac-marfil);
+  --ac-fill-deep:  var(--ac-oro-osc);
+  --ac-tile:       #fbf8f1;
+  --ac-tile-deep:  var(--ac-marfil-3);
+}

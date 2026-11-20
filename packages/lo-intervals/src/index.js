@@ -1,5 +1,5 @@
 // OA «El misterio de E#»: intervalos, sostenidos, bemoles y notas raras.
-import { drawKeyboard, el, mountChoiceQuiz, spoken } from "@saul-music/lo-kit";
+import { drawKeyboard, el, mountChoiceQuiz, noteLabel, spoken } from "@saul-music/lo-kit";
 import { Note } from "tonal";
 import { chromaticSteps, degreeLabel, makeQuestion } from "./theory.js";
 
@@ -34,6 +34,8 @@ function toQuiz(t) {
       ...base,
       eyebrow: `Medio tono ${t.up ? "arriba" : "abajo"} de`,
       big: t.from,
+      bigKind: "note",
+      choiceKind: "note",
       spoken: spoken(t.from),
       ask: `¿Qué nota está medio tono ${t.up ? "arriba" : "abajo"}?`,
       visual: (answered) => kb([{ midi: a, kind: "source", label: t.from }, ...(answered ? [{ midi: b, kind: "answer", label: t.answer }] : [])]),
@@ -48,6 +50,8 @@ function toQuiz(t) {
       ...base,
       eyebrow: "Dos nombres, un sonido",
       big: t.from,
+      bigKind: "note",
+      choiceKind: "note",
       spoken: spoken(t.from),
       ask: "¿Con qué otra nota suena igual?",
       visual: (answered) => kb([{ midi: m, kind: answered ? "answer" : "source", label: answered ? t.answer : "?" }], { letters: answered }),
@@ -63,8 +67,9 @@ function toQuiz(t) {
     return {
       ...base,
       eyebrow: t.type === "semitones" ? "Cuenta los medios tonos" : "Nombra el intervalo",
-      big: `${t.from} → ${t.to}`,
+      big: el("span", { class: "lo-iv__pair" }, noteLabel(t.from), el("span", { class: "lo-iv__arrow", "aria-hidden": "true" }, "→"), noteLabel(t.to)),
       ask: t.type === "semitones" ? "¿Cuántos semitonos hay, subiendo?" : "¿Qué intervalo es?",
+      choiceKind: t.type === "semitones" ? "number" : "text",
       visual: (answered) => kb([
         ...(answered ? steps.slice(1, -1).map((n, i) => ({ midi: a + i + 1, kind: "hint" })) : []),
         { midi: a, kind: "source", label: t.from },
@@ -79,7 +84,8 @@ function toQuiz(t) {
   return {
     ...base,
     eyebrow: "En la escala de",
-    big: `${t.key} mayor`,
+    big: el("span", { class: "lo-iv__pair" }, noteLabel(t.key), el("span", { class: "lo-iv__word" }, "mayor")),
+    choiceKind: "note",
     ask: `¿Cómo se escribe su ${degreeLabel(t.degree)} nota?`,
     visual: (answered) => el("div", { class: "lo-iv" },
       el("ol", { class: "lo-iv__scale" },
@@ -87,7 +93,7 @@ function toQuiz(t) {
           const isAsked = i + 1 === t.degree;
           const cls = isAsked ? (answered ? " is-answer" : " is-asked") : "";
           return el("li", { class: `lo-iv__step${cls}`, style: `--i:${i}` },
-            el("small", {}, degreeLabel(i + 1)), el("b", {}, isAsked && !answered ? "?" : n));
+            el("small", {}, degreeLabel(i + 1)), el("b", {}, isAsked && !answered ? "?" : noteLabel(n)));
         })),
       kb(midis.map((m, i) => ({ midi: m, kind: i + 1 === t.degree ? (answered ? "answer" : "source") : "hint", label: i + 1 === t.degree && !answered ? "?" : undefined })))),
     onAnswer: (s) => s?.sequence([...midis, midis[0] + 12], { gap: 0.32 }),
@@ -95,10 +101,13 @@ function toQuiz(t) {
   };
 }
 
-export function mount(container, { sampler, metadata }) {
+export function mount(container, { sampler, sfx, metadata, cover, next }) {
   return mountChoiceQuiz(container, {
     metadata,
     sampler,
+    sfx,
+    cover,
+    next,
     className: "lo-intervals",
     makeQuestion: (rng) => toQuiz(makeQuestion(rng)),
     demo: ({ sampler: s }) => {

@@ -1,5 +1,6 @@
 // Teclado de piano en SVG, para mostrar notas, medios tonos e intervalos.
 import { svg } from "./dom.js";
+import { pretty } from "./notes.js";
 
 const WHITE_PCS = [0, 2, 4, 5, 7, 9, 11];
 const LETTER = { 0: "C", 2: "D", 4: "E", 5: "F", 7: "G", 9: "A", 11: "B" };
@@ -56,7 +57,9 @@ export function drawKeyboard({ from = 48, to = 71, marks = [], letters = false, 
       cy = BH - 20;
     }
     root.append(svg("circle", { cx, cy, r: 15, class: `key-mark is-${k.kind}` }));
-    root.append(svg("text", { x: cx, y: cy + 5, class: `key-mark-text is-${k.kind}` }, k.label));
+    // Las notas van con ♯/♭ reales en tipografía musical; lo demás («1ª», «?») en la del marcador.
+    const isNote = /^[A-G](##|#|bb|b)?$/.test(k.label);
+    root.append(svg("text", { x: cx, y: cy + 5, class: `key-mark-text is-${k.kind}${isNote ? "" : " is-step"}` }, isNote ? pretty(k.label) : k.label));
   }
   return root;
 }

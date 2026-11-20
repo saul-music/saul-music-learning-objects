@@ -14,6 +14,7 @@ function toQuiz(t) {
       ...base,
       eyebrow: "En clave americana",
       big: t.name,
+      bigKind: "note",
       ask: "¿Cómo se dice en español?",
       recap: `${t.name} se dice ${spoken(t.name)}.`,
       visual: (answered) => drawKeyboard({ from: 60, to: 71, marks: [{ midi, kind: answered ? "answer" : "source", label: t.name }], letters: answered }),
@@ -27,6 +28,7 @@ function toQuiz(t) {
       eyebrow: "En español se dice",
       big: spoken(t.name),
       ask: "¿Cómo se escribe en clave americana?",
+      choiceKind: "note",
       recap: `${spoken(t.name)} se escribe ${t.name}.`,
       // Antes de responder, el teclado no lleva letras: delatarían la respuesta.
       visual: (answered) => drawKeyboard({ from: 60, to: 71, marks: [{ midi, kind: answered ? "answer" : "source", label: answered ? t.name : "?" }], letters: answered }),
@@ -39,6 +41,8 @@ function toQuiz(t) {
     ...base,
     eyebrow: "El alfabeto musical",
     big: t.name,
+    bigKind: "note",
+    choiceKind: "note",
     ask: t.forward ? "¿Qué letra viene después?" : "¿Qué letra viene antes?",
     recap: t.explain,
     visual: (answered) => el("div", { class: "lo-an__ring" },
@@ -56,10 +60,13 @@ function toQuiz(t) {
   };
 }
 
-export function mount(container, { sampler, metadata }) {
+export function mount(container, { sampler, sfx, metadata, cover, next }) {
   return mountChoiceQuiz(container, {
     metadata,
     sampler,
+    sfx,
+    cover,
+    next,
     className: "lo-an",
     makeQuestion: (rng) => toQuiz(makeQuestion(rng)),
     demo: ({ sampler: s }) => {

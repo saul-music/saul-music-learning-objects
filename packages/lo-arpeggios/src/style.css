@@ -15,3 +15,6 @@
 .lo-arp__rung.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }
 .lo-arp__rung.is-answer small { color: var(--ac-on-fill-2); }
 .lo-arp--demo .lo-arp__rung { border-color: var(--ac-fill-2); }
+.lo-arp__rung b .lo-note { font-size: 1.15em; }
+.lo-arp__title { display: inline-flex; align-items: baseline; gap: .25em; }
+.lo-arp__word { font-family: var(--ac-font-display); font-size: .5em; color: var(--ac-fg); }

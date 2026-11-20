@@ -1,6 +1,9 @@
 // OA «La misma nota en otra cuerda»: contenido, actividad y evaluación.
-// Uso: mount(elemento, { sampler, metadata }) → devuelve una función para desmontar.
-import { celebrate, createRun, el, feedback, progress, questionCard, renderIntro, renderSummary, svg } from "@saul-music/lo-kit";
+// Uso: mount(elemento, { sampler, sfx, metadata, cover, next }) → devuelve una función para desmontar.
+import {
+  celebrate, countdown, createRun, createShell, el, feedback, hud, loadBest, noteLabel, pretty, questionCard,
+  renderIntro, renderResults, saveResult, svg,
+} from "@saul-music/lo-kit";
 import { isCorrect, makeQuestion, midiAt, noteName, octaveRelation, spokenName } from "./theory.js";
 
 export * from "./theory.js";
@@ -124,15 +127,15 @@ function buildDemo(example, orientation, play) {
   return { node, caption: example.caption, onReplay };
 }
 
-export function mount(container, { sampler, metadata }) {
+export function mount(container, { sampler, sfx, metadata, cover, next }) {
   const run = createRun(ROUNDS);
   const play = (midi, delay = 0) => sampler?.play(midi, { delay });
-  const root = el("section", { class: "lo-quiz lo-fn" });
-  container.replaceChildren(root);
+  const { root, screen } = createShell(container, "lo-quiz lo-fn");
   let q = null;
   let fresh = false;
+  let playing = false;
 
-  const orientation = () => (root.clientWidth < VERTICAL_BELOW ? "vertical" : "horizontal");
+  const orientation = () => (screen.clientWidth < VERTICAL_BELOW ? "vertical" : "horizontal");
   let shown = null; // orientación dibujada en la pregunta actual (null fuera de una pregunta)
   let lastResult;
   // Se espera a que el tamaño se asiente: un cambio pasajero no debe redibujar (y cortar la animación).
@@ -145,32 +148,42 @@ export function mount(container, { sampler, metadata }) {
 
   function intro() {
     shown = null;
-    renderIntro(root, { metadata, rounds: ROUNDS, demo: buildDemo(metadata.pedagogy.example, orientation(), play), onStart: start });
+    playing = false;
+    renderIntro(screen, {
+      metadata, rounds: ROUNDS, cover, best: loadBest(metadata.id),
+      demo: buildDemo(metadata.pedagogy.example, orientation(), play), onStart: start,
+      hint: "Toca el traste en el mástil. Acierta rápido para sumar bono y encadena aciertos para el combo.",
+    });
   }
 
-  function start() {
+  async function start() {
+    sfx?.unlock();
     sampler?.preload();
     run.reset();
-    next();
+    screen.replaceChildren();
+    await countdown(root, sfx);
+    playing = true;
+    nextQuestion();
   }
 
-  function next() {
+  function nextQuestion() {
     run.round += 1;
     q = makeQuestion(Math.random, { maxFret: MAX_FRET });
     fresh = true;
     render(null);
+    run.startQuestion();
     play(q.midi);
   }
 
   function pick(fret) {
-    if (q.answered) return;
+    if (!playing || q.answered) return;
     q.answered = true;
     const ok = isCorrect(q, fret);
     const answerFret = ok ? fret : q.answers[0];
-    run.record(ok, `${noteName(q.midi)} (${ordinal(q.source)} cuerda, traste ${q.fret}) → en la ${ordinal(q.target)} cuerda: traste ${q.answers.join(" o ")}. Elegiste el ${fret}.`);
+    const result = run.record(ok, `${noteName(q.midi)} (${ordinal(q.source)} cuerda, traste ${q.fret}) → en la ${ordinal(q.target)} cuerda: traste ${q.answers.join(" o ")}. Elegiste el ${fret}.`);
     play(q.midi);
     play(midiAt(q.target, answerFret), 0.8);
-    render({ picked: fret, ok, answerFret }, true);
+    render({ ...result, picked: fret, answerFret }, true);
   }
 
   function render(result, justAnswered = false) {
@@ -179,16 +192,17 @@ export function mount(container, { sampler, metadata }) {
     const entering = fresh;
     fresh = false;
     const name = noteName(q.midi);
-    const marks = [{ kind: "source", string: q.source, fret: q.fret, label: name }];
+    const label = pretty(name);
+    const marks = [{ kind: "source", string: q.source, fret: q.fret, label }];
     let text = "";
     if (result) {
-      for (const f of q.answers) marks.push({ kind: "answer", string: q.target, fret: f, label: name });
+      for (const f of q.answers) marks.push({ kind: "answer", string: q.target, fret: f, label });
       if (!result.ok) marks.push({ kind: "miss", string: q.target, fret: result.picked, label: "✕" });
       const rel = octaveRelation(q.midi, midiAt(q.target, result.answerFret));
       const where = q.answers.map((f) => `traste ${f}`).join(" y ");
       text = result.ok
-        ? `¡Bien! Es ${rel}.`
-        : `No: en el traste ${result.picked} suena ${noteName(midiAt(q.target, result.picked))}. ${name} está en el ${where}: ${rel}.`;
+        ? `Es ${rel}.`
+        : `En el traste ${result.picked} suena ${noteName(midiAt(q.target, result.picked))}. ${name} está en el ${where}: ${rel}.`;
     }
     const board = drawFretboard({
       orientation: shown,
@@ -199,11 +213,11 @@ export function mount(container, { sampler, metadata }) {
     });
     const wrap = el("div", { class: `lo-panel lo-fn__board-wrap${entering ? " is-entering" : ""}` }, board);
     const stage = el("div", { class: "lo-stage" }, wrap);
-    root.replaceChildren(
-      progress(run, { bump: justAnswered && result?.ok }),
+    screen.replaceChildren(
+      hud(run, { sfx, answered: Boolean(result), gained: justAnswered ? result?.gained ?? 0 : 0 }),
       questionCard({
         eyebrow: "Esta nota es",
-        big: name,
+        big: noteLabel(name),
         spoken: spokenName(q.midi),
         sub: `${ordinal(q.source)} cuerda · traste ${q.fret}`,
         ask: ["¿Dónde está en la ", el("strong", {}, `${ordinal(q.target)} cuerda`), "?"],
@@ -213,22 +227,38 @@ export function mount(container, { sampler, metadata }) {
       feedback(text, result ? result.ok : null),
       el("div", { class: "lo-actions" },
         el("button", { class: "lo-btn lo-btn--ghost", onclick: () => play(q.midi) }, "▶ Escuchar la nota"),
-        result ? el("button", { class: "lo-btn", onclick: run.last ? summary : next }, run.last ? "Ver resultado" : "Siguiente →") : ""),
+        result ? el("button", { class: "lo-btn lo-btn--game lo-btn--next", onclick: advance }, run.last ? "Ver resultado" : "Siguiente", el("kbd", {}, "Enter")) : ""),
     );
     if (result && justAnswered) {
       const anchor = stage.querySelector(result.ok ? ".mark--answer .dot" : ".mark--miss .dot");
-      celebrate({ stage, ok: result.ok, streak: run.streak, anchor, shake: wrap });
+      celebrate({ host: root, stage, result, anchor, shake: wrap, sfx });
     }
+  }
+
+  function advance() {
+    if (!playing || !q?.answered) return;
+    if (run.last) summary();
+    else nextQuestion();
   }
 
   function summary() {
     shown = null;
-    renderSummary(root, run, { onRestart: start, onBack: intro });
+    playing = false;
+    renderResults(screen, run, { sfx, next, save: (r) => saveResult(metadata.id, r), onRestart: start, onBack: intro });
   }
+
+  function onKey(e) {
+    if (e.key === "Enter" && playing && q?.answered && !(e.target instanceof HTMLButtonElement)) {
+      e.preventDefault();
+      advance();
+    }
+  }
+  addEventListener("keydown", onKey);
 
   intro();
   return () => {
     removeEventListener("resize", onResize);
+    removeEventListener("keydown", onKey);
     clearTimeout(resizeTimer);
     container.replaceChildren();
   };

@@ -39,11 +39,13 @@ import metadata from "@saul-music/lo-fretboard-notes/metadata.json";
 import "@saul-music/lo-kit/kit.css";
 import "@saul-music/lo-fretboard-notes/style.css";
 
-const unmount = mount(document.getElementById("juego"), { sampler, metadata });
+const unmount = mount(document.getElementById("juego"), { sampler, sfx, metadata, cover, next });
 ```
 
-`sampler` es opcional (sin él, el juego funciona en silencio); el playground usa `createSampler` de
-`@saul-music/audio` con las muestras de guitarra de nailon.
+Todo es opcional salvo `metadata`: `sampler` es la música (sin él, el juego funciona en silencio; el
+playground usa `createSampler` de `@saul-music/audio` con las muestras de guitarra de nailon), `sfx` los efectos
+de juego (`createSfx`), `cover` la portada de la pantalla de título y `next` (`{ title, go }`) el botón «Siguiente»
+de la pantalla de resultados. El récord y las estrellas se guardan en el navegador (`localStorage`).
 
 ## Estructura
 
