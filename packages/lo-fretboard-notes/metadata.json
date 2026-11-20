@@ -6,10 +6,20 @@
     "title": "La misma nota en otra cuerda",
     "description": "Cuestionario sobre el mástil de la guitarra: ves una nota en una cuerda y la buscas en otra.",
     "language": "es",
-    "keywords": ["guitarra", "mástil", "notas", "octavas", "unísono"]
+    "keywords": [
+      "guitarra",
+      "mástil",
+      "notas",
+      "octavas",
+      "unísono",
+      "clave americana"
+    ]
   },
   "educational": {
-    "learningResourceType": ["exercise", "questionnaire"],
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
     "interactivityType": "active",
     "interactivityLevel": "medium",
     "intendedEndUserRole": "learner",
@@ -25,12 +35,36 @@
   "pedagogy": {
     "objective": "Ubicar en cualquier cuerda la misma nota que ves en otra, entre los trastes 0 y 12, y reconocer si suena igual o una octava más aguda o más grave.",
     "content": [
-      "Cada traste sube medio tono.",
-      "Con la afinación estándar, el traste 5 de una cuerda suena igual que la cuerda vecina más aguda tocada al aire (6ª en 5 = 5ª al aire); la excepción es la 3ª cuerda, que se iguala con la 2ª en el traste 4.",
-      "La misma nota aparece en varias cuerdas: a veces con el mismo sonido exacto (unísono), a veces una o más octavas arriba o abajo.",
-      "En el traste 12 se repite la nota de la cuerda al aire, una octava más aguda."
+      {
+        "title": "Clave americana",
+        "figure": "notes",
+        "text": "Las notas se escriben con letras, como en todo el mundo. En español puedes decirlas con su nombre latino."
+      },
+      {
+        "title": "Medio tono por traste",
+        "text": "Cada traste sube medio tono. En el traste 12 vuelve la nota de la cuerda al aire, una octava más aguda."
+      },
+      {
+        "title": "La regla del traste 5",
+        "text": "El traste 5 de una cuerda suena igual que la cuerda vecina más aguda al aire (6ª en 5 = 5ª al aire). La excepción es la 3ª: se iguala con la 2ª en el traste 4."
+      },
+      {
+        "title": "Una nota, muchos lugares",
+        "text": "La misma nota aparece en varias cuerdas: a veces con el mismo sonido exacto (unísono), a veces una o más octavas arriba o abajo."
+      }
     ],
     "activity": "Diez preguntas: se marca una nota en el mástil y se pide tocarla en otra cuerda.",
-    "evaluation": "Retroalimentación inmediata con la posición correcta, el sonido de ambas notas y su relación de octava; al final, el puntaje y un repaso de los errores."
+    "evaluation": "Retroalimentación inmediata con la posición correcta, el sonido de ambas notas y su relación de octava; al final, el puntaje y un repaso de los errores.",
+    "example": {
+      "from": {
+        "string": 6,
+        "fret": 5
+      },
+      "to": {
+        "string": 4,
+        "fret": 7
+      },
+      "caption": "A en la 6ª cuerda, traste 5, es la misma nota que en la 4ª cuerda, traste 7: una octava más aguda."
+    }
   }
 }

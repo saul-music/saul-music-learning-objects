@@ -12,15 +12,17 @@ export function midiAt(string, fret) {
 }
 
 /**
- * Nombre de la nota de un MIDI, con sostenidos.
- * @param {"american"|"latin"|"both"} notation
+ * Nombre de la nota en clave americana (C, D, E, …), con sostenidos.
+ * La clave americana es la notación de todos los OA: es la que se usa en todo el mundo.
  */
-export function noteName(midi, notation = "both") {
-  const pc = Note.pitchClass(Note.fromMidiSharps(midi)); // "A", "C#"
-  const latin = LATIN[pc[0]] + pc.slice(1);
-  if (notation === "american") return pc;
-  if (notation === "latin") return latin;
-  return `${latin} (${pc})`;
+export function noteName(midi) {
+  return Note.pitchClass(Note.fromMidiSharps(midi)); // "A", "C#"
+}
+
+/** Cómo se dice la nota en español (forma latina), solo como apoyo hablado: «La», «Do#». */
+export function spokenName(midi) {
+  const pc = noteName(midi);
+  return LATIN[pc[0]] + pc.slice(1);
 }
 
 /** Trastes de `string` (0..maxFret) donde suena la misma nota (misma clase de altura). */

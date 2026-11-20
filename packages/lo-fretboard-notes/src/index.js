@@ -1,6 +1,6 @@
 // OA «La misma nota en otra cuerda»: contenido, actividad y evaluación.
 // Uso: mount(elemento, { sampler, metadata }) → devuelve una función para desmontar.
-import { isCorrect, makeQuestion, midiAt, noteName, octaveRelation } from "./theory.js";
+import { isCorrect, makeQuestion, midiAt, noteName, octaveRelation, spokenName } from "./theory.js";
 
 export * from "./theory.js";
 
@@ -94,7 +94,9 @@ function drawFretboard({ orientation, highlight, marks = [], targets = [], onPic
   }
   for (const m of marks) {
     const g = svg("g", { class: `mark mark--${m.kind}` });
-    g.append(circle(along(m.fret), across(m.string), { r: 16 }));
+    // Onda que late alrededor de la nota mostrada, para que el ojo la encuentre.
+    if (m.kind === "source") g.append(circle(along(m.fret), across(m.string), { r: 16, class: "pulse" }));
+    g.append(circle(along(m.fret), across(m.string), { r: 16, class: "dot" }));
     g.append(text(along(m.fret), across(m.string), {}, m.label));
     root.append(g);
   }
@@ -102,8 +104,8 @@ function drawFretboard({ orientation, highlight, marks = [], targets = [], onPic
 }
 
 export function mount(container, { sampler, metadata }) {
-  const state = { notation: "both", naturalsOnly: true, round: 0, score: 0, misses: [], q: null, answered: false };
-  const name = (midi) => noteName(midi, state.notation);
+  const state = { naturalsOnly: true, round: 0, score: 0, misses: [], results: [], streak: 0, q: null, answered: false, fresh: false, celebrate: false };
+  const name = noteName;
   const play = (midi, delay = 0) => sampler?.play(midi, { delay });
 
   const root = el("section", { class: "lo-fn" });
@@ -112,40 +114,104 @@ export function mount(container, { sampler, metadata }) {
   const orientation = () => (root.clientWidth < VERTICAL_BELOW ? "vertical" : "horizontal");
   let shown = null; // orientación dibujada en la pregunta actual (null fuera de una pregunta)
   let lastResult;
-  const onResize = () => { if (shown && shown !== orientation()) render(lastResult); };
+  // Se espera a que el tamaño se asiente: un cambio pasajero no debe redibujar (y cortar la animación).
+  let resizeTimer;
+  const onResize = () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { if (shown && shown !== orientation()) render(lastResult); }, 150);
+  };
   addEventListener("resize", onResize);
 
   function intro() {
     shown = null;
     const p = metadata.pedagogy;
-    const notation = el("select", { onchange: (e) => (state.notation = e.target.value), "aria-label": "Notación" },
-      el("option", { value: "both" }, "Latina y americana"),
-      el("option", { value: "latin" }, "Latina (Do, Re, Mi)"),
-      el("option", { value: "american" }, "Americana (C, D, E)"));
-    notation.value = state.notation;
-    const sharps = el("input", { type: "checkbox", onchange: (e) => (state.naturalsOnly = !e.target.checked) });
+    const e = metadata.educational;
+    const minutes = e.typicalLearningTime.replace("PT", "").replace("M", " min");
+    const level = { easy: "Fácil", medium: "Media", difficult: "Difícil" }[e.difficulty];
+    const stagger = (i) => `--i:${i}`;
+
+    // Ejemplo animado: la misma nota en dos cuerdas, unidas por un arco que se dibuja.
+    const ex = p.example;
+    const exMidi = midiAt(ex.from.string, ex.from.fret);
+    const demoOrientation = orientation();
+    const demo = drawFretboard({
+      orientation: demoOrientation,
+      highlight: ex.to.string,
+      marks: [
+        { kind: "source", string: ex.from.string, fret: ex.from.fret, label: noteName(exMidi) },
+        { kind: "answer", string: ex.to.string, fret: ex.to.fret, label: noteName(exMidi) },
+      ],
+    });
+    // Recorte a los trastes 0 a 8: el ejemplo no necesita más y así se lee en celular.
+    const g = geometry(demoOrientation);
+    const cut = g.L.nut + 8 * g.fretW + 4;
+    demo.setAttribute("viewBox", g.v ? `0 0 ${g.L.width} ${cut}` : `0 0 ${cut} ${g.L.height}`);
+    // Arco entre las dos notas, curvado hacia afuera del mástil y recortado al borde de cada círculo.
+    const P1 = g.pt(g.along(ex.from.fret), g.across(ex.from.string));
+    const P2 = g.pt(g.along(ex.to.fret), g.across(ex.to.string));
+    const dx = P2.x - P1.x, dy = P2.y - P1.y, len = Math.hypot(dx, dy);
+    let nx = -dy / len, ny = dx / len;
+    if (g.v ? nx < 0 : ny > 0) { nx = -nx; ny = -ny; } // horizontal: hacia arriba; vertical: hacia la derecha
+    const ux = dx / len, uy = dy / len, r = 24;
+    const A = { x: P1.x + ux * r, y: P1.y + uy * r };
+    const B = { x: P2.x - ux * r, y: P2.y - uy * r };
+    const bend = len * 0.45;
+    const Cx = (A.x + B.x) / 2 + nx * bend, Cy = (A.y + B.y) / 2 + ny * bend;
+    const arc = svg("path", { d: `M${A.x},${A.y} Q${Cx},${Cy} ${B.x},${B.y}`, class: "demo-arc", pathLength: 1 });
+    demo.insertBefore(arc, demo.querySelector(".mark"));
+    demo.classList.add("lo-fn__board--demo");
+    const replay = () => {
+      demo.classList.remove("is-playing");
+      void demo.getBoundingClientRect(); // reinicia la animación
+      demo.classList.add("is-playing");
+      play(exMidi);
+      play(midiAt(ex.to.string, ex.to.fret), 0.9);
+    };
+
+    const tip = (c, i) => el("li", { class: "lo-fn__tip", style: stagger(i + 3) },
+      el("span", { class: "lo-fn__tip-num" }, String(i + 1)),
+      el("h4", {}, c.title),
+      c.figure === "notes"
+        ? el("div", { class: "lo-fn__keys" }, ...["C", "D", "E", "F", "G", "A", "B"].map((n, k) =>
+          el("span", { class: "lo-fn__key", style: `--k:${k}` }, el("b", {}, n), el("small", {}, spokenName(57 + [3, 5, 7, 8, 10, 0, 2][k])))))
+        : "",
+      el("p", {}, c.text));
+
+    const sharps = el("input", { type: "checkbox", onchange: (ev) => (state.naturalsOnly = !ev.target.checked) });
     sharps.checked = !state.naturalsOnly;
-    root.replaceChildren(
-      el("h2", {}, metadata.general.title),
-      el("p", { class: "lo-fn__objective" }, el("strong", {}, "Objetivo: "), p.objective),
-      el("h3", {}, "Antes de empezar"),
-      el("ul", { class: "lo-fn__content" }, ...p.content.map((c) => el("li", {}, c))),
-      el("div", { class: "lo-fn__options" },
-        el("label", {}, "Notación ", notation),
-        el("label", {}, sharps, " Incluir notas con sostenido")),
-      el("button", { class: "lo-btn", onclick: start }, `Empezar (${ROUNDS} preguntas)`),
-    );
+
+    root.replaceChildren(el("div", { class: "lo-fn__intro" },
+      el("header", { class: "lo-fn__hero", style: stagger(0) },
+        el("ul", { class: "lo-fn__chips" },
+          el("li", {}, "Guitarra"), el("li", {}, `⏱ ${minutes}`), el("li", {}, level), el("li", {}, `${ROUNDS} preguntas`)),
+        el("h2", {}, metadata.general.title),
+        el("p", { class: "lo-fn__lead" }, metadata.general.description)),
+      el("figure", { class: "lo-fn__demo", style: stagger(1) },
+        el("div", { class: "lo-fn__board-wrap" }, demo),
+        el("figcaption", {}, ex.caption, " ",
+          el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm", onclick: replay }, "▶ Oír el ejemplo"))),
+      el("div", { class: "lo-fn__goal", style: stagger(2) },
+        el("span", { class: "lo-fn__goal-label" }, "Objetivo"),
+        el("p", {}, p.objective)),
+      el("h3", { style: stagger(3) }, "Antes de empezar"),
+      el("ol", { class: "lo-fn__tips" }, ...p.content.map(tip)),
+      el("div", { class: "lo-fn__start", style: stagger(p.content.length + 3) },
+        el("label", { class: "lo-fn__switch" }, sharps, el("span", { class: "lo-fn__switch-ui", "aria-hidden": "true" }), "Incluir notas con sostenido (#)"),
+        el("button", { class: "lo-btn lo-btn--cta", onclick: start }, "Empezar ", el("span", { "aria-hidden": "true" }, "→"))),
+    ));
+    requestAnimationFrame(() => demo.classList.add("is-playing"));
   }
 
   function start() {
     sampler?.preload();
-    Object.assign(state, { round: 0, score: 0, misses: [] });
+    Object.assign(state, { round: 0, score: 0, misses: [], results: [], streak: 0 });
     next();
   }
 
   function next() {
     state.round += 1;
     state.answered = false;
+    state.fresh = true;
     state.q = makeQuestion(Math.random, { maxFret: MAX_FRET, naturalsOnly: state.naturalsOnly });
     render();
     play(state.q.midi);
@@ -157,6 +223,9 @@ export function mount(container, { sampler, metadata }) {
     const q = state.q;
     const ok = isCorrect(q, fret);
     const answerFret = ok ? fret : q.answers[0];
+    state.results.push(ok);
+    state.streak = ok ? state.streak + 1 : 0;
+    state.celebrate = true;
     if (ok) state.score += 1;
     else state.misses.push({ ...q, picked: fret });
     play(q.midi);
@@ -168,10 +237,10 @@ export function mount(container, { sampler, metadata }) {
     const q = state.q;
     lastResult = result;
     shown = orientation();
-    const marks = [{ kind: "source", string: q.source, fret: q.fret, label: noteName(q.midi, "american") }];
+    const marks = [{ kind: "source", string: q.source, fret: q.fret, label: noteName(q.midi) }];
     let feedback = "";
     if (result) {
-      for (const f of q.answers) marks.push({ kind: "answer", string: q.target, fret: f, label: noteName(q.midi, "american") });
+      for (const f of q.answers) marks.push({ kind: "answer", string: q.target, fret: f, label: noteName(q.midi) });
       if (!result.ok) marks.push({ kind: "miss", string: q.target, fret: result.picked, label: "✕" });
       const rel = octaveRelation(q.midi, midiAt(q.target, result.answerFret));
       const where = q.answers.map((f) => `traste ${f}`).join(" y ");
@@ -187,17 +256,68 @@ export function mount(container, { sampler, metadata }) {
       onPick: pick,
     });
     const last = state.round === ROUNDS;
+    // La entrada se anima solo con una pregunta nueva (no al responder ni al girar la pantalla).
+    const enter = state.fresh ? " is-entering" : "";
+    state.fresh = false;
+    const dots = Array.from({ length: ROUNDS }, (_, i) => {
+      const r = state.results[i];
+      const cls = r === true ? "is-ok" : r === false ? "is-miss" : i === state.round - 1 ? "is-current" : "";
+      return el("li", { class: `lo-fn__dot ${cls}` });
+    });
     root.replaceChildren(
-      el("p", { class: "lo-fn__progress" }, `Pregunta ${state.round} de ${ROUNDS} · Aciertos: ${state.score}`),
-      el("p", { class: "lo-fn__prompt" },
-        "Esta es ", el("strong", {}, name(q.midi)), `, en la ${ordinal(q.source)} cuerda, traste ${q.fret}. `,
-        "¿Dónde está la misma nota en la ", el("strong", {}, `${ordinal(q.target)} cuerda`), "?"),
-      el("div", { class: "lo-fn__board-wrap" }, board),
+      el("div", { class: "lo-fn__progress" },
+        el("span", { class: "lo-fn__count" }, `${state.round}/${ROUNDS}`),
+        el("ol", { class: "lo-fn__dots", "aria-label": `Pregunta ${state.round} de ${ROUNDS}, ${state.score} aciertos` }, ...dots),
+        el("span", { class: `lo-fn__score${result?.ok ? " is-bump" : ""}` }, `★ ${state.score}`)),
+      el("div", { class: `lo-fn__card${enter}` },
+        el("p", { class: "lo-fn__eyebrow" }, "Esta nota es"),
+        el("p", { class: "lo-fn__note" }, name(q.midi)),
+        el("p", { class: "lo-fn__spoken" }, `se dice «${spokenName(q.midi)}»`),
+        el("p", { class: "lo-fn__where" }, `${ordinal(q.source)} cuerda · traste ${q.fret}`),
+        el("p", { class: "lo-fn__ask" }, "¿Dónde está en la ", el("strong", {}, `${ordinal(q.target)} cuerda`), "?")),
+      el("div", { class: "lo-fn__stage" }, el("div", { class: `lo-fn__board-wrap${enter}` }, board), el("div", { class: "lo-fn__fx", "aria-hidden": "true" })),
       el("p", { class: `lo-fn__feedback ${result ? (result.ok ? "is-ok" : "is-miss") : ""}`, "aria-live": "polite" }, feedback),
       el("div", { class: "lo-fn__actions" },
         el("button", { class: "lo-btn lo-btn--ghost", onclick: () => play(q.midi) }, "▶ Escuchar la nota"),
-        result ? el("button", { class: "lo-btn", onclick: last ? summary : next }, last ? "Ver resultado" : "Siguiente") : ""),
+        result ? el("button", { class: "lo-btn", onclick: last ? summary : next }, last ? "Ver resultado" : "Siguiente →") : ""),
     );
+    if (result && state.celebrate) {
+      state.celebrate = false;
+      celebrate(result.ok, state.streak);
+    }
+  }
+
+  /** Efecto de juego sobre el mástil: confeti y «¡Correcto!» al acertar; temblor y «¡Uy!» al fallar. */
+  function celebrate(ok, streak) {
+    const stage = root.querySelector(".lo-fn__stage");
+    const fx = stage.querySelector(".lo-fn__fx");
+    const banner = el("div", { class: `lo-fn__banner ${ok ? "is-ok" : "is-miss"}` },
+      ok ? "¡Correcto!" : "¡Uy!",
+      ok && streak >= 2 ? el("span", { class: "lo-fn__streak" }, `Racha ×${streak}`) : "");
+    const box = stage.getBoundingClientRect();
+    const center = (node) => {
+      const r = node.getBoundingClientRect();
+      return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top };
+    };
+    // El cartel sale a la altura de donde se tocó (importa en el mástil vertical, que es largo).
+    const touched = center(stage.querySelector(ok ? ".mark--answer .dot" : ".mark--miss .dot"));
+    banner.style.top = `${Math.min(Math.max(touched.y - 70, box.height * 0.2), box.height * 0.8)}px`;
+    fx.append(banner);
+    if (!ok) {
+      stage.querySelector(".lo-fn__board-wrap").classList.add("is-shaking");
+      return;
+    }
+    // Confeti desde la posición correcta.
+    const { x, y } = touched;
+    const pieces = 22 + Math.min(streak, 5) * 4; // más confeti con racha
+    for (let i = 0; i < pieces; i++) {
+      const angle = (Math.PI * 2 * i) / pieces + Math.random() * 0.5;
+      const dist = 60 + Math.random() * 90;
+      fx.append(el("i", {
+        class: `lo-fn__confetti ${i % 3 === 0 ? "is-jade" : ""}`,
+        style: `left:${x}px;top:${y}px;--dx:${Math.cos(angle) * dist}px;--dy:${Math.sin(angle) * dist - 30}px;--rot:${Math.random() * 720 - 360}deg;--delay:${Math.random() * 80}ms`,
+      }));
+    }
   }
 
   function summary() {
@@ -217,6 +337,7 @@ export function mount(container, { sampler, metadata }) {
   intro();
   return () => {
     removeEventListener("resize", onResize);
+    clearTimeout(resizeTimer);
     container.replaceChildren();
   };
 }

@@ -4,13 +4,14 @@ import {
   makeQuestion,
   midiAt,
   noteName,
+  spokenName,
   octaveRelation,
   positionsOf,
 } from "../src/theory.js";
 
 describe("mástil", () => {
   it("A en la 6ª cuerda, traste 5, es la misma nota que la 4ª cuerda, traste 7", () => {
-    expect(noteName(midiAt(6, 5), "american")).toBe("A");
+    expect(noteName(midiAt(6, 5))).toBe("A");
     expect(positionsOf(midiAt(6, 5), 4)).toEqual([7]);
     expect(octaveRelation(midiAt(6, 5), midiAt(4, 7))).toBe("la misma nota, una octava más aguda");
   });
@@ -28,10 +29,11 @@ describe("mástil", () => {
     expect(positionsOf(midiAt(1, 0), 6)).toEqual([0, 12]);
   });
 
-  it("nombra en clave americana, latina o ambas", () => {
-    expect(noteName(61, "american")).toBe("C#");
-    expect(noteName(61, "latin")).toBe("Do#");
-    expect(noteName(57, "both")).toBe("La (A)");
+  it("nombra en clave americana y da la forma latina solo para decirla", () => {
+    expect(noteName(61)).toBe("C#");
+    expect(noteName(57)).toBe("A");
+    expect(spokenName(61)).toBe("Do#");
+    expect(spokenName(71)).toBe("Si");
   });
 
   it("acepta cualquier octava de la nota en la cuerda pedida", () => {
@@ -59,14 +61,14 @@ describe("preguntas", () => {
   it("con solo naturales, nunca muestran una nota alterada", () => {
     const rng = seeded(7);
     for (let i = 0; i < 500; i++) {
-      expect(noteName(makeQuestion(rng).midi, "american")).not.toContain("#");
+      expect(noteName(makeQuestion(rng).midi)).not.toContain("#");
     }
   });
 
   it("con alteraciones, a veces muestran una nota alterada", () => {
     const rng = seeded(7);
     const names = Array.from({ length: 200 }, () =>
-      noteName(makeQuestion(rng, { naturalsOnly: false }).midi, "american"),
+      noteName(makeQuestion(rng, { naturalsOnly: false }).midi),
     );
     expect(names.some((n) => n.includes("#"))).toBe(true);
   });
