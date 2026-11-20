@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Pulso">
+  <title>Pulso</title>
+  <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
+  <rect width="480" height="300" fill="#191430"/>
+  <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
+  <path d="M130 300 V140 A110 110 0 0 1 350 140 V300 Z" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <line x1="150" y1="250" x2="330" y2="250" stroke="#342c5c" stroke-width="2"/>
+  <text x="162" y="214" font-family="Marcellus, Georgia, serif" font-size="30" fill="#f1ece2">4</text><text x="162" y="246" font-family="Marcellus, Georgia, serif" font-size="30" fill="#f1ece2">4</text>
+  <ellipse cx="205" cy="236" rx="10" ry="7" transform="rotate(-20 205 236)" fill="#d4a64a"/>
+  <line x1="214" y1="234" x2="214" y2="190" stroke="#d4a64a" stroke-width="3"/>
+  <ellipse cx="240" cy="236" rx="10" ry="7" transform="rotate(-20 240 236)" fill="#f1ece2"/>
+  <line x1="249" y1="234" x2="249" y2="190" stroke="#f1ece2" stroke-width="3"/>
+  <ellipse cx="275" cy="236" rx="10" ry="7" transform="rotate(-20 275 236)" fill="#f1ece2"/>
+  <line x1="284" y1="234" x2="284" y2="190" stroke="#f1ece2" stroke-width="3"/>
+  <ellipse cx="310" cy="236" rx="10" ry="7" transform="rotate(-20 310 236)" fill="#f1ece2"/>
+  <line x1="319" y1="234" x2="319" y2="190" stroke="#f1ece2" stroke-width="3"/>
+  <g fill="none" stroke="#5fb39b" stroke-width="3" stroke-linecap="round">
+    <path d="M200 160 l10 -16 l10 16 l10 -16 l10 16 l10 -16 l10 16 l10 -16 l10 16 l10 -16 l10 16"/>
+  </g>
+  <circle cx="240" cy="110" r="22" fill="#d4a64a"/><circle cx="240" cy="110" r="34" fill="none" stroke="#d4a64a" stroke-width="2" opacity=".5"/><circle cx="240" cy="110" r="46" fill="none" stroke="#d4a64a" stroke-width="2" opacity=".25"/>
+</svg>

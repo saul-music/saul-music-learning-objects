@@ -43,3 +43,12 @@ cualquiera puede usarlo y adaptarlo, con cualquier fin, **siempre que dé crédi
 pero que siempre tengan que darme créditos»). Nota: Creative Commons no recomienda sus licencias para software
 (no tratan patentes ni distribución de código fuente); se acepta porque aquí pesa más el contenido educativo y el
 crédito. Quedan fuera las muestras (CC BY 3.0), las dependencias (MIT) y las fuentes (OFL).
+
+## O8 · Tercer juego en dos OA: «Manos de acorde» y «Pulso» (2026-11-20)
+
+Lo que había en `saul-music-site-midi` (formas de acordes de chords-db, la regla de rasgueo del laboratorio y la
+guitarra) se convierte en dos OA, a pedido del usuario: 6 «Manos de acorde» (formas de acordes mayores, menores y de
+séptima, y qué nota suena en cada cuerda; subconjunto de chords-db, MIT) y 7 «Pulso» (redonda, blancas, negras y
+blanca con punto, la regla «1 acorde → un golpe, 2 → blancas, más → negras» y contar tiempos, con metrónomo). El kit
+admite alternativas con figura (diagramas) y el sampler suma un clic de metrónomo sintetizado. `LICENSE` queda con el
+texto oficial de CC BY 4.0 (para que GitHub la reconozca) y el aviso de crédito pasa a `NOTICE.md`.

@@ -29,7 +29,7 @@ Retroalimentación inmediata con la escalera, el teclado y el arpegio sonando; a
 
 - [El misterio de E#](../lo-intervals/README.md): medios tonos e intervalos (3ª mayor, 3ª menor, 5ª justa).
 
-Prepara para: [Luz y sombra](../lo-major-minor-ear/README.md).
+Prepara para: [Luz y sombra](../lo-major-minor-ear/README.md), [Manos de acorde](../lo-chord-shapes/README.md).
 
 ## Uso
 
@@ -54,4 +54,4 @@ const unmount = mount(document.getElementById("juego"), { sampler, metadata });
 
 ## Licencia
 
-CC BY 4.0, © 2026 Acordia (SAÚL música): puedes usarlo y adaptarlo dando crédito. Ver [`LICENSE`](../../LICENSE).
+CC BY 4.0, © 2026 Acordia (SAÚL música): puedes usarlo y adaptarlo dando crédito. Ver [`NOTICE.md`](../../NOTICE.md) y [`LICENSE`](../../LICENSE).

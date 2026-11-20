@@ -16,6 +16,8 @@ actividad y su evaluación, más sus metadatos (subconjunto de IEEE LOM) para ca
 | 3 | [Eco en el mástil](packages/lo-fretboard-notes/README.md) | La misma nota en otra cuerda | El misterio de E# |
 | 4 | [Escalera del acorde](packages/lo-arpeggios/README.md) | Arpegios: 1ª, 3ª, 5ª y 8ª | El misterio de E# |
 | 5 | [Luz y sombra](packages/lo-major-minor-ear/README.md) | Acordes mayores y menores de oído | Escalera del acorde |
+| 6 | [Manos de acorde](packages/lo-chord-shapes/README.md) | Formas de acordes en la guitarra | Escalera del acorde |
+| 7 | [Pulso](packages/lo-strum-rhythm/README.md) | Figuras del rasgueo y la regla del compás | Manos de acorde |
 
 ## Paquetes
 
@@ -40,7 +42,7 @@ npm run build                        # apps/playground/dist (base relativa)
 **CC BY 4.0**, © 2026 Acordia (SAÚL música): puedes copiar, adaptar y usar estos juegos con cualquier fin,
 **siempre que des crédito**. Crédito sugerido: «Nombre del juego», de Acordia (SAÚL música),
 https://github.com/saul-music/saul-music-learning-objects, CC BY 4.0. Las muestras de guitarra (CC BY 3.0), las
-dependencias y las fuentes conservan sus licencias: ver `LICENSE` y `THIRD_PARTY_NOTICES.md`.
+dependencias y las fuentes conservan sus licencias: ver `NOTICE.md`, `LICENSE` y `THIRD_PARTY_NOTICES.md`.
 
 Reglas del repo: `CLAUDE.md`. Estado: `docs/status.md`. Decisiones: `docs/decisions.md`. Avisos de terceros:
 `THIRD_PARTY_NOTICES.md`.

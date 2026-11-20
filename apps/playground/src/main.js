@@ -26,6 +26,14 @@ import * as majorMinorEar from "@saul-music/lo-major-minor-ear";
 import majorMinorEarMeta from "@saul-music/lo-major-minor-ear/metadata.json";
 import majorMinorEarCover from "@saul-music/lo-major-minor-ear/cover.svg";
 import "@saul-music/lo-major-minor-ear/style.css";
+import * as chordShapes from "@saul-music/lo-chord-shapes";
+import chordShapesMeta from "@saul-music/lo-chord-shapes/metadata.json";
+import chordShapesCover from "@saul-music/lo-chord-shapes/cover.svg";
+import "@saul-music/lo-chord-shapes/style.css";
+import * as strumRhythm from "@saul-music/lo-strum-rhythm";
+import strumRhythmMeta from "@saul-music/lo-strum-rhythm/metadata.json";
+import strumRhythmCover from "@saul-music/lo-strum-rhythm/cover.svg";
+import "@saul-music/lo-strum-rhythm/style.css";
 
 // Registro explícito, en el orden del recorrido. Los prerrequisitos (LOM relation «requires») marcan ese orden.
 const OBJECTS = [
@@ -34,6 +42,8 @@ const OBJECTS = [
   { module: fretboardNotes, metadata: fretboardNotesMeta, cover: fretboardNotesCover },
   { module: arpeggios, metadata: arpeggiosMeta, cover: arpeggiosCover },
   { module: majorMinorEar, metadata: majorMinorEarMeta, cover: majorMinorEarCover },
+  { module: chordShapes, metadata: chordShapesMeta, cover: chordShapesCover },
+  { module: strumRhythm, metadata: strumRhythmMeta, cover: strumRhythmCover },
 ];
 const byId = new Map(OBJECTS.map((o) => [o.metadata.id, o]));
 

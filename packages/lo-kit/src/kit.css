@@ -166,3 +166,10 @@
   .lo-intro .lo-btn--cta { width: 100%; }
   .lo-choices { grid-template-columns: 1fr 1fr; }
 }
+
+/* Alternativas con figura (diagramas de acorde, ritmos) */
+.lo-choices--figures { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.lo-choice--figure { padding: .5rem; min-height: 0; display: grid; place-items: center; }
+.lo-choice--figure svg { width: 100%; max-width: 150px; height: auto; display: block; }
+.lo-choice--figure.is-miss { text-decoration: none; opacity: .6; }
+@media (max-width: 560px) { .lo-choices--figures { grid-template-columns: 1fr 1fr; } }

@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-chord-shapes",
+  "version": "0.1.0",
+  "general": {
+    "title": "Manos de acorde",
+    "subtitle": "Formas de acordes en la guitarra",
+    "description": "Cada acorde tiene su forma en el mástil. Reconoce las formas de los acordes mayores, menores y de séptima, y qué nota suena en cada cuerda.",
+    "language": "es",
+    "keywords": [
+      "acordes",
+      "guitarra",
+      "diagrama",
+      "formas",
+      "séptima"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "guitar"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0). Formas de acordes: chords-db (MIT)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-arpeggios",
+        "description": "Escalera del acorde: la 1ª, la 3ª y la 5ª de los acordes mayores y menores."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Reconocer las formas de guitarra de los acordes mayores, menores y de séptima, y decir qué nota del acorde suena en cada cuerda.",
+    "content": [
+      {
+        "title": "Cómo se lee un diagrama",
+        "text": "Las líneas verticales son las cuerdas (la 6ª a la izquierda) y las horizontales, los trastes. Los puntos son los dedos; ○ es cuerda al aire y × no se toca."
+      },
+      {
+        "title": "Una forma, tres notas",
+        "text": "Toda forma de acorde repite, en distintas cuerdas, solo las notas del acorde: la 1ª, la 3ª y la 5ª (y la 7ª en los de séptima)."
+      },
+      {
+        "title": "Un dedo cambia el color",
+        "text": "De E a Em solo cambia la 3ª: G# baja a G. De E a E7 se suma la 7ª: aparece D."
+      },
+      {
+        "title": "Cejilla",
+        "text": "Una barra sobre varias cuerdas es una cejilla: el índice las aprieta todas en el mismo traste. Así una misma forma sirve para varios acordes."
+      }
+    ],
+    "activity": "Diez preguntas: qué acorde es una forma, cuál es la forma de un acorde y qué nota suena en una cuerda marcada.",
+    "evaluation": "Retroalimentación inmediata con las notas del acorde y su sonido rasgueado; al final, el puntaje y un repaso de los errores."
+  }
+}

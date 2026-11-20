@@ -4,5 +4,6 @@
   licencia Creative Commons Attribution 3.0 (CC BY 3.0). Las mismas que usa Acordia (`acordia_render`).
 - El código y el contenido propios están bajo CC BY 4.0 (ver `LICENSE`).
 - **tonal** (dependencia npm): MIT.
+- **chords-db** (`packages/lo-chord-shapes/data/chords.json`, subconjunto de @tombatossals/chords-db 0.5.1): MIT, de David Rubert; licencia en `packages/lo-chord-shapes/data/LICENSE-chords-db.txt`.
 - **Vite** y **Vitest** (desarrollo): MIT.
 - **Marcellus** y **Work Sans** (Google Fonts): SIL Open Font License 1.1, cargadas desde Google Fonts.
