@@ -1,5 +1,5 @@
 // OA «Manos de acorde»: formas de guitarra de acordes mayores, menores y de séptima.
-import { el, mountChoiceQuiz, svg } from "@saul-music/lo-kit";
+import { chordLabel, el, mountChoiceQuiz, svg } from "@saul-music/lo-kit";
 import { makeQuestion, shapeMidis, shapesOf, stringNumber, TUNING } from "./theory.js";
 
 export * from "./theory.js";
@@ -58,6 +58,7 @@ function toQuiz(t) {
     return {
       ...base,
       choices: t.choices,
+      choiceKind: "chord",
       eyebrow: "Mira la forma",
       ask: "¿Qué acorde es?",
       visual: () => el("div", { class: "lo-cs__single" }, drawChordBox(t.shape, { label: "Forma del acorde" })),
@@ -66,9 +67,10 @@ function toQuiz(t) {
   if (t.type === "pickShape") {
     return {
       ...base,
-      choices: t.choices.map((c) => ({ text: c.symbol, node: () => el("div", { class: "lo-cs__option" }, drawChordBox(c.shape, { label: "Forma de un acorde" })) })),
+      choices: t.choices.map((c) => ({ text: c.symbol, figure: true, node: () => el("div", { class: "lo-cs__option" }, drawChordBox(c.shape, { label: "Forma de un acorde" })) })),
       eyebrow: "Busca la forma de",
       big: t.symbol,
+      bigKind: "chord",
       ask: "¿Cuál es su forma?",
       visual: undefined,
       onAnswer: (s) => strum(s, t.shape),
@@ -77,6 +79,7 @@ function toQuiz(t) {
   return {
     ...base,
     choices: t.choices,
+    choiceKind: "note",
     eyebrow: `En esta forma de ${t.symbol}`,
     ask: ["¿Qué nota suena en la ", el("strong", {}, `${t.string}ª cuerda`), "?"],
     visual: () => el("div", { class: "lo-cs__single" }, drawChordBox(t.shape, { mark: t.stringIdx, label: `Forma de ${t.symbol} con la ${t.string}ª cuerda destacada` })),
@@ -84,10 +87,13 @@ function toQuiz(t) {
   };
 }
 
-export function mount(container, { sampler, metadata }) {
+export function mount(container, { sampler, sfx, metadata, cover, next }) {
   return mountChoiceQuiz(container, {
     metadata,
     sampler,
+    sfx,
+    cover,
+    next,
     className: "lo-chord-shapes",
     makeQuestion: (rng) => toQuiz(makeQuestion(rng)),
     demo: ({ sampler: s }) => {
@@ -95,7 +101,7 @@ export function mount(container, { sampler, metadata }) {
       const node = el("div", { class: "lo-cs__demo" },
         pairs.map(([r, q], i) => el("button", { class: "lo-cs__demo-item", style: `--i:${i}`, onclick: () => strum(s, shapesOf(r, q)[0]) },
           drawChordBox(shapesOf(r, q)[0], { label: `${r}${q === "major" ? "" : q === "minor" ? "m" : "7"}` }),
-          el("b", {}, `${r}${q === "major" ? "" : q === "minor" ? "m" : "7"}`))));
+          chordLabel(`${r}${q === "major" ? "" : q === "minor" ? "m" : "7"}`))));
       return {
         node,
         caption: "E, Em y E7: un dedo cambia el color. En Em se levanta el dedo de la 3ª cuerda (G# baja a G); en E7 se suelta la 4ª cuerda (suena D, la 7ª). Toca cada uno.",

@@ -6,4 +6,5 @@
 - **tonal** (dependencia npm): MIT.
 - **chords-db** (`packages/lo-chord-shapes/data/chords.json`, subconjunto de @tombatossals/chords-db 0.5.1): MIT, de David Rubert; licencia en `packages/lo-chord-shapes/data/LICENSE-chords-db.txt`.
 - **Vite** y **Vitest** (desarrollo): MIT.
-- **Marcellus** y **Work Sans** (Google Fonts): SIL Open Font License 1.1, cargadas desde Google Fonts.
+- **Marcellus**, **Work Sans** y **Noto Music** (Google Fonts): SIL Open Font License 1.1, cargadas desde Google Fonts.
+- **Petaluma Script** (`packages/theme/fonts/`): © Steinberg Media Technologies, SIL Open Font License 1.1 (`PetalumaScript-OFL.txt`). La misma fuente de acordes de Acordia.

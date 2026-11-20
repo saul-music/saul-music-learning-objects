@@ -14,37 +14,78 @@ a:hover { color: var(--ac-accent-hover); }
 .pg-back { justify-self: start; text-decoration: none; }
 .pg-footer { padding: 1rem clamp(1rem, 4vw, 3rem); border-top: 1px solid var(--ac-line); color: var(--ac-fg-muted); font-size: .85rem; }
 
-/* Galería */
+/* Mapa de niveles */
 .pg-hero { display: grid; gap: .4rem; animation: lo-rise .6s both; }
-.pg-hero h1 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; }
-.pg-kicker { margin: 0; font-size: .85rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ac-second); }
+.pg-hero h1 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(2.4rem, 8vw, 3.8rem); line-height: 1.02; }
+.pg-kicker { margin: 0; font-size: .85rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ac-second); }
 .pg-lead { margin: 0; max-width: 60ch; color: var(--ac-fg-muted); font-size: 1.15rem; }
-.pg-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-.pg-card {
-  display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ac-fg); overflow: hidden;
-  background: var(--ac-surface); border: 1px solid var(--ac-line); border-radius: var(--ac-radius);
-  transition: transform .2s, border-color .2s; animation: lo-rise .6s calc(.15s + var(--i) * 90ms) cubic-bezier(.2, .8, .2, 1) both;
-}
-.pg-card:hover, .pg-card:focus-visible { transform: translateY(-4px); border-color: var(--ac-accent); color: var(--ac-fg); outline: none; }
-.pg-card__figure { position: relative; aspect-ratio: 8 / 5; background: var(--ac-noche); }
-.pg-card__cover { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-.pg-card:hover .pg-card__cover { transform: scale(1.04); }
-.pg-card__step {
-  position: absolute; top: .75rem; left: .75rem; width: 2.2rem; height: 2.2rem; display: grid; place-items: center;
-  border-radius: 50%; background: var(--ac-fill); color: var(--ac-on-fill); font-weight: 600;
-}
-.pg-card__body { display: grid; gap: .45rem; align-content: start; padding: 1.1rem 1.25rem 1.25rem; }
-.pg-card__kicker { margin: 0; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ac-second); }
-.pg-card h2 { font-family: var(--ac-font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; margin: 0; }
-.pg-card__desc { margin: 0; color: var(--ac-fg-muted); }
-.pg-card__chips { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin: .25rem 0 0; padding: 0; }
-.pg-card__chips li { font-size: .8rem; font-weight: 600; padding: .1rem .6rem; border: 1px solid var(--ac-line); border-radius: 999px; color: var(--ac-second); }
-.pg-card .pg-requires { margin: .25rem 0 0; font-size: .85rem; color: var(--ac-accent); border-top: 1px solid var(--ac-line); padding-top: .5rem; }
+.pg-hero__score { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; margin-top: .4rem; font-weight: 700; color: var(--ac-fg-muted); }
+.pg-hero__stars { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .9rem .3rem .5rem; border-radius: 999px; background: var(--ac-surface); border: 2px solid var(--ac-line); }
+.pg-hero__stars .lo-star { width: 1.6rem; height: 1.6rem; }
+.pg-hero__stars b { font: 800 1.2rem var(--ac-font-game); color: var(--ac-fg); }
 
+.pg-map { position: relative; list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 1.6rem; }
+.pg-map::before { content: ""; position: absolute; top: 2rem; bottom: 2rem; left: 50%; margin-left: -4px; border-left: 8px dotted var(--ac-line); }
+.pg-level { position: relative; display: grid; grid-template-columns: 1fr 9rem 1fr; align-items: center; gap: 1rem; animation: lo-rise .6s calc(.15s + var(--i) * 90ms) cubic-bezier(.2, .8, .2, 1) both; }
+.pg-level.is-left { grid-template-areas: "card node ."; }
+.pg-level.is-right { grid-template-areas: ". node card"; }
+.pg-level__card { grid-area: card; }
+.pg-level__node { position: relative; justify-self: center; width: 8.5rem; height: 8.5rem; transition: transform .2s; }
+.pg-level__disc {
+  display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+  border: 5px solid var(--ac-line); border-bottom-width: 10px; background: var(--ac-noche); transition: border-color .2s;
+}
+.pg-level__disc img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.pg-level__num {
+  position: absolute; bottom: -.2rem; right: -.2rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center;
+  border-radius: 50%; background: var(--ac-fill); color: var(--ac-on-fill); font: 800 1.15rem var(--ac-font-game);
+  border: 3px solid var(--ac-bg);
+}
+.pg-level.is-played .pg-level__disc { border-color: var(--ac-win); }
+.pg-level.is-played .pg-level__num { background: var(--ac-win); color: var(--ac-on-win); }
+.pg-level.is-next .pg-level__disc { border-color: var(--ac-accent); }
+.pg-level.is-next .pg-level__node { animation: lo-breathe 1.8s ease-in-out infinite; }
+.pg-level__card {
+  position: relative; display: grid; gap: .35rem; padding: 1.1rem 1.25rem 1.2rem; text-decoration: none; color: var(--ac-fg);
+  background: var(--ac-surface); border: 2px solid var(--ac-line); border-bottom-width: 7px; border-radius: 18px;
+  transition: transform .15s, border-color .2s;
+}
+.pg-level.is-left .pg-level__card { text-align: right; justify-items: end; }
+.pg-level__card:hover, .pg-level__card:focus-visible { transform: translateY(-4px); border-color: var(--ac-accent); color: var(--ac-fg); outline: none; }
+.pg-level:hover .pg-level__node, .pg-level:focus-within .pg-level__node { transform: scale(1.06) rotate(-3deg); }
+.pg-level__kicker { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ac-second); }
+.pg-level__card h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: 1.75rem; line-height: 1.1; }
+.pg-level__desc { margin: 0; color: var(--ac-fg-muted); font-size: 1rem; }
+.pg-level__meta { margin: .2rem 0 0; display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: .9rem; color: var(--ac-fg-muted); }
+.pg-level__stars { display: inline-flex; gap: .1rem; }
+.pg-level__stars .lo-star { width: 1.35rem; height: 1.35rem; }
+.pg-level__chips { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; margin: .1rem 0 0; padding: 0; }
+.pg-level.is-left .pg-level__chips { justify-content: flex-end; }
+.pg-level__chips li { font-size: .75rem; font-weight: 700; padding: .05rem .55rem; border: 2px solid var(--ac-line); border-radius: 999px; color: var(--ac-second); }
+.pg-level .pg-requires { margin: .25rem 0 0; font-size: .85rem; color: var(--ac-accent); }
+.pg-level__badge:empty { display: none; }
+.pg-level__badge {
+  position: absolute; top: -.85rem; padding: .2rem .8rem; border-radius: 999px; background: var(--ac-fill); color: var(--ac-on-fill);
+  font: 800 .85rem var(--ac-font-game); letter-spacing: .06em; text-transform: uppercase; animation: lo-wobble 1.6s ease-in-out infinite;
+}
+.pg-level.is-left .pg-level__badge { right: 1rem; }
+.pg-level.is-right .pg-level__badge { left: 1rem; }
+
+@media (max-width: 760px) {
+  .pg-map::before { left: 3.25rem; }
+  .pg-level, .pg-level.is-left, .pg-level.is-right { grid-template-columns: 6.5rem 1fr; grid-template-areas: "node card"; gap: .9rem; }
+  .pg-level__node { width: 6.5rem; height: 6.5rem; }
+  .pg-level__disc { border-width: 4px; border-bottom-width: 8px; }
+  .pg-level__num { width: 2.1rem; height: 2.1rem; font-size: 1rem; }
+  .pg-level.is-left .pg-level__card { text-align: left; justify-items: start; }
+  .pg-level.is-left .pg-level__chips { justify-content: flex-start; }
+  .pg-level.is-left .pg-level__badge { right: auto; left: 1rem; }
+  .pg-level__card h2 { font-size: 1.45rem; }
+}
 @media (max-width: 560px) {
   .pg-brand span { display: block; font-size: .8rem; line-height: 1.2; }
   .pg-brand { line-height: 1.1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pg-hero, .pg-card { animation: none; transition: none; }
+  .pg-hero, .pg-level, .pg-level__node, .pg-level__badge { animation: none; transition: none; }
 }

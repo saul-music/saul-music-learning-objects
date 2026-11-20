@@ -52,3 +52,23 @@ séptima, y qué nota suena en cada cuerda; subconjunto de chords-db, MIT) y 7 �
 blanca con punto, la regla «1 acorde → un golpe, 2 → blancas, más → negras» y contar tiempos, con metrónomo). El kit
 admite alternativas con figura (diagramas) y el sampler suma un clic de metrónomo sintetizado. `LICENSE` queda con el
 texto oficial de CC BY 4.0 (para que GitHub la reconozca) y el aviso de crédito pasa a `NOTICE.md`.
+
+## O9 · Look de juego, con la misma funcionalidad (2026-11-20)
+
+Pedido del usuario: que los OA se sientan como juegos y no como encuestas animadas, sin cambiar lo que enseñan.
+Se cambia el núcleo visual (`lo-kit`), no la lógica de los OA (sus `theory.js` y pruebas quedan iguales):
+
+- **Pantallas de juego:** título (portada, récord, estrellas y botón «Jugar»), cuenta regresiva «3, 2, 1, ¡Ya!»,
+  marcador (ronda, pista de 10 casillas gana/pierde, puntos que cuentan, combo y sonido), resultados (1 a 3
+  estrellas, puntos, récord, racha máxima, precisión, repaso y «Siguiente juego»). La galería pasa a ser un
+  **mapa de niveles** con el progreso y el siguiente nivel recomendado.
+- **Puntuación:** 100 por acierto + bono por rapidez (hasta 100, baja en 12 s; el tiempo **no** corta la pregunta)
+  × combo (×2 desde 3 aciertos seguidos, ×3 desde 5, ×4 desde 8). Estrellas solo por aciertos (3 con 9–10, 2 con
+  7–8, 1 con 4–6). Récord y estrellas en `localStorage` del navegador (sin datos personales ni servidor).
+- **Tipografía musical:** notas y cifrados en Petaluma Script (la de acordes de Acordia, OFL) con ♯ y ♭ reales;
+  figuras y claves en Noto Music (OFL, Google Fonts). El texto corrido reconoce notas alteradas, cifrados y notas
+  en listas.
+- **Colores de ganar y perder:** extensión del tema (`--ac-win` jade y `--ac-lose` terracota, en Noche y Marfil);
+  la marca no cambia. Estilo plano: el volumen de botones y fichas es un canto inferior sólido, sin sombras difusas.
+- **Efectos de sonido** sintetizados con Web Audio (sin archivos), aparte de la música, con silencio recordado.
+- **Atajos:** teclas 1 a 4 para responder y Enter para seguir. Todo respeta `prefers-reduced-motion`.

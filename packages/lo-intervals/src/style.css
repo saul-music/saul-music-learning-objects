@@ -12,3 +12,7 @@
 .lo-iv__step.is-asked b { color: var(--ac-accent); }
 .lo-iv__step.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }
 .lo-iv__step.is-answer small { color: var(--ac-on-fill-2); }
+.lo-iv__step b .lo-note { font-size: 1.15em; }
+.lo-iv__pair { display: inline-flex; align-items: baseline; gap: .25em; }
+.lo-iv__arrow { font-family: var(--ac-font-game); font-weight: 800; font-size: .45em; color: var(--ac-fg-muted); align-self: center; }
+.lo-iv__word { font-family: var(--ac-font-display); font-size: .5em; color: var(--ac-fg); }

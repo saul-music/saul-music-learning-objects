@@ -1,5 +1,5 @@
 // OA «Luz y sombra»: reconocer de oído acordes mayores y menores.
-import { drawKeyboard, el, mountChoiceQuiz, svg } from "@saul-music/lo-kit";
+import { chordLabel, drawKeyboard, el, mountChoiceQuiz, svg } from "@saul-music/lo-kit";
 import { chordSymbol, makeQuestion, voicing } from "./theory.js";
 
 export * from "./theory.js";
@@ -21,11 +21,31 @@ function listenDisc(onClick) {
   return node;
 }
 
-export function mount(container, { sampler, metadata }) {
+/** Ficha de respuesta con su ícono: sol para mayor, luna para menor. */
+function moodChoice(text, major) {
+  return {
+    text,
+    node: () => {
+      const icon = svg("svg", { viewBox: "0 0 40 40", class: "lo-ear__mood", "aria-hidden": "true" });
+      if (major) {
+        icon.append(svg("circle", { cx: 20, cy: 20, r: 8.5, class: "sun" }));
+        for (let k = 0; k < 8; k++) {
+          const a = (Math.PI / 4) * k;
+          icon.append(svg("line", { x1: 20 + Math.cos(a) * 13, y1: 20 + Math.sin(a) * 13, x2: 20 + Math.cos(a) * 18, y2: 20 + Math.sin(a) * 18, class: "ray" }));
+        }
+      } else {
+        icon.append(svg("path", { d: "M25 6a14 14 0 1 0 9 22A11 11 0 0 1 25 6z", class: "moon" }));
+      }
+      return el("span", { class: `lo-ear__choice ${major ? "is-major" : "is-minor"}` }, icon, el("b", {}, text));
+    },
+  };
+}
+
+export function mount(container, { sampler, sfx, metadata, cover, next }) {
   const toQuiz = (t) => {
     const play = (s) => playChord(s, t.midis);
     return {
-      choices: t.choices,
+      choices: [moodChoice("Mayor", true), moodChoice("Menor", false)],
       correct: t.correct,
       explain: t.explain,
       recap: t.explain,
@@ -34,7 +54,7 @@ export function mount(container, { sampler, metadata }) {
       ask: "¿Es mayor o menor?",
       visual: (answered) => answered
         ? el("div", { class: "lo-ear__reveal" },
-          el("p", { class: "lo-ear__symbol" }, chordSymbol(t.root, t.quality)),
+          el("p", { class: "lo-ear__symbol" }, chordLabel(chordSymbol(t.root, t.quality))),
           drawKeyboard({ marks: t.midis.slice(0, 3).map((m, i) => ({ midi: m, kind: i === 1 ? "answer" : "hint", label: t.notes[i] })) }))
         : el("div", { class: "lo-ear__listen" }, listenDisc(() => play(sampler))),
       onShow: play,
@@ -48,14 +68,17 @@ export function mount(container, { sampler, metadata }) {
   return mountChoiceQuiz(container, {
     metadata,
     sampler,
+    sfx,
+    cover,
+    next,
     className: "lo-ear",
     makeQuestion: (rng) => toQuiz(makeQuestion(rng)),
     demo: ({ sampler: s }) => {
       const node = el("div", { class: "lo-ear__demo" },
         el("button", { class: "lo-ear__pair is-major", onclick: () => playChord(s, voicing("C", "major")) },
-          el("b", {}, "C"), el("span", {}, "mayor · luz"), el("small", {}, "C – E – G")),
+          el("b", {}, chordLabel("C")), el("span", {}, "mayor · luz"), el("small", {}, "C – E – G")),
         el("button", { class: "lo-ear__pair is-minor", onclick: () => playChord(s, voicing("C", "minor")) },
-          el("b", {}, "Cm"), el("span", {}, "menor · sombra"), el("small", {}, "C – Eb – G")));
+          el("b", {}, chordLabel("Cm")), el("span", {}, "menor · sombra"), el("small", {}, "C – E♭ – G")));
       return {
         node,
         caption: "Solo cambia una nota: la 3ª. En C mayor es E (4 semitonos sobre C); en C menor baja a Eb (3). Toca cada uno y compáralos.",

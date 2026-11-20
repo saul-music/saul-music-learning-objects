@@ -1,20 +1,15 @@
 /* OA «Pulso»: el compás con sus tiempos y las figuras del rasgueo. */
 .lo-sr { display: grid; gap: .75rem; }
 .lo-sr__bar { display: grid; grid-template-columns: auto repeat(var(--n), 1fr); gap: .4rem; align-items: stretch; max-width: 560px; margin: 0 auto; width: 100%; }
-.lo-sr__meter { display: grid; align-content: center; justify-items: center; padding: 0 .4rem; font-family: var(--ac-font-display); font-size: 1.5rem; line-height: .95; border-right: 3px solid var(--ac-fg-muted); }
+.lo-sr__meter { display: grid; align-content: center; justify-items: center; padding: 0 .5rem; font-family: var(--ac-font-music); font-size: 2rem; line-height: .85; border-right: 3px solid var(--ac-fg-muted); }
 .lo-sr__beat {
   position: relative; display: grid; grid-template-rows: auto auto 1fr; justify-items: center; gap: .15rem; min-height: 7rem; padding: .35rem;
   background: var(--ac-bg); border: 2px solid var(--ac-line); border-radius: var(--ac-radius); transition: background-color .12s, border-color .12s;
 }
 .lo-sr__beat small { font-size: .85rem; color: var(--ac-fg-muted); font-variant-numeric: tabular-nums; }
-.lo-sr__chord { font-family: var(--ac-font-display); font-size: 1.2rem; color: var(--ac-accent); min-height: 1.4em; }
+.lo-sr__chord { font-size: 1.5rem; color: var(--ac-accent); min-height: 1.4em; }
 .lo-sr__beat.is-now { border-color: var(--ac-accent); background: rgba(var(--ac-accent-rgb), .18); }
 .lo-sr__beat.is-hit { border-color: var(--ac-fill-2); }
-.lo-sr__figure { width: 2.4rem; height: auto; align-self: end; }
-.lo-sr__figure .head { fill: none; stroke: var(--ac-fg); stroke-width: 3; }
-.lo-sr__figure .head.is-filled { fill: var(--ac-fg); }
-.lo-sr__figure .stem { stroke: var(--ac-fg); stroke-width: 3; }
-.lo-sr__figure .dot { fill: var(--ac-fg); }
 .lo-sr__bar.is-revealed .lo-sr__beat.is-hit { animation: lo-pop .45s calc(var(--k, 0) * 80ms) both; }
 .lo-sr__demo { display: grid; gap: .6rem; }
 .lo-sr__demo-row { display: grid; grid-template-columns: auto 7.5rem 1fr; align-items: center; gap: .6rem; animation: lo-rise .5s calc(.3s + var(--i) * 120ms) both; }
@@ -24,3 +19,12 @@
   .lo-sr__demo-row { grid-template-columns: auto 1fr; }
   .lo-sr__demo-row .lo-sr__bar { grid-column: 1 / -1; }
 }
+.lo-sr__figure { font-family: var(--ac-font-symbols); font-size: 3.1rem; line-height: 1; color: var(--ac-fg); align-self: end; display: inline-flex; align-items: flex-end; }
+.lo-sr__dot { display: inline-block; width: .16em; height: .16em; margin: 0 0 .14em .06em; border-radius: 50%; background: currentColor; }
+.lo-sr__choice { display: inline-flex; align-items: center; gap: .55rem; }
+.lo-sr__choice .lo-sr__figure { font-size: 2.8rem; color: var(--ac-accent); align-self: center; }
+.lo-sr__choice b { font-weight: 800; font-size: clamp(1.1rem, 3.4vw, 1.35rem); }
+.lo-tile.is-win .lo-sr__figure, .lo-tile.is-lose .lo-sr__figure { color: currentColor; }
+.lo-sr__bar-chords { display: inline-flex; align-items: baseline; gap: .3em; flex-wrap: wrap; justify-content: center; }
+.lo-sr__bar-chords .lo-note { font-size: clamp(3rem, 10vw, 4.6rem); }
+.lo-sr__sep { color: var(--ac-fg-muted); font-size: .5em; }

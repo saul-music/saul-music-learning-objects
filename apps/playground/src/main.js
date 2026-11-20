@@ -3,8 +3,8 @@ import "@saul-music/theme/acordia.css";
 import "@saul-music/theme/base.css";
 import "@saul-music/lo-kit/kit.css";
 import "./playground.css";
-import { createSampler, GUITAR_NYLON_NOTES } from "@saul-music/audio";
-import { instrumentOf, levelOf, minutesOf } from "@saul-music/lo-kit";
+import { createSampler, createSfx, GUITAR_NYLON_NOTES } from "@saul-music/audio";
+import { instrumentOf, levelOf, loadBest, minutesOf, starIcon } from "@saul-music/lo-kit";
 
 import * as americanNotation from "@saul-music/lo-american-notation";
 import americanNotationMeta from "@saul-music/lo-american-notation/metadata.json";
@@ -45,12 +45,12 @@ const OBJECTS = [
   { module: chordShapes, metadata: chordShapesMeta, cover: chordShapesCover },
   { module: strumRhythm, metadata: strumRhythmMeta, cover: strumRhythmCover },
 ];
-const byId = new Map(OBJECTS.map((o) => [o.metadata.id, o]));
 
 const guitar = createSampler({
   baseUrl: `${import.meta.env.BASE_URL}samples/guitar-nylon`,
   notes: GUITAR_NYLON_NOTES,
 });
+const sfx = createSfx();
 
 const app = document.getElementById("app");
 let unmount = null;
@@ -62,52 +62,93 @@ function h(tag, cls, text) {
   return n;
 }
 
-function card({ metadata: m, cover }, i) {
-  const a = h("a", "pg-card");
-  a.href = `#/${m.id}`;
-  a.style.setProperty("--i", i);
-  const img = h("img", "pg-card__cover");
+/** El siguiente nivel recomendado: el primero sin jugar cuyos prerrequisitos ya se jugaron. */
+function recommended(bests) {
+  return OBJECTS.findIndex(({ metadata: m }, i) => {
+    if (bests[i].plays > 0) return false;
+    return (m.relation ?? []).filter((r) => r.kind === "requires").every((r) => {
+      const j = OBJECTS.findIndex((o) => o.metadata.id === r.resource.identifier);
+      return j < 0 || bests[j].plays > 0;
+    });
+  });
+}
+
+function level({ metadata: m, cover }, i, best, isNext) {
+  const li = h("li", `pg-level ${i % 2 ? "is-right" : "is-left"}${best.plays ? " is-played" : ""}${isNext ? " is-next" : ""}`);
+  li.style.setProperty("--i", i);
+  const href = `#/${m.id}`;
+
+  const node = h("a", "pg-level__node");
+  node.href = href;
+  node.tabIndex = -1;
+  node.setAttribute("aria-hidden", "true");
+  const img = h("img");
   img.src = cover;
   img.alt = "";
   img.loading = "lazy";
-  const figure = h("div", "pg-card__figure");
-  figure.append(img, h("span", "pg-card__step", String(i + 1)));
-  const body = h("div", "pg-card__body");
-  body.append(h("p", "pg-card__kicker", m.general.subtitle ?? ""), h("h2", "", m.general.title), h("p", "pg-card__desc", m.general.description));
-  const chips = h("ul", "pg-card__chips");
+  const disc = h("span", "pg-level__disc");
+  disc.append(img);
+  node.append(disc, h("span", "pg-level__num", String(i + 1)));
+
+  const card = h("a", "pg-level__card");
+  card.href = href;
+  const stars = h("span", "pg-level__stars");
+  stars.setAttribute("aria-label", `${best.stars} de 3 estrellas`);
+  stars.append(...[0, 1, 2].map((k) => starIcon(k < best.stars)));
+  const meta = h("p", "pg-level__meta");
+  meta.append(stars, h("span", "", best.plays ? `Récord ${best.points.toLocaleString("es-CL")}` : "Sin jugar"));
+  const chips = h("ul", "pg-level__chips");
   for (const t of [instrumentOf(m.educational.instrument), `⏱ ${minutesOf(m.educational.typicalLearningTime)}`, levelOf(m.educational.difficulty)]) chips.append(h("li", "", t));
-  body.append(chips);
+  card.append(h("p", "pg-level__kicker", m.general.subtitle ?? ""), h("h2", "", m.general.title), h("p", "pg-level__desc", m.general.description), meta, chips);
   for (const r of (m.relation ?? []).filter((x) => x.kind === "requires")) {
-    const req = byId.get(r.resource.identifier);
-    body.append(h("p", "pg-requires", `Antes: ${req ? req.metadata.general.title : r.resource.description.split(":")[0]}${req ? "" : " (pronto)"}`));
+    const req = OBJECTS.find((o) => o.metadata.id === r.resource.identifier);
+    card.append(h("p", "pg-requires", `Antes: ${req ? req.metadata.general.title : r.resource.description.split(":")[0]}`));
   }
-  a.append(figure, body);
-  return a;
+  if (isNext) card.append(h("span", "pg-level__badge", best.plays ? "" : "¡Juega aquí!"));
+  li.append(card, node, h("span", "pg-level__spacer"));
+  return li;
 }
 
 function gallery() {
+  const bests = OBJECTS.map((o) => loadBest(o.metadata.id));
+  const totalStars = bests.reduce((a, b) => a + b.stars, 0);
+  const totalPoints = bests.reduce((a, b) => a + b.points, 0);
+  const next = recommended(bests);
   const head = h("header", "pg-hero");
+  const score = h("div", "pg-hero__score");
+  const starsBox = h("span", "pg-hero__stars");
+  starsBox.append(starIcon(true), h("b", "", `${totalStars}/${OBJECTS.length * 3}`));
+  score.append(starsBox, h("span", "", `${totalPoints.toLocaleString("es-CL")} puntos`));
   head.append(
-    h("p", "pg-kicker", "Playground"),
-    h("h1", "", "Objetos de aprendizaje"),
-    h("p", "pg-lead", "Juegos cortos para aprender música, cada uno con un objetivo. Síguelos en orden: cada uno prepara el siguiente."));
-  const grid = h("div", "pg-grid");
-  grid.append(...OBJECTS.map(card));
-  app.replaceChildren(head, grid);
+    h("p", "pg-kicker", "Playground · Objetos de aprendizaje"),
+    h("h1", "", "Mapa de niveles"),
+    h("p", "pg-lead", "Siete juegos cortos para aprender música, cada uno con una misión. Síguelos en orden: cada nivel prepara el siguiente."),
+    score);
+  const map = h("ol", "pg-map");
+  map.append(...OBJECTS.map((o, i) => level(o, i, bests[i], i === next)));
+  app.replaceChildren(head, map);
 }
 
 function route() {
   unmount?.();
   unmount = null;
   const id = location.hash.replace(/^#\/?/, "");
-  const found = byId.get(id);
+  const idx = OBJECTS.findIndex((o) => o.metadata.id === id);
   scrollTo(0, 0);
-  if (!found) return gallery();
-  const back = h("a", "pg-back", "← Todos los juegos");
+  if (idx < 0) return gallery();
+  const found = OBJECTS[idx];
+  const after = OBJECTS[idx + 1];
+  const back = h("a", "pg-back", "← Mapa de niveles");
   back.href = "#/";
   const host = h("div");
   app.replaceChildren(back, host);
-  unmount = found.module.mount(host, { sampler: guitar, metadata: found.metadata });
+  unmount = found.module.mount(host, {
+    sampler: guitar,
+    sfx,
+    metadata: found.metadata,
+    cover: found.cover,
+    next: after ? { title: after.metadata.general.title, go: () => { location.hash = `#/${after.metadata.id}`; } } : null,
+  });
 }
 
 const themeBtn = document.querySelector(".pg-theme");

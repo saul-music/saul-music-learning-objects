@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/sampler.js"
+    ".": "./src/index.js",
+    "./sampler": "./src/sampler.js",
+    "./sfx": "./src/sfx.js"
   },
   "license": "CC-BY-4.0"
 }
