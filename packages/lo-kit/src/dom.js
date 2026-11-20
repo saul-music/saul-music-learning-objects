@@ -10,7 +10,7 @@ export function el(tag, attrs = {}, ...children) {
     else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
     else node.setAttribute(k, v);
   }
-  node.append(...children.flat().filter((c) => c !== "" && c != null && c !== false));
+  node.append(...children.flat(Infinity).filter((c) => c !== "" && c != null && c !== false));
   return node;
 }
 

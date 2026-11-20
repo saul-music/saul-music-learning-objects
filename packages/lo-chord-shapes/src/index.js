@@ -99,7 +99,7 @@ export function mount(container, { sampler, sfx, metadata, cover, next }) {
     demo: ({ sampler: s }) => {
       const pairs = [["E", "major"], ["E", "minor"], ["E", "7"]];
       const node = el("div", { class: "lo-cs__demo" },
-        pairs.map(([r, q], i) => el("button", { class: "lo-cs__demo-item", style: `--i:${i}`, onclick: () => strum(s, shapesOf(r, q)[0]) },
+        pairs.map(([r, q], i) => el("button", { class: "lo-cs__demo-item lo-listen", style: `--i:${i}`, onclick: () => strum(s, shapesOf(r, q)[0]) },
           drawChordBox(shapesOf(r, q)[0], { label: `${r}${q === "major" ? "" : q === "minor" ? "m" : "7"}` }),
           chordLabel(`${r}${q === "major" ? "" : q === "minor" ? "m" : "7"}`))));
       return {

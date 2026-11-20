@@ -75,9 +75,9 @@ export function mount(container, { sampler, sfx, metadata, cover, next }) {
     makeQuestion: (rng) => toQuiz(makeQuestion(rng)),
     demo: ({ sampler: s }) => {
       const node = el("div", { class: "lo-ear__demo" },
-        el("button", { class: "lo-ear__pair is-major", onclick: () => playChord(s, voicing("C", "major")) },
+        el("button", { class: "lo-ear__pair is-major lo-listen", onclick: () => playChord(s, voicing("C", "major")) },
           el("b", {}, chordLabel("C")), el("span", {}, "mayor · luz"), el("small", {}, "C – E – G")),
-        el("button", { class: "lo-ear__pair is-minor", onclick: () => playChord(s, voicing("C", "minor")) },
+        el("button", { class: "lo-ear__pair is-minor lo-listen", onclick: () => playChord(s, voicing("C", "minor")) },
           el("b", {}, chordLabel("Cm")), el("span", {}, "menor · sombra"), el("small", {}, "C – E♭ – G")));
       return {
         node,

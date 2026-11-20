@@ -98,3 +98,10 @@ Enseña ortografía enarmónica práctica: cada letra una vez, sostenido o bemol
 sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pregunta; tonalidades mayores hasta 3 alteraciones más F# y Gb
 (y C#/Cb solo como respuesta de las notas raras). Sin menores por ahora. Decisiones mías, revisables: la dirección de la estrategia
 (sostenido al subir en tonalidades de sostenidos, bemol al bajar en las de bemoles) y la portada.
+
+## O13 · Cuatro errores de interfaz (2026-11-20)
+
+- **Do es C (alfabeto):** el anillo de letras mostraba la vecina de la nota de partida, o sea la respuesta. Antes de responder solo se ve la letra de partida; el resto son casillas «?».
+- **Luz y sombra y demás descripciones:** el `figcaption` era `flex` y partía el texto en cada nota; ahora es texto corrido. Las tarjetas que suenan de la demo (Luz y sombra y Manos de acorde) pasan a `lo-listen`: esperan a que termine el sonido (O11).
+- **Pulso:** `el()` aplanaba un solo nivel de hijos y mostraba `[object HTMLSpanElement]`; ahora aplana todos.
+- **Nombra bien la nota:** las alternativas de acorde dibujan cada nota en tipografía musical (la G suelta salía en texto chico).
