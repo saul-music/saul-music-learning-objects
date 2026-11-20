@@ -52,7 +52,11 @@ function isNoteToken(text, start, token) {
   if (token.length > 1) return true;
   const before = text.slice(0, start).trimEnd().slice(-1);
   const after = text.slice(start + 1).trimStart().slice(0, 1);
-  return LIST_MARK.test(before) || /[–→)·]/.test(after);
+  if (LIST_MARK.test(before) || /[–→)·]/.test(after)) return true;
+  // Lista separada por comas («C, D, E»): vale si la letra vecina al otro lado de la coma también es una nota.
+  const prevItem = before === "," && /(^|[^A-Za-z0-9])[A-G](?:##|#|bb|b)?\s*,\s*$/.test(text.slice(0, start));
+  const nextItem = after === "," && /^\s*,\s*[A-G](?:##|#|bb|b)?(?![A-Za-z0-9])/.test(text.slice(start + token.length));
+  return prevItem || nextItem;
 }
 
 /** Notas que hay en un texto, con su posición (lógica pura). */

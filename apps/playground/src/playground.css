@@ -30,7 +30,7 @@ a:hover { color: var(--ac-accent-hover); }
 .pg-level.is-left { grid-template-areas: "card node ."; }
 .pg-level.is-right { grid-template-areas: ". node card"; }
 .pg-level__card { grid-area: card; }
-.pg-level__node { position: relative; justify-self: center; width: 8.5rem; height: 8.5rem; transition: transform .2s; }
+.pg-level__node { grid-area: node; position: relative; justify-self: center; width: 8.5rem; height: 8.5rem; transition: transform .2s; }
 .pg-level__disc {
   display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
   border: 5px solid var(--ac-line); border-bottom-width: 10px; background: var(--ac-noche); transition: border-color .2s;
