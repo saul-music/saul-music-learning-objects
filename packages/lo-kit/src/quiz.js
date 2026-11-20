@@ -230,7 +230,7 @@ export function renderResults(screen, run, { sfx, save, next, onRestart, onBack 
       el("div", {}, el("dt", {}, "Precisión"), el("dd", {}, `${Math.round((run.score / run.rounds) * 100)}%`))),
     misses,
     el("div", { class: "lo-actions lo-actions--center" },
-      next ? el("button", { class: "lo-btn lo-btn--game", onclick: next.go }, `Siguiente: ${next.title} →`) : "",
+      next ? el("button", { class: "lo-btn lo-btn--game", onclick: next.go }, rich(`Siguiente: ${next.title} →`)) : "",
       el("button", { class: next ? "lo-btn lo-btn--game lo-btn--alt" : "lo-btn lo-btn--game", onclick: onRestart }, "↻ Jugar otra vez"),
       el("button", { class: "lo-btn lo-btn--ghost", onclick: onBack }, "Volver al inicio"))));
   sfx?.fanfare();

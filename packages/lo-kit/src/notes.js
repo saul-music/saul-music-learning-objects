@@ -45,18 +45,25 @@ const TOKEN = /(^|[^A-Za-z0-9])([A-G](?:##|#|bb|b)?(?:maj7|m7|m|7)?)(?![A-Za-z0-
 const LIST_MARK = /[–→(·]/;
 
 /**
- * ¿Es una nota este token? Con alteración o cifrado, sí. Una letra sola, solo si va en una lista de
- * notas («B – D♯ – F♯ – A», «C → E») o entre paréntesis: así «A» como preposición no se confunde.
+ * ¿Es una nota este token? Con alteración o cifrado, sí. Una letra mayúscula suelta también, salvo
+ * «A» y «E», que además son palabras («¿A qué…?», «e incluso») cuando abren una oración: ahí cuentan si
+ * van en una lista de notas («A – C – E»), si es «E» (salvo ante «i»/«hi») o si la «A» va ante «mayor»,
+ * «menor», «lleva»… A mitad de oración siempre son notas
+ * («en F mayor… es una B», «De A a C#»), porque la preposición va en minúscula.
  */
 function isNoteToken(text, start, token) {
   if (token.length > 1) return true;
+  if (!/[AE]/.test(token)) return true;
   const before = text.slice(0, start).trimEnd().slice(-1);
-  const after = text.slice(start + 1).trimStart().slice(0, 1);
-  if (LIST_MARK.test(before) || /[–→)·]/.test(after)) return true;
-  // Lista separada por comas («C, D, E»): vale si la letra vecina al otro lado de la coma también es una nota.
-  const prevItem = before === "," && /(^|[^A-Za-z0-9])[A-G](?:##|#|bb|b)?\s*,\s*$/.test(text.slice(0, start));
-  const nextItem = after === "," && /^\s*,\s*[A-G](?:##|#|bb|b)?(?![A-Za-z0-9])/.test(text.slice(start + token.length));
-  return prevItem || nextItem;
+  const opensSentence = before === "" || /[.:;!?¿¡«"]/.test(before);
+  if (!opensSentence) return true;
+  const rest = text.slice(start + 1);
+  // En una lista: «A – C – E», «E, Em y E7».
+  if (/^\s*[–→·,]\s*[A-G](?:##|#|bb|b)?(?:maj7|m7|m|7)?(?![A-Za-z0-9áéíóúñ])/.test(rest)) return true;
+  // «E menor», «A mayor lleva…»: la «E» conjunción solo va ante «i»/«hi», y la «A» preposición ante otras palabras.
+  return token === "E"
+    ? !/^\s+[iíIÍhH]/.test(rest)
+    : /^\s+(mayor|menor|sostenido|bemol|lleva|suena|es|está|vale)\b/.test(rest);
 }
 
 /** Notas que hay en un texto, con su posición (lógica pura). */
@@ -67,14 +74,27 @@ export function* notesIn(text) {
   }
 }
 
+// Signos sueltos que el texto nombra como tales: «# y b», «# se dice sostenido», «b se dice bemol».
+const BARE_SIGN = /(^|[\s(])(#(?=[\s),.:;]|$)|b(?= se dice\b)|(?<=# y )b(?![A-Za-z0-9]))/g;
+
+/** Notas y signos sueltos de un texto, ordenados: { start, name, sign? }. */
+function marksIn(str) {
+  const marks = [...notesIn(str)];
+  for (const m of str.matchAll(BARE_SIGN)) {
+    const start = m.index + m[1].length;
+    marks.push({ start, name: m[2], sign: m[2] === "#" ? "♯" : "♭" });
+  }
+  return marks.sort((x, y) => x.start - y.start);
+}
+
 /** Parte un texto y escribe sus notas en tipografía musical. Devuelve nodos y textos. */
 export function richText(text) {
   const str = String(text);
   const out = [];
   let last = 0;
-  for (const { start, name } of notesIn(str)) {
+  for (const { start, name, sign } of marksIn(str)) {
     if (start > last) out.push(str.slice(last, start));
-    out.push(noteLabel(name, { cls: "lo-note--inline" }));
+    out.push(sign ? el("span", { class: "lo-note lo-note--inline lo-note--sign", "aria-label": sign === "♯" ? "sostenido" : "bemol", role: "img" }, sign) : noteLabel(name, { cls: "lo-note--inline" }));
     last = start + name.length;
   }
   if (last < str.length) out.push(str.slice(last));
@@ -86,8 +106,8 @@ export function prettyText(text) {
   const str = String(text);
   let out = "";
   let last = 0;
-  for (const { start, name } of notesIn(str)) {
-    out += str.slice(last, start) + pretty(name);
+  for (const { start, name, sign } of marksIn(str)) {
+    out += str.slice(last, start) + (sign ?? pretty(name));
     last = start + name.length;
   }
   return out + str.slice(last);
