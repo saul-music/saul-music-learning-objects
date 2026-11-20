@@ -17,3 +17,5 @@
 .lo-es__pair { display: inline-flex; align-items: baseline; gap: .25em; }
 .lo-es__word { font-family: var(--ac-font-display); font-size: .5em; color: var(--ac-fg); }
 .lo-es__hint { margin: 0; text-align: center; color: var(--ac-fg-muted); font-size: 1rem; }
+.lo-es__triad { display: inline-flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: .1em .55em; }
+.lo-tile .lo-es__triad .lo-note { font-size: clamp(1.8rem, 5vw, 2.4rem); }

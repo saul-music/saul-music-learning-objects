@@ -31,6 +31,12 @@ function scaleStrip(notes, asked, answered) {
       })));
 }
 
+/** Alternativa de acorde: cada nota en tipografía musical (si no, la G suelta sale en texto chico). */
+const triadChoice = (text) => ({
+  text: text.split(" ").join(" – "), // con guiones, el texto de «Era …» también reconoce la G suelta como nota
+  node: () => el("span", { class: "lo-es__triad" }, text.split(" ").map((n) => noteLabel(n))),
+});
+
 function toQuiz(t) {
   const base = { choices: t.choices, correct: t.correct, explain: t.explain, recap: t.explain };
   if (t.type === "spelling") {
@@ -85,7 +91,7 @@ function toQuiz(t) {
     eyebrow: "Acorde mayor",
     big: t.root,
     bigKind: "chord",
-    choiceKind: "text",
+    choices: t.choices.map(triadChoice),
     ask: ["¿Qué notas lleva el acorde de ", chordLabel(t.root), " mayor?"],
     onShow: play,
     replay: { label: "▶ Oír el acorde", play },

@@ -74,7 +74,8 @@
 .lo-requires .lo-label { color: var(--ac-accent); }
 .lo-requires p { margin: 0; color: var(--ac-fg-muted); }
 .lo-demo { margin: 0; display: grid; gap: .6rem; }
-.lo-demo figcaption { font-size: 1.05rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.lo-demo figcaption { font-size: 1.05rem; line-height: 1.7; }
+.lo-demo figcaption .lo-btn { margin-left: .6rem; vertical-align: middle; }
 .lo-tips { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
 .lo-tip {
   position: relative; display: grid; gap: .5rem; align-content: start; padding: 1.2rem;

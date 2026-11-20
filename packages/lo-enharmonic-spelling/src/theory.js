@@ -112,7 +112,7 @@ export function triadQuestion(rng) {
   const letters = triad.map((n) => n[0]).join(", ");
   return {
     type: "triad", root, triad, answer, choices, correct,
-    explain: `Un acorde mayor apila 1ª, 3ª y 5ª de la escala, con letras alternadas (${letters}). Por eso es ${answer}.`,
+    explain: `Un acorde mayor apila 1ª, 3ª y 5ª de la escala, con letras alternadas (${letters}). Por eso es ${triad.join(" – ")}.`,
   };
 }
 

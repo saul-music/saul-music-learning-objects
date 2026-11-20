@@ -46,9 +46,11 @@ function toQuiz(t) {
     ask: t.forward ? "¿Qué letra viene después?" : "¿Qué letra viene antes?",
     recap: t.explain,
     visual: (answered) => el("div", { class: "lo-an__ring" },
+      // Antes de responder solo se ve la letra de partida: el resto del anillo delataría la vecina.
       LETTERS.map((l) => el("span", {
-        class: `lo-an__letter${l === t.name ? " is-source" : ""}${answered && l === t.answer ? " is-answer" : ""}`,
-      }, l))),
+        class: `lo-an__letter${l === t.name ? " is-source" : ""}${answered && l === t.answer ? " is-answer" : ""}${answered || l === t.name ? "" : " is-hidden"}`,
+        "aria-hidden": answered || l === t.name ? null : "true",
+      }, answered || l === t.name ? l : "?"))),
     onShow: (sampler) => sampler?.play(midi),
     onAnswer: (sampler) => {
       // Hacia adelante sube y hacia atrás baja, aunque el alfabeto dé la vuelta (G → A, A → G).
