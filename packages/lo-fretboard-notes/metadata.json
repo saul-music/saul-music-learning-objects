@@ -32,6 +32,15 @@
     "copyrightAndOtherRestrictions": "yes",
     "description": "Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
   },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-intervals",
+        "description": "Intervalos y alteraciones: qué son el # y el b, y por qué existen notas como E#."
+      }
+    }
+  ],
   "pedagogy": {
     "objective": "Ubicar en cualquier cuerda la misma nota que ves en otra, entre los trastes 0 y 12, y reconocer si suena igual o una octava más aguda o más grave.",
     "content": [
@@ -42,7 +51,7 @@
       },
       {
         "title": "Medio tono por traste",
-        "text": "Cada traste sube medio tono. En el traste 12 vuelve la nota de la cuerda al aire, una octava más aguda."
+        "text": "Cada traste sube medio tono. Entre dos letras vecinas hay una nota con sostenido (C, C#, D…), salvo entre E y F y entre B y C. En el traste 12 vuelve la nota de la cuerda al aire, una octava más aguda."
       },
       {
         "title": "La regla del traste 5",

@@ -32,7 +32,7 @@ describe("mástil", () => {
   it("nombra en clave americana y da la forma latina solo para decirla", () => {
     expect(noteName(61)).toBe("C#");
     expect(noteName(57)).toBe("A");
-    expect(spokenName(61)).toBe("Do#");
+    expect(spokenName(61)).toBe("Do sostenido");
     expect(spokenName(71)).toBe("Si");
   });
 
@@ -58,18 +58,9 @@ describe("preguntas", () => {
     }
   });
 
-  it("con solo naturales, nunca muestran una nota alterada", () => {
+  it("usan las 12 notas, sostenidos incluidos", () => {
     const rng = seeded(7);
-    for (let i = 0; i < 500; i++) {
-      expect(noteName(makeQuestion(rng).midi)).not.toContain("#");
-    }
-  });
-
-  it("con alteraciones, a veces muestran una nota alterada", () => {
-    const rng = seeded(7);
-    const names = Array.from({ length: 200 }, () =>
-      noteName(makeQuestion(rng, { naturalsOnly: false }).midi),
-    );
-    expect(names.some((n) => n.includes("#"))).toBe(true);
+    const names = new Set(Array.from({ length: 600 }, () => noteName(makeQuestion(rng).midi)));
+    expect(names.size).toBe(12);
   });
 });

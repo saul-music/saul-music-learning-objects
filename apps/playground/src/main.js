@@ -29,6 +29,14 @@ function card({ metadata: m }) {
     <div><dt>Tipo</dt><dd>Cuestionario</dd></div></dl>`;
   a.querySelector("h2").textContent = m.general.title;
   a.querySelector("p").textContent = m.general.description;
+  // Prerrequisitos (LOM relation «requires»). Si el OA requerido aún no está en el banco, se marca «pronto».
+  for (const r of (m.relation ?? []).filter((x) => x.kind === "requires")) {
+    const ready = OBJECTS.some((o) => o.metadata.id === r.resource.identifier);
+    const req = document.createElement("p");
+    req.className = "pg-requires";
+    req.textContent = `Antes: ${r.resource.description.split(":")[0]}${ready ? "" : " (pronto)"}`;
+    a.append(req);
+  }
   return a;
 }
 

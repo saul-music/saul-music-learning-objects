@@ -33,3 +33,4 @@ a:hover { color: var(--ac-accent-hover); }
   .pg-brand span { display: block; font-size: .8rem; line-height: 1.2; }
   .pg-brand { line-height: 1.1; }
 }
+.pg-card .pg-requires { font-size: .85rem; color: var(--ac-accent); border-top: 1px solid var(--ac-line); padding-top: .5rem; }

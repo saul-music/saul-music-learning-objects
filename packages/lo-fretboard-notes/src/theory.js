@@ -19,10 +19,10 @@ export function noteName(midi) {
   return Note.pitchClass(Note.fromMidiSharps(midi)); // "A", "C#"
 }
 
-/** Cómo se dice la nota en español (forma latina), solo como apoyo hablado: «La», «Do#». */
+/** Cómo se dice la nota en español (forma latina), solo como apoyo hablado: «La», «Do sostenido». */
 export function spokenName(midi) {
   const pc = noteName(midi);
-  return LATIN[pc[0]] + pc.slice(1);
+  return LATIN[pc[0]] + (pc.includes("#") ? " sostenido" : "");
 }
 
 /** Trastes de `string` (0..maxFret) donde suena la misma nota (misma clase de altura). */
@@ -49,20 +49,19 @@ export function octaveRelation(fromMidi, toMidi) {
   return n === 1 ? `la misma nota, una octava ${dir}` : `la misma nota, ${n} octavas ${dir}`;
 }
 
-const isNatural = (midi) => !Note.fromMidiSharps(midi).includes("#");
-
 /**
- * Arma una pregunta al azar.
+ * Arma una pregunta al azar, con las 12 notas (sostenidos incluidos: este OA exige haber pasado
+ * el de intervalos y alteraciones).
  * @param {() => number} rng  generador en [0, 1); se inyecta para poder probar
- * @param {{maxFret?: number, naturalsOnly?: boolean}} opts
+ * @param {{maxFret?: number}} opts
  */
-export function makeQuestion(rng = Math.random, { maxFret = 12, naturalsOnly = true } = {}) {
+export function makeQuestion(rng = Math.random, { maxFret = 12 } = {}) {
   const pick = (arr) => arr[Math.floor(rng() * arr.length)];
   const strings = [1, 2, 3, 4, 5, 6];
   const candidates = [];
   for (const s of strings) {
     for (let f = 0; f <= maxFret; f++) {
-      if (!naturalsOnly || isNatural(midiAt(s, f))) candidates.push([s, f]);
+      candidates.push([s, f]);
     }
   }
   const [source, fret] = pick(candidates);

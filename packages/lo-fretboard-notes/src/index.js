@@ -104,7 +104,7 @@ function drawFretboard({ orientation, highlight, marks = [], targets = [], onPic
 }
 
 export function mount(container, { sampler, metadata }) {
-  const state = { naturalsOnly: true, round: 0, score: 0, misses: [], results: [], streak: 0, q: null, answered: false, fresh: false, celebrate: false };
+  const state = { round: 0, score: 0, misses: [], results: [], streak: 0, q: null, answered: false, fresh: false, celebrate: false };
   const name = noteName;
   const play = (midi, delay = 0) => sampler?.play(midi, { delay });
 
@@ -177,8 +177,8 @@ export function mount(container, { sampler, metadata }) {
         : "",
       el("p", {}, c.text));
 
-    const sharps = el("input", { type: "checkbox", onchange: (ev) => (state.naturalsOnly = !ev.target.checked) });
-    sharps.checked = !state.naturalsOnly;
+    // Prerrequisitos (IEEE LOM, relation kind «requires»): se avisan aquí; el orden lo lleva el playground.
+    const requires = (metadata.relation ?? []).filter((r) => r.kind === "requires");
 
     root.replaceChildren(el("div", { class: "lo-fn__intro" },
       el("header", { class: "lo-fn__hero", style: stagger(0) },
@@ -196,7 +196,11 @@ export function mount(container, { sampler, metadata }) {
       el("h3", { style: stagger(3) }, "Antes de empezar"),
       el("ol", { class: "lo-fn__tips" }, ...p.content.map(tip)),
       el("div", { class: "lo-fn__start", style: stagger(p.content.length + 3) },
-        el("label", { class: "lo-fn__switch" }, sharps, el("span", { class: "lo-fn__switch-ui", "aria-hidden": "true" }), "Incluir notas con sostenido (#)"),
+        requires.length
+          ? el("div", { class: "lo-fn__requires" },
+            el("span", { class: "lo-fn__goal-label" }, "Antes de este juego"),
+            ...requires.map((r) => el("p", {}, r.resource.description)))
+          : el("span"),
         el("button", { class: "lo-btn lo-btn--cta", onclick: start }, "Empezar ", el("span", { "aria-hidden": "true" }, "→"))),
     ));
     requestAnimationFrame(() => demo.classList.add("is-playing"));
@@ -212,7 +216,7 @@ export function mount(container, { sampler, metadata }) {
     state.round += 1;
     state.answered = false;
     state.fresh = true;
-    state.q = makeQuestion(Math.random, { maxFret: MAX_FRET, naturalsOnly: state.naturalsOnly });
+    state.q = makeQuestion(Math.random, { maxFret: MAX_FRET });
     render();
     play(state.q.midi);
   }

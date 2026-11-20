@@ -1,0 +1,64 @@
+name: pipeline
+
+# Un solo pipeline por repo (D45 de saul), secuencial: tests -> build -> deploy (GitHub Pages, solo en main).
+# Sin GCP ni secretos: el playground es estático. npm instala solo del registro público (.npmrc).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pipeline-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - name: el lock solo trae el registro público
+        run: "! grep -q artifactory package-lock.json"
+      - run: npm ci
+      - run: npm test
+
+  build:
+    name: build del playground
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [test]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: apps/playground/dist
+
+  deploy:
+    name: desplegar en GitHub Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
