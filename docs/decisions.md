@@ -85,3 +85,16 @@ playground no declaraba la sesión de audio como reproducción (el reproductor d
 - **Reanudar en cada toque**: iOS suspende o «interrumpe» el contexto al cambiar de app y solo un gesto lo reanuda.
 - Respaldo `webkitAudioContext` y `decodeAudioData` con callbacks para Safari antiguo; cada muestra se baja una vez.
 - Diagnóstico: `?debug=audio` en la dirección muestra el estado del contexto y la sesión, con botones de prueba.
+
+## O11 · Un sonido a la vez y cuenta regresiva sin recorte (2026-11-20)
+
+- La cuenta regresiva recortaba el «¡Ya!»: el escenario estaba vacío y la capa absoluta medía ~65 px. Ahora el escenario toma altura mínima mientras cuenta.
+- El sampler expone `isSounding()` y `onSounding()`. Mientras algo suena, los botones `lo-listen` («Oír…») quedan bloqueados y aparece el cartel animado «Reproduciendo…» (`bindSound` en `lo-kit`, desde `createShell`).
+
+## O12 · «Nombra bien la nota» (2026-11-20)
+
+Nuevo OA `lo-enharmonic-spelling`, paso 3 del recorrido (requiere «El misterio de E#»; «Eco en el mástil» pasa a requerirlo).
+Enseña ortografía enarmónica práctica: cada letra una vez, sostenido o bemol según la tonalidad (con el criterio «si dudas, bemol»,
+sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pregunta; tonalidades mayores hasta 3 alteraciones más F# y Gb
+(y C#/Cb solo como respuesta de las notas raras). Sin menores por ahora. Decisiones mías, revisables: la dirección de la estrategia
+(sostenido al subir en tonalidades de sostenidos, bemol al bajar en las de bemoles) y la portada.
