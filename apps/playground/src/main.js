@@ -4,7 +4,7 @@ import "@saul-music/theme/base.css";
 import "@saul-music/lo-kit/kit.css";
 import "./playground.css";
 import { createSampler, currentAudioContext, createSfx, GUITAR_NYLON_NOTES, installGestureUnlock, resumeAudio } from "@saul-music/audio";
-import { instrumentOf, levelOf, loadBest, minutesOf, starIcon } from "@saul-music/lo-kit";
+import { instrumentOf, levelOf, loadBest, minutesOf, richText, starIcon } from "@saul-music/lo-kit";
 
 import * as americanNotation from "@saul-music/lo-american-notation";
 import americanNotationMeta from "@saul-music/lo-american-notation/metadata.json";
@@ -92,10 +92,11 @@ audioDebugPanel();
 const app = document.getElementById("app");
 let unmount = null;
 
+/** Crea un elemento; el texto pasa por richText para escribir las notas en tipografía musical. */
 function h(tag, cls, text) {
   const n = document.createElement(tag);
   if (cls) n.className = cls;
-  if (text != null) n.textContent = text;
+  if (text != null) n.append(...richText(text));
   return n;
 }
 

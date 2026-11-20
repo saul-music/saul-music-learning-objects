@@ -1,5 +1,5 @@
 // OA «Luz y sombra»: reconocer de oído acordes mayores y menores.
-import { chordLabel, drawKeyboard, el, mountChoiceQuiz, svg } from "@saul-music/lo-kit";
+import { chordLabel, drawKeyboard, el, mountChoiceQuiz, richText, svg } from "@saul-music/lo-kit";
 import { chordSymbol, makeQuestion, voicing } from "./theory.js";
 
 export * from "./theory.js";
@@ -76,9 +76,9 @@ export function mount(container, { sampler, sfx, metadata, cover, next }) {
     demo: ({ sampler: s }) => {
       const node = el("div", { class: "lo-ear__demo" },
         el("button", { class: "lo-ear__pair is-major lo-listen", onclick: () => playChord(s, voicing("C", "major")) },
-          el("b", {}, chordLabel("C")), el("span", {}, "mayor · luz"), el("small", {}, "C – E – G")),
+          el("b", {}, chordLabel("C")), el("span", {}, "mayor · luz"), el("small", {}, richText("C – E – G"))),
         el("button", { class: "lo-ear__pair is-minor lo-listen", onclick: () => playChord(s, voicing("C", "minor")) },
-          el("b", {}, chordLabel("Cm")), el("span", {}, "menor · sombra"), el("small", {}, "C – E♭ – G")));
+          el("b", {}, chordLabel("Cm")), el("span", {}, "menor · sombra"), el("small", {}, richText("C – Eb – G"))));
       return {
         node,
         caption: "Solo cambia una nota: la 3ª. En C mayor es E (4 semitonos sobre C); en C menor baja a Eb (3). Toca cada uno y compáralos.",
