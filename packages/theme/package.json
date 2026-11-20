@@ -3,5 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "exports": { "./acordia.css": "./acordia.css", "./base.css": "./base.css" }
+  "exports": {
+    "./acordia.css": "./acordia.css",
+    "./base.css": "./base.css"
+  },
+  "license": "CC-BY-4.0"
 }

@@ -6,11 +6,14 @@
   "exports": {
     ".": "./src/index.js",
     "./metadata.json": "./metadata.json",
-    "./style.css": "./src/style.css"
+    "./style.css": "./src/style.css",
+    "./cover.svg": "./cover.svg"
   },
   "dependencies": {
     "@saul-music/audio": "*",
+    "@saul-music/lo-kit": "*",
     "@saul-music/theme": "*",
     "tonal": "^6.7.1"
-  }
+  },
+  "license": "CC-BY-4.0"
 }

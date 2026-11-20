@@ -3,8 +3,8 @@
   "id": "lo-fretboard-notes",
   "version": "0.1.0",
   "general": {
-    "title": "La misma nota en otra cuerda",
-    "description": "Cuestionario sobre el mástil de la guitarra: ves una nota en una cuerda y la buscas en otra.",
+    "title": "Eco en el mástil",
+    "description": "La misma nota vive en varias cuerdas. Ves una en el mástil y la buscas en otra cuerda.",
     "language": "es",
     "keywords": [
       "guitarra",
@@ -13,7 +13,8 @@
       "octavas",
       "unísono",
       "clave americana"
-    ]
+    ],
+    "subtitle": "La misma nota en otra cuerda"
   },
   "educational": {
     "learningResourceType": [
@@ -30,14 +31,14 @@
   "rights": {
     "cost": "no",
     "copyrightAndOtherRestrictions": "yes",
-    "description": "Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
   },
   "relation": [
     {
       "kind": "requires",
       "resource": {
         "identifier": "lo-intervals",
-        "description": "Intervalos y alteraciones: qué son el # y el b, y por qué existen notas como E#."
+        "description": "El misterio de E#: medios tonos, sostenidos y por qué existen notas como E#."
       }
     }
   ],

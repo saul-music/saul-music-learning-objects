@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Escalera del acorde">
+  <title>Escalera del acorde</title>
+  <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
+  <rect width="480" height="300" fill="#191430"/>
+  <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
+  <path d="M130 300 V140 A110 110 0 0 1 350 140 V300 Z" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <rect x="160" y="240" width="36" height="50" rx="3" fill="#342c5c" stroke="#5fb39b" stroke-width="2"/>
+  <text x="178" y="268" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="24" fill="#f1ece2">1</text>
+  <rect x="202" y="210" width="36" height="80" rx="3" fill="#342c5c" stroke="#5fb39b" stroke-width="2"/>
+  <text x="220" y="238" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="24" fill="#f1ece2">3</text>
+  <rect x="244" y="180" width="36" height="110" rx="3" fill="#342c5c" stroke="#5fb39b" stroke-width="2"/>
+  <text x="262" y="208" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="24" fill="#f1ece2">5</text>
+  <rect x="286" y="150" width="36" height="140" rx="3" fill="#d4a64a" stroke="#5fb39b" stroke-width="2"/>
+  <text x="304" y="178" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="24" fill="#191430">8</text>
+  <path d="M178 228 L220 198 L262 168 L304 138" fill="none" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <circle cx="304" cy="120" r="6" fill="#5fb39b"/>
+</svg>

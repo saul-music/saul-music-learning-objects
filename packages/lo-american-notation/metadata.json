@@ -1,0 +1,60 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-american-notation",
+  "version": "0.1.0",
+  "general": {
+    "title": "Do es C",
+    "subtitle": "Clave americana y nombres latinos",
+    "description": "Las notas se escriben con letras en todo el mundo. Aprende a pasar de C D E a Do Re Mi y de vuelta.",
+    "language": "es",
+    "keywords": [
+      "clave americana",
+      "cifrado",
+      "notas",
+      "sostenido",
+      "bemol"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "easy",
+    "typicalLearningTime": "PT4M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [],
+  "pedagogy": {
+    "objective": "Leer y escribir las notas en clave americana (C, D, E, F, G, A, B, con # y b) y decir su nombre latino.",
+    "content": [
+      {
+        "title": "Siete letras",
+        "figure": "notes",
+        "text": "C D E F G A B se dicen Do Re Mi Fa Sol La Si. Es la notación que se usa en todo el mundo: cifrados, canciones, apps."
+      },
+      {
+        "title": "Sostenido y bemol",
+        "text": "# se dice sostenido y sube medio tono (C# = Do sostenido). b se dice bemol y baja medio tono (Bb = Si bemol)."
+      },
+      {
+        "title": "Un círculo de siete",
+        "text": "Después de G vuelve A, y antes de A viene G: el alfabeto musical tiene solo siete letras y da la vuelta."
+      },
+      {
+        "title": "Se escribe en letras, se dice en español",
+        "text": "En Acordia siempre escribimos en clave americana. Al hablar, puedes decirla con su nombre latino."
+      }
+    ],
+    "activity": "Diez preguntas: de letra a nombre latino, de nombre a letra y qué letra viene antes o después.",
+    "evaluation": "Retroalimentación inmediata con la nota en el teclado y su sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

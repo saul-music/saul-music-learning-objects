@@ -1,0 +1,14 @@
+/* OA «El misterio de E#»: la escala con cada letra una vez. */
+.lo-iv { display: grid; gap: 1rem; }
+.lo-iv__scale { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: 0; }
+.lo-iv__step {
+  display: grid; justify-items: center; min-width: 3.2rem; padding: .35rem .3rem; line-height: 1.15;
+  border: 2px solid var(--ac-line); border-radius: var(--ac-radius); background: var(--ac-bg);
+}
+.lo-panel.is-entering .lo-iv__step { animation: lo-rise .4s calc(.2s + var(--i) * 60ms) both; }
+.lo-iv__step small { font-size: .75rem; color: var(--ac-fg-muted); }
+.lo-iv__step b { font-family: var(--ac-font-display); font-size: 1.5rem; font-weight: 400; }
+.lo-iv__step.is-asked { border-color: var(--ac-accent); border-style: dashed; }
+.lo-iv__step.is-asked b { color: var(--ac-accent); }
+.lo-iv__step.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }
+.lo-iv__step.is-answer small { color: var(--ac-on-fill-2); }

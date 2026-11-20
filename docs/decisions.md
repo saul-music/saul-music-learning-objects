@@ -21,3 +21,25 @@ Las notas se muestran en clave americana; la latina solo como apoyo hablado. Sin
 ## O4 · Sostenidos siempre en el mástil (2026-11-20)
 
 «La misma nota en otra cuerda» usa las 12 notas y exige haber pasado el OA de intervalos y alteraciones.
+
+## O5 · Kit común `lo-kit` (2026-11-20)
+
+Lo que comparten los OA (introducción, cuestionario de alternativas, avance, efectos de acierto y error, resumen,
+teclado de piano y nombres de notas) vive en `packages/lo-kit`. Cada OA aporta su lógica, su figura y sus
+metadatos; así un OA nuevo no repite la interfaz y todos se ven y se comportan igual.
+
+## O6 · Recorrido y nombres de los juegos (2026-11-20)
+
+Cinco OA en orden, encadenados por sus prerrequisitos: 1 «Do es C» (clave americana), 2 «El misterio de E#»
+(intervalos, alteraciones y notas raras), 3 «Eco en el mástil» (la misma nota en otra cuerda), 4 «Escalera del
+acorde» (arpegio 1ª–3ª–5ª–8ª) y 5 «Luz y sombra» (mayor o menor de oído). El segundo juego pedido se dividió en
+cuatro OA por granularidad (un objetivo por OA). El tercer juego (a partir de `saul-music-site-midi`) queda para el
+segundo incremento.
+
+## O7 · Licencia CC BY 4.0 (2026-11-20)
+
+Todo el repo (código, juegos, textos, portadas y metadatos) se publica bajo CC BY 4.0, © Acordia (SAÚL música):
+cualquiera puede usarlo y adaptarlo, con cualquier fin, **siempre que dé crédito**. Lo pidió el usuario («de CC,
+pero que siempre tengan que darme créditos»). Nota: Creative Commons no recomienda sus licencias para software
+(no tratan patentes ni distribución de código fuente); se acepta porque aquí pesa más el contenido educativo y el
+crédito. Quedan fuera las muestras (CC BY 3.0), las dependencias (MIT) y las fuentes (OFL).

@@ -3,5 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "exports": { ".": "./src/sampler.js" }
+  "exports": {
+    ".": "./src/sampler.js"
+  },
+  "license": "CC-BY-4.0"
 }

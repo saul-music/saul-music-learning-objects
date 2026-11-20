@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Do es C">
+  <title>Do es C</title>
+  <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
+  <rect width="480" height="300" fill="#191430"/>
+  <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
+  <path d="M130 300 V140 A110 110 0 0 1 350 140 V300 Z" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <text x="240" y="196" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="132" fill="#d4a64a">C</text>
+  <text x="240" y="248" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="30" font-style="italic" fill="#f1ece2">Do</text>
+  <g font-family="Marcellus, Georgia, serif" font-size="30" fill="#bcb5cc" text-anchor="middle" opacity=".55">
+    <text x="70" y="120">D</text><text x="100" y="190">E</text><text x="62" y="265">F</text>
+    <text x="410" y="125">G</text><text x="382" y="195">A</text><text x="418" y="270">B</text>
+  </g>
+</svg>

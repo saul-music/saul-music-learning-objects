@@ -1,0 +1,9 @@
+/* OA «Do es C»: la rueda del alfabeto musical. */
+.lo-an__ring { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; padding: .5rem 0; }
+.lo-an__letter {
+  width: 3.2rem; height: 3.2rem; display: grid; place-items: center; border-radius: 50%;
+  font-family: var(--ac-font-display); font-size: 1.6rem; border: 2px solid var(--ac-line); color: var(--ac-fg-muted);
+}
+.lo-an__letter.is-source { background: var(--ac-fill); border-color: var(--ac-fill); color: var(--ac-on-fill); }
+.lo-panel.is-entering .lo-an__letter.is-source { animation: lo-pop .5s .2s both; }
+.lo-an__letter.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }

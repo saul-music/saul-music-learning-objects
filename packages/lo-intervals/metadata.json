@@ -1,0 +1,72 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-intervals",
+  "version": "0.1.0",
+  "general": {
+    "title": "El misterio de E#",
+    "subtitle": "Intervalos, sostenidos, bemoles y notas raras",
+    "description": "¿Por qué existe E# si suena como F? Medios tonos, enarmonía, intervalos y el secreto de las escalas.",
+    "language": "es",
+    "keywords": [
+      "intervalos",
+      "semitono",
+      "sostenido",
+      "bemol",
+      "enarmonía",
+      "E#"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-american-notation",
+        "description": "Do es C: leer las notas en clave americana, con # y b."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Contar medios tonos, reconocer notas enarmónicas, nombrar intervalos básicos y explicar por qué existen notas como E#, B#, Fb y Cb.",
+    "content": [
+      {
+        "title": "Medio tono",
+        "text": "Es la distancia más corta: la tecla vecina en el piano o el traste vecino en la guitarra. Dos medios tonos hacen un tono."
+      },
+      {
+        "title": "Sin tecla negra",
+        "text": "Entre E y F, y entre B y C, no hay tecla negra: están a medio tono. Por eso E# cae en F, B# en C, Fb en E y Cb en B."
+      },
+      {
+        "title": "Dos nombres, un sonido",
+        "text": "C# y Db son la misma tecla: notas enarmónicas. Suenan igual; cambia cómo se escriben."
+      },
+      {
+        "title": "Intervalos",
+        "text": "La distancia entre dos notas: 2ª menor (1 semitono), 2ª mayor (2), 3ª menor (3), 3ª mayor (4), 4ª justa (5), 5ª justa (7), 6ª mayor (9), 8ª (12)."
+      },
+      {
+        "title": "¿Por qué existen las notas raras?",
+        "text": "En una escala cada letra aparece una sola vez. F# mayor es F# G# A# B C# D# E#: la 7ª tiene que ser una E, y suena en F. Por eso se escribe E#."
+      }
+    ],
+    "activity": "Diez preguntas de cinco tipos: medio tono arriba o abajo, enarmonía, contar semitonos, nombrar el intervalo y escribir una nota de una escala.",
+    "evaluation": "Retroalimentación inmediata con el teclado, los pasos cromáticos y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

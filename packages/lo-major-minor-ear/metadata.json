@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-major-minor-ear",
+  "version": "0.1.0",
+  "general": {
+    "title": "Luz y sombra",
+    "subtitle": "Acordes mayores y menores de oído",
+    "description": "Escucha un acorde y decide: ¿luz o sombra? Entrena el oído para distinguir mayores y menores.",
+    "language": "es",
+    "keywords": [
+      "oído",
+      "acordes",
+      "mayor",
+      "menor",
+      "tercera"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT5M",
+    "instrument": "ear"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-arpeggios",
+        "description": "Escalera del acorde: la 3ª mayor y la 3ª menor dentro del arpegio."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Reconocer de oído si un acorde es mayor o menor, atendiendo a su 3ª.",
+    "content": [
+      {
+        "title": "Una sola nota cambia",
+        "text": "Mayor y menor comparten la 1ª y la 5ª. Solo cambia la 3ª: 4 semitonos en mayor, 3 en menor."
+      },
+      {
+        "title": "Luz y sombra",
+        "text": "Muchos oyen el mayor más abierto o luminoso y el menor más oscuro o melancólico. Usa la imagen que te sirva."
+      },
+      {
+        "title": "Escucha la 3ª",
+        "text": "Cada acorde suena rasgueado y luego en arpegio: fíjate en la segunda nota del arpegio, es la 3ª."
+      },
+      {
+        "title": "Compara",
+        "text": "Al responder puedes oír el mismo acorde en mayor y en menor, uno tras otro."
+      }
+    ],
+    "activity": "Diez acordes en guitarra, con raíces al azar: decide si cada uno es mayor o menor.",
+    "evaluation": "Retroalimentación inmediata con el nombre del acorde, sus notas en el teclado y la comparación mayor/menor; al final, el puntaje y un repaso de los errores."
+  }
+}
