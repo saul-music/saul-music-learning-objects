@@ -3,7 +3,7 @@ import "@saul-music/theme/acordia.css";
 import "@saul-music/theme/base.css";
 import "@saul-music/lo-kit/kit.css";
 import "./playground.css";
-import { createSampler, createSfx, GUITAR_NYLON_NOTES } from "@saul-music/audio";
+import { createSampler, currentAudioContext, createSfx, GUITAR_NYLON_NOTES, installGestureUnlock, resumeAudio } from "@saul-music/audio";
 import { instrumentOf, levelOf, loadBest, minutesOf, starIcon } from "@saul-music/lo-kit";
 
 import * as americanNotation from "@saul-music/lo-american-notation";
@@ -51,6 +51,38 @@ const guitar = createSampler({
   notes: GUITAR_NYLON_NOTES,
 });
 const sfx = createSfx();
+// iPhone: cada toque reanuda el audio y lo declara «reproducción» (si no, el interruptor de silencio lo calla).
+installGestureUnlock(document);
+
+/** Diagnóstico de audio: agrega ?debug=audio a la dirección para ver el estado y probar el sonido. */
+function audioDebugPanel() {
+  if (!new URLSearchParams(location.search).has("debug")) return;
+  const box = h("aside", "pg-debug");
+  const info = h("pre", "pg-debug__info");
+  const paint = () => {
+    const c = currentAudioContext();
+    const session = navigator.audioSession ? navigator.audioSession.type : "no disponible";
+    info.textContent = [
+      `contexto: ${c ? c.state : "sin crear"}`,
+      `sesión de audio: ${session}`,
+      `frecuencia: ${c ? c.sampleRate : "-"} Hz`,
+      `efectos: ${sfx.muted ? "silenciados" : "activos"}`,
+    ].join("\n");
+  };
+  const btn = (label, fn) => {
+    const b = h("button", "lo-btn lo-btn--ghost lo-btn--sm", label);
+    b.addEventListener("click", () => { resumeAudio(); fn(); setTimeout(paint, 300); });
+    return b;
+  };
+  box.append(h("b", "", "Diagnóstico de audio"), info,
+    btn("Pitido", () => guitar.click({ accent: true, gain: 0.5 })),
+    btn("Guitarra (A)", () => guitar.play(57)),
+    btn("Efecto", () => { sfx.unlock(); sfx.correct(2); }));
+  document.body.append(box);
+  paint();
+  setInterval(paint, 1000);
+}
+audioDebugPanel();
 
 const app = document.getElementById("app");
 let unmount = null;

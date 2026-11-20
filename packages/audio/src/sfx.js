@@ -2,10 +2,11 @@
 // cuenta regresiva, estrellas y fanfarria. Son aparte de la música del OA (el sampler) y se pueden
 // silenciar; la preferencia se recuerda en este navegador.
 
+import { audioContext, resumeAudio } from "./context.js";
+
 const NOTE = (n) => 440 * 2 ** ((n - 69) / 12); // MIDI → Hz
 
 export function createSfx({ storageKey = "acordia-lo:sfx" } = {}) {
-  let ctx = null;
   let muted = false;
   try {
     muted = globalThis.localStorage?.getItem(storageKey) === "off";
@@ -13,16 +14,18 @@ export function createSfx({ storageKey = "acordia-lo:sfx" } = {}) {
     /* sin almacenamiento: se queda con sonido */
   }
 
+  // El mismo contexto que la guitarra (context.js): uno solo, preparado para iPhone.
   function context() {
-    if (!ctx) ctx = new AudioContext();
-    if (ctx.state === "suspended") ctx.resume();
-    return ctx;
+    const c = audioContext();
+    if (c && c.state !== "running") resumeAudio();
+    return c;
   }
 
   /** Un tono con envolvente corta. `slide` lleva la frecuencia a otro valor durante el tono. */
   function tone(freq, { at = 0, dur = 0.14, type = "triangle", gain = 0.16, slide } = {}) {
     if (muted) return;
     const c = context();
+    if (!c) return;
     const t = c.currentTime + at;
     const osc = c.createOscillator();
     const g = c.createGain();
@@ -51,7 +54,7 @@ export function createSfx({ storageKey = "acordia-lo:sfx" } = {}) {
     },
     /** Llamar en un gesto del usuario (iOS solo deja sonar después de uno). */
     unlock() {
-      if (!muted) context();
+      resumeAudio();
     },
     /** Acierto: arpegio que sube; con combo suma notas más agudas. */
     correct(multiplier = 1) {

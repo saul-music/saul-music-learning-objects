@@ -89,3 +89,7 @@ a:hover { color: var(--ac-accent-hover); }
 @media (prefers-reduced-motion: reduce) {
   .pg-hero, .pg-level, .pg-level__node, .pg-level__badge { animation: none; transition: none; }
 }
+
+/* Diagnóstico de audio (?debug=audio) */
+.pg-debug { position: fixed; right: .75rem; bottom: .75rem; z-index: 50; display: grid; gap: .4rem; max-width: 18rem; padding: .8rem; border-radius: 12px; background: var(--ac-bg); border: 2px solid var(--ac-accent); font-size: .85rem; }
+.pg-debug__info { margin: 0; font-size: .8rem; white-space: pre-wrap; color: var(--ac-fg-muted); }
