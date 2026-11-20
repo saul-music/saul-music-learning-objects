@@ -12,7 +12,7 @@ function playChord(sampler, midis) {
 
 /** Disco de escucha: ondas que laten mientras se oye el acorde. */
 function listenDisc(onClick) {
-  const node = svg("svg", { viewBox: "0 0 200 200", class: "lo-ear__disc", role: "button", tabindex: 0, "aria-label": "Volver a oír el acorde" });
+  const node = svg("svg", { viewBox: "0 0 200 200", class: "lo-ear__disc lo-listen", role: "button", tabindex: 0, "aria-label": "Volver a oír el acorde" });
   for (const r of [92, 74, 56]) node.append(svg("circle", { cx: 100, cy: 100, r, class: "ring" }));
   node.append(svg("circle", { cx: 100, cy: 100, r: 44, class: "core" }));
   node.append(svg("text", { x: 100, y: 116, class: "note" }, "♪"));

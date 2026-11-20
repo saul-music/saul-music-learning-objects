@@ -130,7 +130,7 @@ function buildDemo(example, orientation, play) {
 export function mount(container, { sampler, sfx, metadata, cover, next }) {
   const run = createRun(ROUNDS);
   const play = (midi, delay = 0) => sampler?.play(midi, { delay });
-  const { root, screen } = createShell(container, "lo-quiz lo-fn");
+  const { root, screen } = createShell(container, "lo-quiz lo-fn", sampler);
   let q = null;
   let fresh = false;
   let playing = false;
@@ -226,7 +226,7 @@ export function mount(container, { sampler, sfx, metadata, cover, next }) {
       stage,
       feedback(text, result ? result.ok : null),
       el("div", { class: "lo-actions" },
-        el("button", { class: "lo-btn lo-btn--ghost", onclick: () => play(q.midi) }, "▶ Escuchar la nota"),
+        el("button", { class: "lo-btn lo-btn--ghost lo-listen", onclick: () => play(q.midi) }, "▶ Escuchar la nota"),
         result ? el("button", { class: "lo-btn lo-btn--game lo-btn--next", onclick: advance }, run.last ? "Ver resultado" : "Siguiente", el("kbd", {}, "Enter")) : ""),
     );
     if (result && justAnswered) {

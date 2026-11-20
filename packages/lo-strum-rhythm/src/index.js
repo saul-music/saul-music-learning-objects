@@ -110,7 +110,7 @@ export function mount(container, { sampler, sfx, metadata, cover, next }) {
         const row = el("div", { class: "lo-sr__demo-row", style: `--i:${i}` },
           el("span", { class: "lo-sr__demo-name" }, FIGURES[f].plural),
           measure("4/4", { figure: f, beats: strumBeats("4/4", f), show: true }));
-        row.prepend(el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm", onclick: () => playBars(s, "4/4", strumBeats("4/4", f), { node: row, bars: 1 }), "aria-label": `Oír ${FIGURES[f].plural}` }, "▶"));
+        row.prepend(el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm lo-listen", onclick: () => playBars(s, "4/4", strumBeats("4/4", f), { node: row, bars: 1 }), "aria-label": `Oír ${FIGURES[f].plural}` }, "▶"));
         return row;
       });
       return {

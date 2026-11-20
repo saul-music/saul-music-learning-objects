@@ -35,7 +35,7 @@ import { loadBest, saveResult } from "./score.js";
  * @param {string} [o.className]
  */
 export function mountChoiceQuiz(container, { metadata, sampler, sfx, cover, next, makeQuestion, demo, rounds = 10, className = "" }) {
-  const { root, screen } = createShell(container, `lo-quiz ${className}`);
+  const { root, screen } = createShell(container, `lo-quiz ${className}`, sampler);
   const run = createRun(rounds);
   let q = null;
   let fresh = false;
@@ -116,8 +116,8 @@ export function mountChoiceQuiz(container, { metadata, sampler, sfx, cover, next
       stage,
       feedback(text, result ? result.ok : null),
       el("div", { class: "lo-actions" },
-        q.replay ? el("button", { class: "lo-btn lo-btn--ghost", onclick: () => q.replay.play(sampler) }, rich(q.replay.label)) : "",
-        result ? (q.extras ?? []).map((x) => el("button", { class: "lo-btn lo-btn--ghost", onclick: () => x.play(sampler) }, rich(x.label))) : "",
+        q.replay ? el("button", { class: "lo-btn lo-btn--ghost lo-listen", onclick: () => q.replay.play(sampler) }, rich(q.replay.label)) : "",
+        result ? (q.extras ?? []).map((x) => el("button", { class: "lo-btn lo-btn--ghost lo-listen", onclick: () => x.play(sampler) }, rich(x.label))) : "",
         result ? el("button", { class: "lo-btn lo-btn--game lo-btn--next", onclick: advance }, run.last ? "Ver resultado" : "Siguiente", el("kbd", {}, "Enter")) : ""),
     );
     if (result) {
