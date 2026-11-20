@@ -1,0 +1,16 @@
+{
+  "name": "@saul-music/lo-american-notation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./metadata.json": "./metadata.json",
+    "./cover.svg": "./cover.svg",
+    "./style.css": "./src/style.css"
+  },
+  "dependencies": {
+    "@saul-music/lo-kit": "*",
+    "tonal": "^6.7.1"
+  }
+}

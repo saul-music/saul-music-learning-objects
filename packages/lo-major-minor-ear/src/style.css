@@ -1,0 +1,27 @@
+/* OA «Luz y sombra»: disco de escucha y el par mayor/menor del ejemplo. */
+.lo-ear__listen { display: grid; place-items: center; padding: .5rem 0; }
+.lo-ear__disc { width: min(220px, 60vw); height: auto; cursor: pointer; }
+.lo-ear__disc .ring { fill: none; stroke: var(--ac-accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; opacity: 0; animation: lo-ear-wave 2.4s ease-out infinite; }
+.lo-ear__disc .ring:nth-child(2) { animation-delay: .4s; }
+.lo-ear__disc .ring:nth-child(3) { animation-delay: .8s; }
+.lo-ear__disc .core { fill: var(--ac-fill); }
+.lo-ear__disc .note { fill: var(--ac-on-fill); font-size: 48px; text-anchor: middle; font-family: var(--ac-font-display); }
+.lo-ear__disc:hover .core, .lo-ear__disc:focus-visible .core { fill: var(--ac-accent-hover); }
+.lo-ear__disc:focus-visible { outline: none; }
+.lo-ear__reveal { display: grid; gap: .75rem; justify-items: center; }
+.lo-ear__symbol { margin: 0; font-family: var(--ac-font-display); font-size: 3rem; line-height: 1; color: var(--ac-second); animation: lo-pop .5s both; }
+
+.lo-ear__demo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .5rem; }
+.lo-ear__pair {
+  font: inherit; cursor: pointer; display: grid; gap: .2rem; justify-items: center; padding: 1.25rem .75rem;
+  border-radius: var(--ac-radius); border: 2px solid transparent; transition: transform .2s;
+}
+.lo-ear__pair:hover, .lo-ear__pair:focus-visible { transform: translateY(-3px); outline: none; border-color: var(--ac-fg); }
+.lo-ear__pair b { font-family: var(--ac-font-display); font-weight: 400; font-size: 2.6rem; line-height: 1; }
+.lo-ear__pair span { font-weight: 600; }
+.lo-ear__pair small { opacity: .8; }
+.lo-ear__pair.is-major { background: var(--ac-fill); color: var(--ac-on-fill); }
+.lo-ear__pair.is-minor { background: var(--ac-noche-3); color: var(--ac-marfil); }
+
+@keyframes lo-ear-wave { 0% { transform: scale(.55); opacity: .9; } 100% { transform: scale(1.05); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lo-ear__disc .ring { animation: none; opacity: .4; } }

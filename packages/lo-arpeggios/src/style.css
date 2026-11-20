@@ -1,0 +1,17 @@
+/* OA «Escalera del acorde»: cuatro peldaños que suben (1ª, 3ª, 5ª, 8ª). */
+.lo-arp { display: grid; gap: 1rem; }
+.lo-arp__ladder { display: flex; justify-content: center; align-items: flex-end; gap: .5rem; list-style: none; margin: 0; padding: .5rem 0 0; min-height: 9rem; }
+.lo-arp__rung {
+  display: grid; justify-items: center; align-content: end; width: 4.2rem; padding: .4rem .3rem;
+  height: calc(4.2rem + var(--i) * 1.4rem); border: 2px solid var(--ac-line); border-radius: var(--ac-radius) var(--ac-radius) 0 0;
+  background: var(--ac-surface);
+}
+/* Los peldaños suben solo cuando aparece la pregunta (no al responder) y en el ejemplo de la intro. */
+.lo-panel.is-entering .lo-arp__rung, .lo-arp--demo .lo-arp__rung { animation: lo-rise .45s calc(.2s + var(--i) * 90ms) both; }
+.lo-arp__rung small { font-size: .8rem; color: var(--ac-fg-muted); }
+.lo-arp__rung b { font-family: var(--ac-font-display); font-weight: 400; font-size: 1.7rem; line-height: 1.1; }
+.lo-arp__rung.is-asked { border-color: var(--ac-accent); border-style: dashed; }
+.lo-arp__rung.is-asked b { color: var(--ac-accent); }
+.lo-arp__rung.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }
+.lo-arp__rung.is-answer small { color: var(--ac-on-fill-2); }
+.lo-arp--demo .lo-arp__rung { border-color: var(--ac-fill-2); }

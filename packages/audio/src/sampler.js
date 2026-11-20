@@ -65,6 +65,14 @@ export function createSampler({ baseUrl, notes }) {
       src.start(t);
       src.stop(t + duration);
     },
+    /** Acorde rasgueado: las notas entran con `strum` segundos de diferencia, de grave a agudo. */
+    chord(midis, { delay = 0, strum = 0.035, duration = 2.4, gain = 0.7 } = {}) {
+      [...midis].sort((a, b) => a - b).forEach((m, i) => this.play(m, { delay: delay + i * strum, duration, gain }));
+    },
+    /** Notas una tras otra (un arpegio), separadas por `gap` segundos. */
+    sequence(midis, { delay = 0, gap = 0.45, duration = 1.4, gain = 0.9 } = {}) {
+      midis.forEach((m, i) => this.play(m, { delay: delay + i * gap, duration, gain }));
+    },
   };
 }
 

@@ -1,0 +1,68 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-arpeggios",
+  "version": "0.1.0",
+  "general": {
+    "title": "Escalera del acorde",
+    "subtitle": "Arpegios: 1ª, 3ª, 5ª y 8ª",
+    "description": "Un acorde es una escalera de cuatro peldaños: 1ª, 3ª, 5ª y la octava. Sube por ella en acordes mayores y menores.",
+    "language": "es",
+    "keywords": [
+      "arpegio",
+      "acorde",
+      "tríada",
+      "tercera",
+      "quinta",
+      "octava"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT5M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-intervals",
+        "description": "El misterio de E#: medios tonos e intervalos (3ª mayor, 3ª menor, 5ª justa)."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Construir el arpegio 1ª – 3ª – 5ª – 8ª de acordes mayores y menores y reconocer qué paso ocupa cada nota.",
+    "content": [
+      {
+        "title": "La 1ª",
+        "text": "Es la raíz: la nota que le da nombre al acorde. En D mayor, la 1ª es D."
+      },
+      {
+        "title": "La 3ª",
+        "text": "Decide el color: a 4 semitonos de la raíz es mayor (D – F#); a 3 es menor (D – F)."
+      },
+      {
+        "title": "La 5ª",
+        "text": "Está a 7 semitonos de la raíz (5ª justa) y es igual en mayor y en menor: en D, es A."
+      },
+      {
+        "title": "La 8ª",
+        "text": "La octava es la raíz otra vez, 12 semitonos más arriba. Mismo nombre, más aguda."
+      }
+    ],
+    "activity": "Diez preguntas: completar la nota que falta, decir cuál es un paso del arpegio y qué paso ocupa una nota.",
+    "evaluation": "Retroalimentación inmediata con la escalera, el teclado y el arpegio sonando; al final, el puntaje y un repaso de los errores."
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="El misterio de E#">
+  <title>El misterio de E#</title>
+  <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
+  <rect width="480" height="300" fill="#191430"/>
+  <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
+  <path d="M130 300 V140 A110 110 0 0 1 350 140 V300 Z" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <rect x="165" y="150" width="48" height="140" rx="3" fill="#e2bb69" stroke="#342c5c" stroke-width="2"/>
+  <text x="189" y="276" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="20" font-weight="600" fill="#191430">E</text>
+  <rect x="215" y="150" width="48" height="140" rx="3" fill="#5fb39b" stroke="#342c5c" stroke-width="2"/>
+  <text x="239" y="276" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="20" font-weight="600" fill="#191430">F</text>
+  <rect x="265" y="150" width="48" height="140" rx="3" fill="#f1ece2" stroke="#342c5c" stroke-width="2"/>
+  <text x="289" y="276" text-anchor="middle" font-family="Work Sans, Arial, sans-serif" font-size="20" font-weight="600" fill="#191430">G</text>
+  <rect x="248" y="150" width="30" height="86" rx="2" fill="#191430" stroke="#342c5c" stroke-width="2"/>
+  <path d="M189 140 Q214 92 239 140" fill="none" stroke="#5fb39b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M232 128 L240 142 L226 140" fill="none" stroke="#5fb39b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="240" y="92" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="44" fill="#d4a64a">E# = F</text>
+</svg>
