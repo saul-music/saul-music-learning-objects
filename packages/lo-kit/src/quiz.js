@@ -1,5 +1,6 @@
 // Capa de juego común a los OA: escenario, marcador, cronómetro, cuenta regresiva, efectos de acierto
 // y error, y pantalla de resultados. La lógica de cada OA no cambia; esto es cómo se juega y se siente.
+import { bindSound } from "./sound.js";
 import { el, svg } from "./dom.js";
 import { richText } from "./notes.js";
 import { SCORING, starsFor } from "./score.js";
@@ -17,13 +18,14 @@ export const rich = (x) => (typeof x === "string" ? richText(x) : x);
  * Escenario del juego: un fondo con símbolos musicales que flotan (fijo) y una pantalla que cambia.
  * @returns {{ root: HTMLElement, screen: HTMLElement }}
  */
-export function createShell(container, className = "") {
+export function createShell(container, className = "", sampler) {
   const glyphs = ["♪", "♫", "♩", "♯", "♭", "𝄞", "♬", "𝄢"];
   const bg = el("div", { class: "lo-bg", "aria-hidden": "true" },
     glyphs.concat(glyphs).map((g, i) => el("span", { style: `--x:${(i * 37) % 100}%;--d:${14 + (i % 5) * 3}s;--delay:${-i * 2.1}s;--s:${0.8 + (i % 4) * 0.35}` }, g)));
   const screen = el("div", { class: "lo-screen" });
   const root = el("section", { class: `lo-game ${className}`.trim() }, bg, screen);
   container.replaceChildren(root);
+  bindSound(root, sampler);
   return { root, screen };
 }
 
@@ -119,6 +121,9 @@ export function countdown(host, sfx) {
   return new Promise((resolve) => {
     if (reducedMotion()) return resolve();
     const layer = el("div", { class: "lo-countdown", "aria-live": "assertive" });
+    // El escenario está vacío mientras cuenta: sin altura propia la capa se recorta.
+    const prevMin = host.style.minHeight;
+    host.style.minHeight = "min(70vh, 26rem)";
     host.append(layer);
     const steps = ["3", "2", "1", "¡Ya!"];
     steps.forEach((s, i) => {
@@ -130,6 +135,7 @@ export function countdown(host, sfx) {
     });
     setTimeout(() => {
       layer.remove();
+      host.style.minHeight = prevMin;
       resolve();
     }, steps.length * 560);
   });

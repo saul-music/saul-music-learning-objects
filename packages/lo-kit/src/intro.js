@@ -72,7 +72,7 @@ export function renderIntro(screen, { metadata, rounds, cover, best, demo, onSta
       ? el("figure", { class: "lo-demo", style: stagger(3) },
         el("div", { class: "lo-panel" }, demo.node),
         el("figcaption", {}, rich(demo.caption), " ",
-          demo.onReplay ? el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm", onclick: demo.onReplay }, demo.replayLabel ?? "▶ Oír el ejemplo") : ""))
+          demo.onReplay ? el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm lo-listen", onclick: demo.onReplay }, demo.replayLabel ?? "▶ Oír el ejemplo") : ""))
       : "",
     el("ol", { class: "lo-tips" }, p.content.map(tip)),
     el("div", { class: "lo-start", style: stagger(p.content.length + 4) },

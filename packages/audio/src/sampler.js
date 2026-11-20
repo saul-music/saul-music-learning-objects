@@ -28,6 +28,30 @@ export function nearestSample(midi, available) {
 export function createSampler({ baseUrl, notes }) {
   const buffers = new Map(); // MIDI → promesa del buffer (una sola descarga por muestra)
   let loading = null;
+  // «Sonando»: hasta cuándo (reloj de audio) hay algo agendado, y quién escucha el cambio.
+  let busyUntil = 0;
+  let busyTimer = null;
+  let sounding = false;
+  const watchers = new Set();
+
+  function setSounding(on) {
+    if (on === sounding) return;
+    sounding = on;
+    watchers.forEach((f) => f(on));
+  }
+
+  /** Marca que algo suena hasta `end` (segundos del reloj de audio) y avisa cuando termine. */
+  function holdUntil(c, end) {
+    busyUntil = Math.max(busyUntil, end);
+    setSounding(true);
+    clearTimeout(busyTimer);
+    const check = () => {
+      const left = busyUntil - c.currentTime;
+      if (left <= 0.02) setSounding(false);
+      else busyTimer = setTimeout(check, left * 1000 + 30);
+    };
+    busyTimer = setTimeout(check, Math.max(0, busyUntil - c.currentTime) * 1000 + 30);
+  }
 
   function context() {
     const c = audioContext();
@@ -58,6 +82,7 @@ export function createSampler({ baseUrl, notes }) {
       const c = context();
       if (!c) return;
       const { sample, shift } = nearestSample(midi, notes);
+      holdUntil(c, c.currentTime + delay + duration);
       const buf = await load(sample);
       const src = c.createBufferSource();
       src.buffer = buf;
@@ -79,6 +104,7 @@ export function createSampler({ baseUrl, notes }) {
       const c = context();
       if (!c) return;
       const t = c.currentTime + delay;
+      holdUntil(c, t + 0.07);
       const osc = c.createOscillator();
       const g = c.createGain();
       osc.frequency.value = accent ? 1760 : 1175;
@@ -87,6 +113,15 @@ export function createSampler({ baseUrl, notes }) {
       osc.connect(g).connect(c.destination);
       osc.start(t);
       osc.stop(t + 0.07);
+    },
+    /** ¿Hay algo sonando o agendado? */
+    isSounding() {
+      return sounding;
+    },
+    /** Avisa (true/false) cuando empieza o termina todo lo que suena. Devuelve cómo dejar de escuchar. */
+    onSounding(fn) {
+      watchers.add(fn);
+      return () => watchers.delete(fn);
     },
     /** Segundos del reloj de audio (para sincronizar la vista con lo que suena). */
     now() {
