@@ -1,0 +1,44 @@
+/* OA «La misma nota en otra cuerda». Solo tokens --ac-* de @saul-music/theme. */
+.lo-fn { display: grid; gap: 1rem; }
+.lo-fn h2 { font-family: var(--ac-font-display); font-weight: 400; margin: 0; }
+.lo-fn h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ac-fg-muted); margin: .5rem 0 0; }
+.lo-fn__objective { margin: 0; }
+.lo-fn__content { margin: 0; padding-left: 1.2rem; display: grid; gap: .35rem; }
+.lo-fn__options { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; }
+.lo-fn__options select {
+  font: inherit; color: var(--ac-fg); background: var(--ac-surface);
+  border: 1px solid var(--ac-line); border-radius: var(--ac-radius); padding: .35rem .5rem;
+}
+.lo-fn__progress { margin: 0; color: var(--ac-fg-muted); font-size: .9rem; }
+.lo-fn__prompt { margin: 0; font-size: 1.15rem; }
+.lo-fn__prompt strong { color: var(--ac-accent); font-weight: 600; }
+.lo-fn__board-wrap { overflow-x: auto; background: var(--ac-surface); border: 1px solid var(--ac-line); border-radius: var(--ac-radius); padding: .5rem; }
+.lo-fn__board { display: block; width: 100%; height: auto; }
+.lo-fn__board--vertical { max-width: 330px; margin: 0 auto; }
+.lo-fn__feedback { margin: 0; min-height: 1.6em; }
+.lo-fn__feedback.is-ok { color: var(--ac-second); font-weight: 600; }
+.lo-fn__feedback.is-miss { color: var(--ac-fg); }
+.lo-fn__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.lo-fn__misses { margin: 0; padding-left: 1.2rem; display: grid; gap: .35rem; }
+
+/* Mástil */
+.lo-fn__board .string { stroke: var(--ac-fg-muted); }
+.lo-fn__board .string--target { stroke: var(--ac-accent); stroke-width: 4; }
+.lo-fn__board .fret { stroke: var(--ac-line); stroke-width: 2; }
+.lo-fn__board .nut { stroke: var(--ac-fg); stroke-width: 6; }
+.lo-fn__board .inlay { fill: var(--ac-line); }
+.lo-fn__board text { font-family: var(--ac-font-text); text-anchor: middle; }
+.lo-fn__board .fret-num { fill: var(--ac-fg-muted); font-size: 15px; }
+.lo-fn__board .string-num { fill: var(--ac-fg-muted); font-size: 15px; text-anchor: start; }
+.lo-fn__board .string-num--target { fill: var(--ac-accent); font-weight: 600; }
+.lo-fn__board .string-num--top { text-anchor: middle; }
+.lo-fn__board .target { fill: transparent; stroke: transparent; stroke-width: 2; cursor: pointer; }
+.lo-fn__board .target:hover, .lo-fn__board .target:focus-visible { stroke: var(--ac-accent); fill: rgba(var(--ac-accent-rgb), .15); outline: none; }
+.lo-fn__board .mark text { font-size: 15px; font-weight: 600; pointer-events: none; }
+.lo-fn__board .mark--source circle { fill: var(--ac-fill); }
+.lo-fn__board .mark--source text { fill: var(--ac-on-fill); }
+.lo-fn__board .mark--answer circle { fill: var(--ac-fill-2); }
+.lo-fn__board .mark--answer text { fill: var(--ac-on-fill-2); }
+.lo-fn__board .mark--miss circle { fill: var(--ac-bg); stroke: var(--ac-fg-muted); stroke-width: 2; stroke-dasharray: 4 3; }
+.lo-fn__board .mark--miss text { fill: var(--ac-fg-muted); }
+.lo-fn > .lo-btn { justify-self: start; }

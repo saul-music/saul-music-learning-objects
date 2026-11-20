@@ -1,0 +1,64 @@
+/* Tokens de Acordia, copiados de acordia_render/web/style.css (bloques 1 a 3).
+   Fuente única de los colores de los OA: no se inventan colores aquí.
+   <html data-theme="dark"> (Noche, por defecto) o data-theme="light" (Marfil). */
+:root {
+  --ac-noche:       #191430;
+  --ac-noche-2:     #221c40;   /* superficie sobre noche */
+  --ac-noche-3:     #342c5c;   /* línea sobre noche */
+  --ac-marfil:      #f1ece2;
+  --ac-marfil-2:    #e7e0d1;   /* superficie sobre marfil */
+  --ac-marfil-3:    #d3c9b4;   /* línea sobre marfil */
+  --ac-oro:         #d4a64a;
+  --ac-oro-claro:   #e2bb69;
+  --ac-oro-osc:     #7a5712;
+  --ac-jade:        #5fb39b;
+  --ac-jade-osc:    #2e6f5e;
+
+  --ac-font-display: "Marcellus", "Trajan Pro", Georgia, "Times New Roman", serif;
+  --ac-font-text:    "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --ac-radius:      4px;       /* esquinas casi rectas: grabado, no app genérica */
+  --ac-arch:        999px 999px 0 0; /* el portal: forma firma de Acordia */
+  --ac-space:       clamp(4rem, 8vw, 7rem); /* respiro entre secciones */
+}
+
+/* 2. Roles semánticos · modo Noche (por defecto) ------------------------- */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ac-bg:          var(--ac-noche);
+  --ac-surface:     var(--ac-noche-2);
+  --ac-line:        var(--ac-noche-3);
+  --ac-fg:          var(--ac-marfil);
+  --ac-fg-muted:    #bcb5cc;
+  --ac-accent:      var(--ac-oro);        /* oro para texto y enlaces */
+  --ac-accent-rgb:  212, 166, 74;
+  --ac-accent-hover:var(--ac-oro-claro);
+  --ac-accent-hover-rgb: 226, 187, 105;
+  --ac-second:      var(--ac-jade);       /* jade para texto */
+  --ac-second-rgb:  95, 179, 155;
+  --ac-fill:        var(--ac-oro);        /* rellenos de botón */
+  --ac-on-fill:     var(--ac-noche);
+  --ac-fill-2:      var(--ac-jade);
+  --ac-on-fill-2:   var(--ac-noche);
+}
+
+/* 3. Roles semánticos · modo Marfil ------------------------------------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --ac-bg:          var(--ac-marfil);
+  --ac-surface:     var(--ac-marfil-2);
+  --ac-line:        var(--ac-marfil-3);
+  --ac-fg:          var(--ac-noche);
+  --ac-fg-muted:    #57506d;
+  --ac-accent:      var(--ac-oro-osc);
+  --ac-accent-rgb:  122, 87, 18;
+  --ac-accent-hover:#5a3f0b;
+  --ac-accent-hover-rgb: 90, 63, 11;
+  --ac-second:      var(--ac-jade-osc);
+  --ac-second-rgb:  46, 111, 94;
+  --ac-fill:        var(--ac-oro);
+  --ac-on-fill:     var(--ac-noche);
+  --ac-fill-2:      var(--ac-jade-osc);
+  --ac-on-fill-2:   var(--ac-marfil);
+}

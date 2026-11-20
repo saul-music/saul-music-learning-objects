@@ -1,0 +1,19 @@
+{
+  "name": "@saul-music/playground",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@saul-music/audio": "*",
+    "@saul-music/lo-fretboard-notes": "*",
+    "@saul-music/theme": "*"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}

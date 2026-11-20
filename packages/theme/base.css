@@ -1,0 +1,9 @@
+/* Componentes base comunes a los OA y al playground. Solo tokens --ac-*. */
+.lo-btn {
+  font: inherit; font-weight: 500; cursor: pointer;
+  background: var(--ac-fill); color: var(--ac-on-fill);
+  border: 1px solid var(--ac-fill); border-radius: var(--ac-radius); padding: .55rem 1.1rem;
+}
+.lo-btn:hover { background: var(--ac-accent-hover); border-color: var(--ac-accent-hover); }
+.lo-btn--ghost { background: transparent; color: var(--ac-accent); border-color: var(--ac-line); }
+.lo-btn--ghost:hover { background: transparent; color: var(--ac-accent-hover); border-color: var(--ac-accent); }

@@ -1,0 +1,35 @@
+/* Marco del playground. Solo tokens --ac-*. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--ac-bg); color: var(--ac-fg);
+  font-family: var(--ac-font-text); font-size: 1.0625rem; line-height: 1.6;
+}
+a { color: var(--ac-accent); }
+a:hover { color: var(--ac-accent-hover); }
+.pg-header {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem); border-bottom: 1px solid var(--ac-line);
+}
+.pg-brand { font-family: var(--ac-font-display); font-size: 1.5rem; color: var(--ac-fg); text-decoration: none; }
+.pg-brand span { font-family: var(--ac-font-text); font-size: 1rem; color: var(--ac-fg-muted); }
+.pg-main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 2rem clamp(1rem, 4vw, 3rem); display: grid; gap: 1.5rem; align-content: start; }
+.pg-lead { margin: 0; max-width: 60ch; color: var(--ac-fg-muted); }
+.pg-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.pg-card {
+  display: grid; gap: .5rem; padding: 1.25rem; text-decoration: none; color: var(--ac-fg);
+  background: var(--ac-surface); border: 1px solid var(--ac-line); border-radius: var(--ac-radius);
+  border-top: 4px solid var(--ac-accent);
+}
+.pg-card:hover { border-color: var(--ac-accent); color: var(--ac-fg); }
+.pg-card h2 { font-family: var(--ac-font-display); font-weight: 400; font-size: 1.4rem; margin: 0; }
+.pg-card p { margin: 0; color: var(--ac-fg-muted); }
+.pg-card dl { display: flex; gap: 1.5rem; margin: .5rem 0 0; font-size: .85rem; }
+.pg-card dt { color: var(--ac-fg-muted); }
+.pg-card dd { margin: 0; color: var(--ac-second); font-weight: 600; }
+.pg-back { justify-self: start; text-decoration: none; }
+.pg-footer { padding: 1rem clamp(1rem, 4vw, 3rem); border-top: 1px solid var(--ac-line); color: var(--ac-fg-muted); font-size: .85rem; }
+@media (max-width: 560px) {
+  .pg-brand span { display: block; font-size: .8rem; line-height: 1.2; }
+  .pg-brand { line-height: 1.1; }
+}

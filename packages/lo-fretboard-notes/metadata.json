@@ -1,0 +1,36 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-fretboard-notes",
+  "version": "0.1.0",
+  "general": {
+    "title": "La misma nota en otra cuerda",
+    "description": "Cuestionario sobre el mástil de la guitarra: ves una nota en una cuerda y la buscas en otra.",
+    "language": "es",
+    "keywords": ["guitarra", "mástil", "notas", "octavas", "unísono"]
+  },
+  "educational": {
+    "learningResourceType": ["exercise", "questionnaire"],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "easy",
+    "typicalLearningTime": "PT5M",
+    "instrument": "guitar"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "pedagogy": {
+    "objective": "Ubicar en cualquier cuerda la misma nota que ves en otra, entre los trastes 0 y 12, y reconocer si suena igual o una octava más aguda o más grave.",
+    "content": [
+      "Cada traste sube medio tono.",
+      "Con la afinación estándar, el traste 5 de una cuerda suena igual que la cuerda vecina más aguda tocada al aire (6ª en 5 = 5ª al aire); la excepción es la 3ª cuerda, que se iguala con la 2ª en el traste 4.",
+      "La misma nota aparece en varias cuerdas: a veces con el mismo sonido exacto (unísono), a veces una o más octavas arriba o abajo.",
+      "En el traste 12 se repite la nota de la cuerda al aire, una octava más aguda."
+    ],
+    "activity": "Diez preguntas: se marca una nota en el mástil y se pide tocarla en otra cuerda.",
+    "evaluation": "Retroalimentación inmediata con la posición correcta, el sonido de ambas notas y su relación de octava; al final, el puntaje y un repaso de los errores."
+  }
+}

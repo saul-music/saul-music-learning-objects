@@ -1,0 +1,17 @@
+{
+  "name": "saul-music-learning-objects",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @saul-music/playground",
+    "build": "npm run build -w @saul-music/playground",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^5.1.1"
+  }
+}
