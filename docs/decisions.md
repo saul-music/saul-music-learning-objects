@@ -35,3 +35,11 @@ Cinco OA en orden, encadenados por sus prerrequisitos: 1 «Do es C» (clave amer
 acorde» (arpegio 1ª–3ª–5ª–8ª) y 5 «Luz y sombra» (mayor o menor de oído). El segundo juego pedido se dividió en
 cuatro OA por granularidad (un objetivo por OA). El tercer juego (a partir de `saul-music-site-midi`) queda para el
 segundo incremento.
+
+## O7 · Licencia CC BY 4.0 (2026-11-20)
+
+Todo el repo (código, juegos, textos, portadas y metadatos) se publica bajo CC BY 4.0, © Acordia (SAÚL música):
+cualquiera puede usarlo y adaptarlo, con cualquier fin, **siempre que dé crédito**. Lo pidió el usuario («de CC,
+pero que siempre tengan que darme créditos»). Nota: Creative Commons no recomienda sus licencias para software
+(no tratan patentes ni distribución de código fuente); se acepta porque aquí pesa más el contenido educativo y el
+crédito. Quedan fuera las muestras (CC BY 3.0), las dependencias (MIT) y las fuentes (OFL).

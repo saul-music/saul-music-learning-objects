@@ -35,5 +35,12 @@ npm run dev                          # playground en local
 npm run build                        # apps/playground/dist (base relativa)
 ```
 
+## Licencia
+
+**CC BY 4.0**, © 2026 Acordia (SAÚL música): puedes copiar, adaptar y usar estos juegos con cualquier fin,
+**siempre que des crédito**. Crédito sugerido: «Nombre del juego», de Acordia (SAÚL música),
+https://github.com/saul-music/saul-music-learning-objects, CC BY 4.0. Las muestras de guitarra (CC BY 3.0), las
+dependencias y las fuentes conservan sus licencias: ver `LICENSE` y `THIRD_PARTY_NOTICES.md`.
+
 Reglas del repo: `CLAUDE.md`. Estado: `docs/status.md`. Decisiones: `docs/decisions.md`. Avisos de terceros:
 `THIRD_PARTY_NOTICES.md`.

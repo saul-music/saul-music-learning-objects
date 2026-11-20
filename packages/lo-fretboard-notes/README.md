@@ -51,3 +51,7 @@ const unmount = mount(document.getElementById("juego"), { sampler, metadata });
 - `src/theory.js`: lógica pura de las preguntas, probada en `test/` con Vitest.
 - `src/index.js`: el mástil interactivo, sobre las piezas de `@saul-music/lo-kit` (intro, avance, efectos y resumen).
 - `cover.svg`: portada de la galería.
+
+## Licencia
+
+CC BY 4.0, © 2026 Acordia (SAÚL música): puedes usarlo y adaptarlo dando crédito. Ver [`LICENSE`](../../LICENSE).

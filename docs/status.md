@@ -11,7 +11,6 @@
 ## Pendientes
 
 - Probar en iPhone y Android reales, y oírlo.
-- Licencia del código (hoy sin licencia: todos los derechos reservados).
 - El playground muestra los prerrequisitos pero no bloquea el orden: decidir si se guarda el avance y se bloquea.
 - Segundo incremento: el tercer juego, a partir de lo que había en `saul-music-site-midi`.
 
@@ -20,4 +19,5 @@
 ```text
 2026-11-20 · creación · prototipo del playground y primer OA; pipeline tests -> build -> deploy · O1 a O4
 2026-11-20 · segundo juego · kit común y cuatro OA nuevos con portada y README; recorrido en la galería · O5, O6
+2026-11-20 · licencia · CC BY 4.0 con crédito a Acordia (SAÚL música) para código y contenido · O7
 ```

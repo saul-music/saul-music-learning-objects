@@ -9,5 +9,6 @@
   },
   "dependencies": {
     "@saul-music/theme": "*"
-  }
+  },
+  "license": "CC-BY-4.0"
 }
