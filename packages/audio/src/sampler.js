@@ -69,6 +69,23 @@ export function createSampler({ baseUrl, notes }) {
     chord(midis, { delay = 0, strum = 0.035, duration = 2.4, gain = 0.7 } = {}) {
       [...midis].sort((a, b) => a - b).forEach((m, i) => this.play(m, { delay: delay + i * strum, duration, gain }));
     },
+    /** Clic de metrónomo sintetizado (sin muestras); `accent` marca el tiempo 1. */
+    click({ delay = 0, accent = false, gain = 0.35 } = {}) {
+      const c = context();
+      const t = c.currentTime + delay;
+      const osc = c.createOscillator();
+      const g = c.createGain();
+      osc.frequency.value = accent ? 1760 : 1175;
+      g.gain.setValueAtTime(gain, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+      osc.connect(g).connect(c.destination);
+      osc.start(t);
+      osc.stop(t + 0.07);
+    },
+    /** Segundos del reloj de audio (para sincronizar la vista con lo que suena). */
+    now() {
+      return context().currentTime;
+    },
     /** Notas una tras otra (un arpegio), separadas por `gap` segundos. */
     sequence(midis, { delay = 0, gap = 0.45, duration = 1.4, gain = 0.9 } = {}) {
       midis.forEach((m, i) => this.play(m, { delay: delay + i * gap, duration, gain }));

@@ -1,0 +1,69 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-strum-rhythm",
+  "version": "0.1.0",
+  "general": {
+    "title": "Pulso",
+    "subtitle": "Figuras del rasgueo y la regla del compás",
+    "description": "Redonda, blancas o negras: escucha cuántos golpes da la guitarra en cada compás y aprende la regla con que Acordia rasguea los acordes.",
+    "language": "es",
+    "keywords": [
+      "ritmo",
+      "rasgueo",
+      "pulso",
+      "compás",
+      "redonda",
+      "blanca",
+      "negra"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "easy",
+    "typicalLearningTime": "PT5M",
+    "instrument": "ear"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-chord-shapes",
+        "description": "Manos de acorde: las formas que se rasguean."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Reconocer de oído si un rasgueo va en redonda, blancas, negras o blanca con punto, y decidir cómo se rasguea un compás según cuántos acordes tiene.",
+    "content": [
+      {
+        "title": "El pulso",
+        "text": "Es el latido parejo de la música. Cada latido es un tiempo: 4/4 tiene 4 tiempos por compás y 3/4 tiene 3."
+      },
+      {
+        "title": "Las figuras",
+        "text": "La redonda dura 4 tiempos, la blanca 2 y la negra 1. El punto suma la mitad: la blanca con punto dura 3."
+      },
+      {
+        "title": "La regla del rasgueo",
+        "text": "Un acorde en el compás: un golpe al inicio que dura todo el compás. Dos acordes de medio compás: un golpe al empezar cada uno (blancas). Más acordes: un golpe por tiempo (negras)."
+      },
+      {
+        "title": "Escucha el clic",
+        "text": "El metrónomo marca cada tiempo y suena más agudo en el 1. Cuenta los golpes de guitarra entre un 1 y el siguiente."
+      }
+    ],
+    "activity": "Diez preguntas: escuchar un rasgueo con metrónomo y reconocer la figura, aplicar la regla a un compás con acordes y contar tiempos.",
+    "evaluation": "Retroalimentación inmediata con el compás dibujado, las figuras en cada golpe y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

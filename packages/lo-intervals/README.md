@@ -55,4 +55,4 @@ const unmount = mount(document.getElementById("juego"), { sampler, metadata });
 
 ## Licencia
 
-CC BY 4.0, © 2026 Acordia (SAÚL música): puedes usarlo y adaptarlo dando crédito. Ver [`LICENSE`](../../LICENSE).
+CC BY 4.0, © 2026 Acordia (SAÚL música): puedes usarlo y adaptarlo dando crédito. Ver [`NOTICE.md`](../../NOTICE.md) y [`LICENSE`](../../LICENSE).

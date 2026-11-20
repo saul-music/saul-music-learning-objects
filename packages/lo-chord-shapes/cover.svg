@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Manos de acorde">
+  <title>Manos de acorde</title>
+  <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
+  <rect width="480" height="300" fill="#191430"/>
+  <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
+  <path d="M130 300 V140 A110 110 0 0 1 350 140 V300 Z" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <line x1="195" y1="120" x2="285" y2="120" stroke="#f1ece2" stroke-width="5"/>
+  <line x1="195" y1="150" x2="285" y2="150" stroke="#342c5c" stroke-width="2"/>
+  <line x1="195" y1="180" x2="285" y2="180" stroke="#342c5c" stroke-width="2"/>
+  <line x1="195" y1="210" x2="285" y2="210" stroke="#342c5c" stroke-width="2"/>
+  <line x1="195" y1="240" x2="285" y2="240" stroke="#342c5c" stroke-width="2"/>
+  <line x1="195" y1="120" x2="195" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <line x1="213" y1="120" x2="213" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <line x1="231" y1="120" x2="231" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <line x1="249" y1="120" x2="249" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <line x1="267" y1="120" x2="267" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <line x1="285" y1="120" x2="285" y2="240" stroke="#bcb5cc" stroke-width="1.5"/>
+  <circle cx="195" cy="108" r="5" fill="none" stroke="#bcb5cc" stroke-width="2"/>
+  <circle cx="213" cy="165.0" r="8" fill="#d4a64a"/>
+  <circle cx="231" cy="165.0" r="8" fill="#d4a64a"/>
+  <circle cx="249" cy="135.0" r="8" fill="#5fb39b"/>
+  <circle cx="267" cy="108" r="5" fill="none" stroke="#bcb5cc" stroke-width="2"/>
+  <circle cx="285" cy="108" r="5" fill="none" stroke="#bcb5cc" stroke-width="2"/>
+  <text x="240.0" y="86" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="34" fill="#d4a64a">E</text>
+  <g fill="none" stroke="#5fb39b" stroke-width="3" stroke-linecap="round" opacity=".8">
+    <path d="M330 150 q18 20 0 40"/><path d="M342 140 q28 30 0 60"/>
+  </g>
+</svg>

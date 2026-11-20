@@ -7,7 +7,8 @@ import { celebrate, createRun, feedback, progress, questionCard, renderSummary }
  * Forma de una pregunta (la arma el OA):
  * {
  *   eyebrow?, big?, spoken?, sub?, ask,       // tarjeta
- *   choices: string[], correct: number,       // alternativas y la correcta
+ *   choices: (string | {text: string, node: () => Element})[], correct: number,
+ *                                             // alternativas (texto o figura, p. ej. un diagrama) y la correcta
  *   explain: string,                          // se muestra al responder (acierto o error)
  *   recap?: string,                           // línea del resumen si se falla
  *   visual?: (answered: boolean) => Element,  // figura bajo la tarjeta (teclado, escalera…)
@@ -32,6 +33,7 @@ export function mountChoiceQuiz(container, { metadata, sampler, makeQuestion, de
   const run = createRun(rounds);
   let q = null;
   let fresh = false;
+  const textOf = (c) => (typeof c === "string" ? c : c.text);
 
   function intro() {
     renderIntro(root, { metadata, rounds, demo: demo?.({ sampler }), onStart: start });
@@ -55,7 +57,7 @@ export function mountChoiceQuiz(container, { metadata, sampler, makeQuestion, de
     if (q.picked != null) return;
     q.picked = i;
     const ok = i === q.correct;
-    run.record(ok, q.recap ?? `${q.ask} → ${q.choices[q.correct]}`);
+    run.record(ok, q.recap ?? `${q.ask} → ${textOf(q.choices[q.correct])}`);
     q.onAnswer?.(sampler, ok);
     render({ ok, chosen: i });
   }
@@ -63,21 +65,23 @@ export function mountChoiceQuiz(container, { metadata, sampler, makeQuestion, de
   function render(result) {
     const entering = fresh;
     fresh = false;
-    const choices = el("div", { class: "lo-choices", role: "group", "aria-label": "Alternativas" },
+    const figures = q.choices.some((c) => typeof c !== "string");
+    const choices = el("div", { class: `lo-choices${figures ? " lo-choices--figures" : ""}`, role: "group", "aria-label": "Alternativas" },
       q.choices.map((label, i) => {
-        let cls = "lo-choice";
+        let cls = figures ? "lo-choice lo-choice--figure" : "lo-choice";
         if (result) {
           if (i === q.correct) cls += " is-ok";
           else if (i === result.chosen) cls += " is-miss";
           else cls += " is-dim";
         }
-        return el("button", { class: cls, style: `--i:${i}`, disabled: result ? "" : null, onclick: () => pick(i) }, label);
+        const content = typeof label === "string" ? label : label.node();
+        return el("button", { class: cls, style: `--i:${i}`, disabled: result ? "" : null, "aria-label": figures ? textOf(label) : null, onclick: () => pick(i) }, content);
       }));
     const stage = el("div", { class: "lo-stage" },
       q.visual ? el("div", { class: `lo-panel${entering ? " is-entering" : ""}` }, q.visual(Boolean(result))) : "",
       choices);
     let text = "";
-    if (result) text = result.ok ? `¡Bien! ${q.explain}` : `No era ${q.choices[result.chosen]}. ${q.explain}`;
+    if (result) text = result.ok ? `¡Bien! ${q.explain}` : `No era ${textOf(q.choices[result.chosen])}. ${q.explain}`;
     root.replaceChildren(
       progress(run, { bump: result?.ok }),
       questionCard({ ...q, entering }),
