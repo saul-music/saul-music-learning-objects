@@ -1,6 +1,8 @@
 // Sampler mínimo sobre Web Audio: carga muestras por nota y toca cualquier MIDI
 // con la muestra más cercana, ajustando la velocidad de reproducción.
-// No es un OA: es infraestructura compartida por los OA que suenan.
+// No es un OA: es infraestructura compartida por los OA que suenan. Usa el contexto de audio único
+// del playground (context.js), preparado para iPhone.
+import { audioContext, decodeAudio, resumeAudio } from "./context.js";
 
 const NAMES = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 
@@ -24,34 +26,37 @@ export function nearestSample(midi, available) {
  * @param {number[]} opts.notes  números MIDI de las muestras que existen
  */
 export function createSampler({ baseUrl, notes }) {
-  let ctx = null;
-  const buffers = new Map();
+  const buffers = new Map(); // MIDI → promesa del buffer (una sola descarga por muestra)
   let loading = null;
 
   function context() {
-    if (!ctx) ctx = new AudioContext();
-    if (ctx.state === "suspended") ctx.resume();
-    return ctx;
+    const c = audioContext();
+    if (c && c.state !== "running") resumeAudio();
+    return c;
   }
 
-  async function load(midi) {
-    if (buffers.has(midi)) return buffers.get(midi);
-    const res = await fetch(`${baseUrl}/${sampleName(midi)}.mp3`);
-    const buf = await context().decodeAudioData(await res.arrayBuffer());
-    buffers.set(midi, buf);
-    return buf;
+  function load(midi) {
+    if (!buffers.has(midi)) {
+      const p = fetch(`${baseUrl}/${sampleName(midi)}.mp3`)
+        .then((res) => res.arrayBuffer())
+        .then((ab) => decodeAudio(context(), ab));
+      p.catch(() => buffers.delete(midi)); // si falla, se reintenta la próxima vez
+      buffers.set(midi, p);
+    }
+    return buffers.get(midi);
   }
 
   return {
     /** Precarga todas las muestras (llamar tras un gesto del usuario). */
     preload() {
-      context();
-      loading ??= Promise.all(notes.map(load));
+      if (!context()) return Promise.resolve();
+      loading ??= Promise.all(notes.map(load)).catch(() => { loading = null; });
       return loading;
     },
     /** Toca una nota MIDI ahora (o dentro de `delay` segundos). */
     async play(midi, { delay = 0, duration = 1.6, gain = 0.9 } = {}) {
       const c = context();
+      if (!c) return;
       const { sample, shift } = nearestSample(midi, notes);
       const buf = await load(sample);
       const src = c.createBufferSource();
@@ -72,6 +77,7 @@ export function createSampler({ baseUrl, notes }) {
     /** Clic de metrónomo sintetizado (sin muestras); `accent` marca el tiempo 1. */
     click({ delay = 0, accent = false, gain = 0.35 } = {}) {
       const c = context();
+      if (!c) return;
       const t = c.currentTime + delay;
       const osc = c.createOscillator();
       const g = c.createGain();
@@ -84,7 +90,7 @@ export function createSampler({ baseUrl, notes }) {
     },
     /** Segundos del reloj de audio (para sincronizar la vista con lo que suena). */
     now() {
-      return context().currentTime;
+      return context()?.currentTime ?? 0;
     },
     /** Notas una tras otra (un arpegio), separadas por `gap` segundos. */
     sequence(midis, { delay = 0, gap = 0.45, duration = 1.4, gain = 0.9 } = {}) {

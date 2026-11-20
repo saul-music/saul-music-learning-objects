@@ -24,4 +24,5 @@
 2026-11-20 · licencia · CC BY 4.0 con crédito a Acordia (SAÚL música) para código y contenido · O7
 2026-11-20 · tercer juego · «Manos de acorde» (chords-db) y «Pulso» (regla de rasgueo); LICENSE oficial y NOTICE.md · O8
 2026-11-20 · look de juego · núcleo visual nuevo en lo-kit con la misma lógica; mapa de niveles; puntuación, récords y estrellas; tipografía musical y colores de ganar/perder · O9
+2026-11-20 · audio en iPhone · sesión «playback» (interruptor de silencio), un solo contexto, reanudar en cada toque y ?debug=audio · O10
 ```

@@ -72,3 +72,16 @@ Se cambia el núcleo visual (`lo-kit`), no la lógica de los OA (sus `theory.js`
   la marca no cambia. Estilo plano: el volumen de botones y fichas es un canto inferior sólido, sin sombras difusas.
 - **Efectos de sonido** sintetizados con Web Audio (sin archivos), aparte de la música, con silencio recordado.
 - **Atajos:** teclas 1 a 4 para responder y Enter para seguir. Todo respeta `prefers-reduced-motion`.
+
+## O10 · Audio preparado para iPhone (2026-11-20)
+
+En iPhone no sonaba nada. Causa más probable: iOS calla Web Audio con el interruptor de silencio del costado, y el
+playground no declaraba la sesión de audio como reproducción (el reproductor de Acordia sí lo hace). Se corrige en
+`packages/audio/src/context.js`:
+
+- `navigator.audioSession.type = "playback"` antes de crear el contexto y en cada gesto (Safari 16.4+); en iOS más
+  antiguo, un `<audio>` silencioso en el primer toque cumple el mismo papel.
+- **Un solo contexto** para guitarra y efectos (antes había dos).
+- **Reanudar en cada toque**: iOS suspende o «interrumpe» el contexto al cambiar de app y solo un gesto lo reanuda.
+- Respaldo `webkitAudioContext` y `decodeAudioData` con callbacks para Safari antiguo; cada muestra se baja una vez.
+- Diagnóstico: `?debug=audio` en la dirección muestra el estado del contexto y la sesión, con botones de prueba.
