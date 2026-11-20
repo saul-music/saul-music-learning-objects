@@ -37,8 +37,8 @@
     {
       "kind": "requires",
       "resource": {
-        "identifier": "lo-intervals",
-        "description": "El misterio de E#: medios tonos, sostenidos y por qué existen notas como E#."
+        "identifier": "lo-enharmonic-spelling",
+        "description": "Nombra bien la nota: la letra correcta y cuándo usar sostenido o bemol."
       }
     }
   ],

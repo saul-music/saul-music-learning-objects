@@ -8,6 +8,8 @@
 - Cinco OA en un recorrido (O6), sobre el kit común (O5): «Do es C», «El misterio de E#», «Eco en el mástil»,
   «Escalera del acorde» y «Luz y sombra», cada uno con portada y README.
 - Tercer juego en dos OA (O8): «Manos de acorde» y «Pulso». Siete juegos en el recorrido.
+- Ocho juegos: «Nombra bien la nota» (O12) es el paso 3, entre «El misterio de E#» y «Eco en el mástil».
+- Un solo sonido a la vez y cuenta regresiva sin recorte (O11).
 - Look de juego (O9): pantallas de título, cuenta regresiva, marcador con puntos y combo, resultados con estrellas
   y récord, mapa de niveles, tipografía musical (Petaluma, Noto Music), colores de ganar/perder y efectos de sonido.
 
@@ -26,3 +28,4 @@
 2026-11-20 · look de juego · núcleo visual nuevo en lo-kit con la misma lógica; mapa de niveles; puntuación, récords y estrellas; tipografía musical y colores de ganar/perder · O9
 2026-11-20 · audio en iPhone · sesión «playback» (interruptor de silencio), un solo contexto, reanudar en cada toque y ?debug=audio · O10
 ```
+2026-11-20 · arreglos de juego y juego nuevo · cuenta regresiva sin recorte y un sonido a la vez con «Reproduciendo…» (PR #5, O11); «Nombra bien la nota», ortografía enarmónica (O12) · pendiente: ojo y oído en celular real

@@ -1,0 +1,19 @@
+/* OA «Nombra bien la nota»: la escala con una casilla por letra. */
+.lo-es { display: grid; gap: 1rem; }
+.lo-es__scale { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: 0; }
+.lo-es__step {
+  display: grid; justify-items: center; min-width: 3.2rem; padding: .35rem .3rem; line-height: 1.15;
+  border: 2px solid var(--ac-line); border-radius: var(--ac-radius); background: var(--ac-bg);
+}
+.lo-panel.is-entering .lo-es__step { animation: lo-rise .4s calc(.2s + var(--i) * 60ms) both; }
+.lo-es__step small { font-size: .75rem; color: var(--ac-fg-muted); }
+.lo-es__step b { font-family: var(--ac-font-display); font-size: 1.5rem; font-weight: 400; }
+.lo-es__step b .lo-note { font-size: 1.15em; }
+.lo-es__letter { font-size: .7rem; letter-spacing: .08em; color: var(--ac-fg-muted); }
+.lo-es__step.is-asked { border-color: var(--ac-accent); border-style: dashed; }
+.lo-es__step.is-asked b { color: var(--ac-accent); }
+.lo-es__step.is-answer { background: var(--ac-fill-2); border-color: var(--ac-fill-2); color: var(--ac-on-fill-2); animation: lo-pop .45s both; }
+.lo-es__step.is-answer small, .lo-es__step.is-answer .lo-es__letter { color: var(--ac-on-fill-2); }
+.lo-es__pair { display: inline-flex; align-items: baseline; gap: .25em; }
+.lo-es__word { font-family: var(--ac-font-display); font-size: .5em; color: var(--ac-fg); }
+.lo-es__hint { margin: 0; text-align: center; color: var(--ac-fg-muted); font-size: 1rem; }

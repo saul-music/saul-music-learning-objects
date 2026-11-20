@@ -2,7 +2,7 @@
 
 ![Portada de «Manos de acorde»](cover.svg)
 
-**Formas de acordes en la guitarra** · paso 6 del recorrido · guitarra · 6 min · dificultad media
+**Formas de acordes en la guitarra** · paso 7 del recorrido · guitarra · 6 min · dificultad media
 
 Cada acorde tiene su forma en el mástil. Reconoce las formas de los acordes mayores, menores y de séptima, y qué nota suena en cada cuerda.
 
