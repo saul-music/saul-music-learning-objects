@@ -13,11 +13,12 @@ actividad y su evaluación, más sus metadatos (subconjunto de IEEE LOM) para ca
 |---|---|---|---|
 | 1 | [Do es C](packages/lo-american-notation/README.md) | Clave americana y nombres latinos | — |
 | 2 | [El misterio de E#](packages/lo-intervals/README.md) | Intervalos, sostenidos, bemoles y notas raras | Do es C |
-| 3 | [Eco en el mástil](packages/lo-fretboard-notes/README.md) | La misma nota en otra cuerda | El misterio de E# |
-| 4 | [Escalera del acorde](packages/lo-arpeggios/README.md) | Arpegios: 1ª, 3ª, 5ª y 8ª | El misterio de E# |
-| 5 | [Luz y sombra](packages/lo-major-minor-ear/README.md) | Acordes mayores y menores de oído | Escalera del acorde |
-| 6 | [Manos de acorde](packages/lo-chord-shapes/README.md) | Formas de acordes en la guitarra | Escalera del acorde |
-| 7 | [Pulso](packages/lo-strum-rhythm/README.md) | Figuras del rasgueo y la regla del compás | Manos de acorde |
+| 3 | [Nombra bien la nota](packages/lo-enharmonic-spelling/README.md) | La letra correcta y cuándo usar sostenido o bemol | El misterio de E# |
+| 4 | [Eco en el mástil](packages/lo-fretboard-notes/README.md) | La misma nota en otra cuerda | Nombra bien la nota |
+| 5 | [Escalera del acorde](packages/lo-arpeggios/README.md) | Arpegios: 1ª, 3ª, 5ª y 8ª | El misterio de E# |
+| 6 | [Luz y sombra](packages/lo-major-minor-ear/README.md) | Acordes mayores y menores de oído | Escalera del acorde |
+| 7 | [Manos de acorde](packages/lo-chord-shapes/README.md) | Formas de acordes en la guitarra | Escalera del acorde |
+| 8 | [Pulso](packages/lo-strum-rhythm/README.md) | Figuras del rasgueo y la regla del compás | Manos de acorde |
 
 ## Paquetes
 

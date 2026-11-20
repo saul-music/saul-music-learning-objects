@@ -14,6 +14,10 @@ import * as intervals from "@saul-music/lo-intervals";
 import intervalsMeta from "@saul-music/lo-intervals/metadata.json";
 import intervalsCover from "@saul-music/lo-intervals/cover.svg";
 import "@saul-music/lo-intervals/style.css";
+import * as enharmonic from "@saul-music/lo-enharmonic-spelling";
+import enharmonicMeta from "@saul-music/lo-enharmonic-spelling/metadata.json";
+import enharmonicCover from "@saul-music/lo-enharmonic-spelling/cover.svg";
+import "@saul-music/lo-enharmonic-spelling/style.css";
 import * as fretboardNotes from "@saul-music/lo-fretboard-notes";
 import fretboardNotesMeta from "@saul-music/lo-fretboard-notes/metadata.json";
 import fretboardNotesCover from "@saul-music/lo-fretboard-notes/cover.svg";
@@ -39,6 +43,7 @@ import "@saul-music/lo-strum-rhythm/style.css";
 const OBJECTS = [
   { module: americanNotation, metadata: americanNotationMeta, cover: americanNotationCover },
   { module: intervals, metadata: intervalsMeta, cover: intervalsCover },
+  { module: enharmonic, metadata: enharmonicMeta, cover: enharmonicCover },
   { module: fretboardNotes, metadata: fretboardNotesMeta, cover: fretboardNotesCover },
   { module: arpeggios, metadata: arpeggiosMeta, cover: arpeggiosCover },
   { module: majorMinorEar, metadata: majorMinorEarMeta, cover: majorMinorEarCover },

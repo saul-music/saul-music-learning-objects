@@ -13,6 +13,7 @@
     "@saul-music/lo-american-notation": "*",
     "@saul-music/lo-arpeggios": "*",
     "@saul-music/lo-chord-shapes": "*",
+    "@saul-music/lo-enharmonic-spelling": "*",
     "@saul-music/lo-fretboard-notes": "*",
     "@saul-music/lo-intervals": "*",
     "@saul-music/lo-kit": "*",

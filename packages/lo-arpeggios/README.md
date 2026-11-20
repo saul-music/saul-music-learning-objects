@@ -2,7 +2,7 @@
 
 ![Portada de «Escalera del acorde»](cover.svg)
 
-**Arpegios: 1ª, 3ª, 5ª y 8ª** · paso 4 del recorrido · teoría · 5 min · dificultad media
+**Arpegios: 1ª, 3ª, 5ª y 8ª** · paso 5 del recorrido · teoría · 5 min · dificultad media
 
 Un acorde es una escalera de cuatro peldaños: 1ª, 3ª, 5ª y la octava. Sube por ella en acordes mayores y menores.
 

@@ -1,0 +1,62 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-enharmonic-spelling",
+  "version": "0.1.0",
+  "general": {
+    "title": "Nombra bien la nota",
+    "subtitle": "Por qué casi nunca ves E#, B#, Fb ni Cb, y cuándo usar bemoles",
+    "description": "Cada letra una sola vez: escribe las notas como las escribiría un músico y elige sostenido o bemol con criterio.",
+    "language": "es",
+    "keywords": ["enarmonía", "ortografía musical", "bemol", "sostenido", "tonalidad", "E#", "Cb"]
+  },
+  "educational": {
+    "learningResourceType": ["exercise", "questionnaire"],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-intervals",
+        "description": "El misterio de E#: medios tonos, sostenidos y por qué existen notas como E#."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Escribir las notas de una tonalidad mayor con la letra correcta, elegir entre sostenido y bemol con un criterio simple y explicar por qué casi nunca se usan E#, B#, Fb y Cb.",
+    "content": [
+      {
+        "title": "Cada letra, una vez",
+        "text": "Una escala mayor usa las siete letras, cada una una sola vez y en orden. En F mayor la cuarta nota es una B: se escribe Bb, no A#, porque la A ya está usada."
+      },
+      {
+        "title": "El nombre sigue a la tonalidad",
+        "text": "Las tonalidades con sostenidos (G, D, A) usan sostenidos y las de bemoles (F, Bb, Eb) usan bemoles. Si dudas, el bemol suele ser la opción más cómoda: Bb, Eb y Ab son muy comunes."
+      },
+      {
+        "title": "Las notas raras",
+        "text": "E# suena como F, B# como C, Fb como E y Cb como B. Solo aparecen cuando la tonalidad las pide: E# en F# mayor, Cb en Gb mayor, B# en C# mayor y Fb en Cb mayor."
+      },
+      {
+        "title": "Elige el nombre simple",
+        "text": "Fuera de esas tonalidades, entre E y F y entre B y C no hay tecla negra: la nota que sigue es F o C, no E# ni B#."
+      },
+      {
+        "title": "Los acordes también",
+        "text": "Un acorde mayor usa letras alternadas: Bb mayor es Bb D F, no A# D F. Si el acorde suena bien pero se ve raro, probablemente esté mal escrito."
+      }
+    ],
+    "activity": "Diez preguntas de cuatro tipos: escribir la nota de una escala, elegir el nombre simple al subir o bajar medio tono, encontrar la tonalidad de una nota rara y escribir un acorde.",
+    "evaluation": "Retroalimentación inmediata con la escala dibujada y el sonido; la explicación dice qué letra estaba ya usada. Al final, puntaje y repaso de errores."
+  }
+}

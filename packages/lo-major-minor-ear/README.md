@@ -2,7 +2,7 @@
 
 ![Portada de «Luz y sombra»](cover.svg)
 
-**Acordes mayores y menores de oído** · paso 5 del recorrido · oído · 5 min · dificultad media
+**Acordes mayores y menores de oído** · paso 6 del recorrido · oído · 5 min · dificultad media
 
 Escucha un acorde y decide: ¿luz o sombra? Entrena el oído para distinguir mayores y menores.
 

@@ -30,7 +30,7 @@ Retroalimentación inmediata con el teclado, los pasos cromáticos y el sonido; 
 
 - [Do es C](../lo-american-notation/README.md): leer las notas en clave americana, con # y b.
 
-Prepara para: [Eco en el mástil](../lo-fretboard-notes/README.md), [Escalera del acorde](../lo-arpeggios/README.md).
+Prepara para: [Nombra bien la nota](../lo-enharmonic-spelling/README.md), [Escalera del acorde](../lo-arpeggios/README.md).
 
 ## Uso
 

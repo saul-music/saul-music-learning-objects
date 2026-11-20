@@ -2,7 +2,7 @@
 
 ![Portada de «Eco en el mástil»](cover.svg)
 
-**La misma nota en otra cuerda** · paso 3 del recorrido · guitarra · 5 min · dificultad fácil
+**La misma nota en otra cuerda** · paso 4 del recorrido · guitarra · 5 min · dificultad fácil
 
 La misma nota vive en varias cuerdas. Ves una en el mástil y la buscas en otra cuerda.
 
@@ -27,7 +27,7 @@ Retroalimentación inmediata con la posición correcta, el sonido de ambas notas
 
 ## Prerrequisitos
 
-- [El misterio de E#](../lo-intervals/README.md): medios tonos, sostenidos y por qué existen notas como E#.
+- [Nombra bien la nota](../lo-enharmonic-spelling/README.md): medios tonos, sostenidos y por qué existen notas como E#.
 
 Prepara para: —.
 

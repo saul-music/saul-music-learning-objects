@@ -2,7 +2,7 @@
 
 ![Portada de «Pulso»](cover.svg)
 
-**Figuras del rasgueo y la regla del compás** · paso 7 del recorrido · oído · 5 min · dificultad fácil
+**Figuras del rasgueo y la regla del compás** · paso 8 del recorrido · oído · 5 min · dificultad fácil
 
 Redonda, blancas o negras: escucha cuántos golpes da la guitarra en cada compás y aprende la regla con que Acordia rasguea los acordes.
 
