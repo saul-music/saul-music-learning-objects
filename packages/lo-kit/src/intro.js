@@ -47,9 +47,9 @@ export function renderIntro(screen, { metadata, rounds, cover, best, demo, onSta
     el("header", { class: "lo-title", style: stagger(0) },
       cover ? el("div", { class: "lo-title__art" }, el("img", { src: cover, alt: "" })) : "",
       el("div", { class: "lo-title__text" },
-        el("p", { class: "lo-kicker" }, metadata.general.subtitle ?? ""),
-        el("h2", {}, metadata.general.title),
-        el("p", { class: "lo-lead" }, metadata.general.description),
+        el("p", { class: "lo-kicker" }, rich(metadata.general.subtitle ?? "")),
+        el("h2", {}, rich(metadata.general.title)),
+        el("p", { class: "lo-lead" }, rich(metadata.general.description)),
         el("ul", { class: "lo-chips" },
           el("li", {}, instrumentOf(e.instrument)),
           el("li", {}, `⏱ ${minutesOf(e.typicalLearningTime)}`),
@@ -72,7 +72,7 @@ export function renderIntro(screen, { metadata, rounds, cover, best, demo, onSta
       ? el("figure", { class: "lo-demo", style: stagger(3) },
         el("div", { class: "lo-panel" }, demo.node),
         el("figcaption", {}, rich(demo.caption), " ",
-          demo.onReplay ? el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm lo-listen", onclick: demo.onReplay }, demo.replayLabel ?? "▶ Oír el ejemplo") : ""))
+          demo.onReplay ? el("button", { class: "lo-btn lo-btn--ghost lo-btn--sm lo-listen", onclick: demo.onReplay }, rich(demo.replayLabel ?? "▶ Oír el ejemplo")) : ""))
       : "",
     el("ol", { class: "lo-tips" }, p.content.map(tip)),
     el("div", { class: "lo-start", style: stagger(p.content.length + 4) },

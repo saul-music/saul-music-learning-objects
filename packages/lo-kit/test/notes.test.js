@@ -34,4 +34,18 @@ describe("tipografía de notas", () => {
     expect(notes("A veces suena Am (A – C – E).")).toEqual(["Am", "A", "C", "E"]);
     expect(notes("A en la 6ª cuerda")).toEqual([]);
   });
+
+  it("reconoce letras sueltas en oraciones (listas con espacios, «una B», «en F»)", async () => {
+    const { notesIn, prettyText } = await import("../src/notes.js");
+    const notes = (t) => [...notesIn(t)].map((n) => n.name);
+    expect(notes("F# mayor es F# G# A# B C# D# E#: la 7ª tiene que ser una E, y suena en F.")).toEqual(["F#", "F#", "G#", "A#", "B", "C#", "D#", "E#", "E", "F"]);
+    expect(notes("Leer (C, D, E, F, G, A, B, con # y b)")).toEqual(["C", "D", "E", "F", "G", "A", "B"]);
+    expect(notes("E, Em y E7: un dedo cambia el color")).toEqual(["E", "Em", "E7"]);
+    expect(notes("E menor: E (1ª) · G (3ª)")).toEqual(["E", "E", "G"]);
+    expect(notes("De A a C# hay 4 semitonos")).toEqual(["A", "C#"]);
+    expect(notes("A veces suena bien. A 4 semitonos. ¿A qué nota? E incluso.")).toEqual([]);
+    expect(prettyText("con # y b")).toBe("con ♯ y ♭");
+    expect(prettyText("# se dice sostenido y b se dice bemol")).toBe("♯ se dice sostenido y ♭ se dice bemol");
+    expect(prettyText("Do# no es Bb ni b")).toBe("Do# no es B♭ ni b");
+  });
 });
