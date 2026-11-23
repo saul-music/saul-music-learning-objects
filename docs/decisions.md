@@ -155,3 +155,13 @@ sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pr
 
 Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de la diapositiva** (o al del juego), para que quien usa teclado o lector de pantalla sepa dónde está; al abrir una lección no se mueve el foco. El título lleva `tabindex="-1"` (recibe foco por programa, no entra en el orden del Tab) y sin contorno, porque no es un control. Comprobado en un navegador real. **Sin comprobar:** con un lector de pantalla real (VoiceOver, TalkBack).
 
+## O19 · Catálogo público, «continuar» y enlace a «Mi cuenta» (2026-11-24)
+
+**Tanda 1 de «Mi Acordia» (control C45, site S104).** Aprende se integra con la cuenta del sitio:
+
+- **`/aprende/lessons.json`:** el build lo escribe después de Vite (`scripts/lessons-json.mjs`, a partir de `src/catalog.js`) con las rutas y las lecciones **solo con id y título**: nada del contenido, que tiene derechos reservados. «Mi cuenta» lo lee para mostrar títulos reales; sin él, muestra lo guardado.
+- **«Continuar»:** al abrir una lección, Aprende anota `PUT /api/me/continue` con `{ lesson: { path, lesson } }`. Es de disparar y olvidar: si falla, no se le muestra nada a la persona.
+- **Marca de sesión:** con sesión deja `localStorage["acordia-session"] = "1"` (sin datos personales) y sin sesión la quita; las páginas de tema del sitio solo cargarán Firebase si existe (tanda 2).
+- **«Mi cuenta»** del encabezado va ahora a `/mi-acordia.html`.
+- **Pruebas:** el catálogo (solo id y título, sin contenido), el script que escribe el archivo y el cliente (`saveContinue`); y una corrida de navegador: abrir una lección anota «continuar», con sesión queda la marca y sin sesión no, y el enlace apunta a la página nueva.
+

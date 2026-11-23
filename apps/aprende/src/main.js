@@ -95,6 +95,8 @@ function lessonView(path, lesson, startAt = 0) {
   const n = lesson.slides.length;
   let at = Math.min(Math.max(0, startAt), n); // n = el juego
   const eyebrow = `Lección ${path.lessons.indexOf(lesson) + 1} · ${lesson.title}`;
+  // «Continuar» (C30): al abrir una lección se anota; si falla, no importa (no hay que molestar a nadie por esto).
+  state.api?.saveContinue({ lesson: { path: path.id, lesson: lesson.id } }).catch(() => {});
   const host = el("div", { class: "ap-lesson-host" });
   let gameUnmount = null;
   show(link(`#/${path.id}`, "ap-back", `← ${path.title}`), host);
@@ -200,6 +202,10 @@ async function boot() {
   } catch {
     return show(messageView({ title: "No pudimos cargar tu sesión", text: "Revisa tu conexión e inténtalo de nuevo.", action: { label: "Reintentar", onclick: () => location.reload() } }));
   }
+  // «Hay una sesión»: las páginas de tema del sitio solo cargan Firebase si existe esta marca (sin datos personales).
+  try {
+    state.auth.user ? localStorage.setItem("acordia-session", "1") : localStorage.removeItem("acordia-session");
+  } catch { /* sin almacenamiento */ }
   if (!state.auth.user) {
     return show(messageView({
       title: "Entra para aprender",
@@ -208,7 +214,6 @@ async function boot() {
     }));
   }
   document.getElementById("ap-account").hidden = false;
-  document.getElementById("ap-account").href = LOGIN("");
   state.api = createApi({ getToken: state.auth.getToken });
   try {
     const consent = await state.api.consent();

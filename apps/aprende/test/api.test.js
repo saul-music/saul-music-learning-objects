@@ -32,6 +32,14 @@ describe("cliente de la API", () => {
     expect(saved).toEqual({ points: 90, stars: 3, plays: 2 });
   });
 
+  it("anota lo último que vio con un solo campo", async () => {
+    const { api, calls } = fake(200, { continue: {} });
+    await api.saveContinue({ lesson: { path: "basico", lesson: "pulso" } });
+    expect(calls[0].url).toBe("/api/me/continue");
+    expect(calls[0].options.method).toBe("PUT");
+    expect(JSON.parse(calls[0].options.body)).toEqual({ lesson: { path: "basico", lesson: "pulso" } });
+  });
+
   it("un error del servidor sale como ApiError con su estado", async () => {
     for (const status of [403, 404, 422, 429, 500]) {
       await expect(fake(status, {}).api.progress()).rejects.toMatchObject({ status });
