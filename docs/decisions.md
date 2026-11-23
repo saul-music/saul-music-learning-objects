@@ -140,3 +140,14 @@ sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pr
 - **Comprobación posterior (smoke):** el pipeline verifica que `/__/firebase/init.json` responda 200 y que `/__/auth/handler` traiga Firebase, además de `/privacidad.html` (que pasa por el rewrite a Cloud Run). Si una versión perdiera las URLs reservadas, el login se rompería y el pipeline lo diría.
 - **Lección:** el guardián hizo su trabajo (falló cerrado antes de tocar nada) y la suposición «versión sin archivos propios = 0 archivos» era falsa. Se descubrió porque el pipeline corre contra el Hosting real; con la API falsa no se veía.
 
+## O17 · Primer despliegue real de Aprende y su comprobación (2026-11-23)
+
+**Aprende quedó publicado en `https://saulapp-music.web.app/aprende/`** tras tres intentos; cada uno enseñó algo y ninguno dañó el sitio (el guardián falló cerrado antes de tocar nada):
+
+1. Se negó por las URLs reservadas de Firebase (`/__/…`): O16 e infra I20.
+2. Hosting respondió 403 por falta de `run.services.get` sobre `musicsite`: infra I21 (`roles/run.viewer`).
+3. Publicó (53 archivos, 736 KB comprimidos), pero **la comprobación posterior falló** porque corrió justo al lanzar la versión y el CDN aún no la servía. Ahora **reintenta hasta 2 minutos**.
+
+- **Verificado en producción tras publicar:** `/aprende/` 200; el JS, el CSS y las muestras de guitarra con su tipo correcto; `/aprende` redirige a `/aprende/`; cabecera `noindex`; el sitio, una página de canción, `/privacidad.html`, `/entrar.html`, `/__/firebase/init.json` y `/__/auth/handler` siguen en 200; la API sin token da 404. Con un navegador real y el **SDK de Firebase real**: sin errores de consola, sin sesión pide entrar y el enlace lleva a `/entrar.html?volver=/aprende/`.
+- **Sin comprobar:** con una cuenta real (entrar, aceptar el aviso v3, jugar y guardar el avance), el audio en un celular real y en iPhone, y Safari.
+
