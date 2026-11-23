@@ -104,9 +104,14 @@ jobs:
           AUTH_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
       - name: comprobar (Aprende responde y el sitio sigue enrutando a Cloud Run)
         run: |
-          curl -fsS https://saulapp-music.web.app/aprende/ | grep -q "Aprende"
-          test "$(curl -s -o /dev/null -w '%{http_code}' https://saulapp-music.web.app/privacidad.html)" = "200"
+          # Hosting tarda unos segundos en servir una versión recién lanzada: se reintenta hasta 2 minutos.
+          U=https://saulapp-music.web.app
+          for i in $(seq 1 24); do
+            curl -fsS "$U/aprende/" | grep -q "Aprende" && break
+            [ "$i" = 24 ] && { echo "✗ /aprende/ no responde tras 2 minutos"; exit 1; }
+            sleep 5
+          done
+          test "$(curl -s -o /dev/null -w '%{http_code}' $U/privacidad.html)" = "200"   # pasa por el rewrite a Cloud Run
           # el login del sitio depende de las URLs reservadas de Firebase: si se perdieran, esto falla
-          test "$(curl -s -o /dev/null -w '%{http_code}' https://saulapp-music.web.app/__/firebase/init.json)" = "200"
-          curl -fsS https://saulapp-music.web.app/__/auth/handler | grep -qi "firebase"
-
+          test "$(curl -s -o /dev/null -w '%{http_code}' $U/__/firebase/init.json)" = "200"
+          curl -fsS $U/__/auth/handler | grep -qi "firebase"
