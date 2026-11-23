@@ -152,10 +152,13 @@ function lessonView(path, lesson, startAt = 0) {
     });
   }
 
-  function go(i) {
+  function go(i, { focus = true } = {}) {
     at = Math.min(Math.max(0, i), n);
     scrollTo(0, 0);
     at === n ? game() : slides();
+    // El foco pasa al título de la diapositiva (o al del juego) para quien navega con teclado o lector de pantalla;
+    // al abrir la lección no, para no quitarle el foco al enlace con el que llegó.
+    if (focus) host.querySelector(".ap-slide h2, .lo-intro h2")?.focus({ preventScroll: true });
   }
 
   const onKey = (e) => {
@@ -169,7 +172,7 @@ function lessonView(path, lesson, startAt = 0) {
     gameUnmount?.();
     removeEventListener("keydown", onKey);
   };
-  go(at);
+  go(at, { focus: false });
 }
 
 function route() {

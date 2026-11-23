@@ -19,7 +19,7 @@ export function figureNode(figure) {
 export function slideCard(slide, { eyebrow, onListen }) {
   return el("article", { class: "ap-slide" },
     el("p", { class: "ap-kicker" }, rich(eyebrow)),
-    el("h2", {}, rich(slide.title)),
+    el("h2", { tabindex: "-1" }, rich(slide.title)), // tabindex -1: se le pasa el foco al cambiar de diapositiva
     slide.text.map((t) => el("p", {}, rich(t))),
     slide.figure ? figureNode(slide.figure) : "",
     slide.listen?.length

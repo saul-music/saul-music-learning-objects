@@ -68,6 +68,7 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 .ap-slide { display: grid; gap: 1rem; padding: clamp(1.2rem, 4vw, 2rem); border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); animation: lo-rise .35s both; }
 .ap-slide h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.1; }
 .ap-slide p { margin: 0; max-width: 60ch; font-size: 1.15rem; }
+.ap-slide h2:focus { outline: none; } /* el foco es para lectores de pantalla; el título no es un control */
 .ap-figure { max-width: 100%; overflow-x: auto; }
 .ap-listen { display: flex; flex-wrap: wrap; gap: .6rem; }
 .ap-table { border-collapse: collapse; min-width: 16rem; }
