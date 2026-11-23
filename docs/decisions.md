@@ -105,3 +105,16 @@ sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pr
 - **Luz y sombra y demás descripciones:** el `figcaption` era `flex` y partía el texto en cada nota; ahora es texto corrido. Las tarjetas que suenan de la demo (Luz y sombra y Manos de acorde) pasan a `lo-listen`: esperan a que termine el sonido (O11).
 - **Pulso:** `el()` aplanaba un solo nivel de hijos y mostraba `[object HTMLSpanElement]`; ahora aplana todos.
 - **Nombra bien la nota:** las alternativas de acorde dibujan cada nota en tipografía musical (la G suelta salía en texto chico).
+
+## O14 · Puntaje templado y evento de resultado (2026-11-23)
+
+**Decisión del usuario (C44, cierra C37 del control).** Los números eran demasiado grandes (hasta 800 por acierto y miles por partida).
+
+- **Escala nueva:** un acierto vale **7 puntos más hasta 3 por rapidez** (10 como máximo); un error, 0. Con 10 rondas, una partida vale **hasta 100**. Las estrellas no cambian (3 con 9 o 10 aciertos, 2 con 7 u 8, 1 con 4 a 6).
+- **La racha ya no multiplica los puntos:** se sigue celebrando (el marcador dice «racha», el banner «racha de N» desde 3 y el sonido sube de nivel), pero no cambia el puntaje. `comboMultiplier` queda solo como nivel de celebración.
+- **`gamePoints(puntos, rondas)`** lleva cualquier número de rondas a la escala de 0 a 100 (con otras rondas, una partida también vale como máximo 100).
+- **Récords del navegador en una clave nueva** (`acordia-lo:v2:<id>`): los récords viejos, en miles, no sirven de comparación y habrían impedido todo «nuevo récord». Se pierden los récords locales anteriores; eran de prueba.
+- **Evento `lo:result`:** al mostrar los resultados, el kit lanza en la pantalla del juego un `CustomEvent` que burbujea, con `detail: { points (0 a 100), stars (0 a 3), correct, rounds }`. Así quien aloje un juego (las lecciones de Aprende) guarda el avance **sin tocar ningún OA**: ninguno cambió. Lo usan todos los juegos, porque pasan por `renderResults`.
+- **Pruebas:** la escala (nunca más de 10 por respuesta, sea cual sea la racha), `gamePoints` con otras rondas, el récord con la clave nueva.
+- **Sin comprobar:** el aspecto del marcador con «racha» en un celular real.
+

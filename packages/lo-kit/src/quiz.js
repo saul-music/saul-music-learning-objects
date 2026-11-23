@@ -3,7 +3,7 @@
 import { bindSound } from "./sound.js";
 import { el, svg } from "./dom.js";
 import { richText } from "./notes.js";
-import { SCORING, starsFor } from "./score.js";
+import { gamePoints, SCORING, starsFor } from "./score.js";
 
 export { createRun } from "./score.js";
 
@@ -82,7 +82,7 @@ export function hud(run, { sfx, answered = false, gained = 0, timer = true } = {
   if (gained) requestAnimationFrame(() => animateNumber(num, run.points - gained, run.points));
   const combo = run.streak >= 3
     ? el("span", { class: `lo-hud__combo x${Math.min(4, run.streak >= 8 ? 4 : run.streak >= 5 ? 3 : 2)}`, title: `Racha de ${run.streak}` },
-      `×${run.streak >= 8 ? 4 : run.streak >= 5 ? 3 : 2}`, el("small", {}, "combo"))
+      String(run.streak), el("small", {}, "racha"))
     : el("span", { class: "lo-hud__combo" });
   const bar = el("div", { class: "lo-hud" },
     el("div", { class: "lo-hud__round" }, el("span", { class: "lo-hud__label" }, "Ronda"), el("b", {}, `${run.round}/${run.rounds}`)),
@@ -174,7 +174,7 @@ export function celebrate({ host, stage, result, anchor, shake, sfx }) {
     : pickOne(["¡UY!", "¡CASI!", "¡OH, NO!"]);
   const banner = el("div", { class: `lo-banner ${ok ? "is-win" : "is-lose"}` },
     el("span", { class: "lo-banner__word" }, word),
-    ok ? el("span", { class: "lo-banner__sub" }, `+${fmt(gained)} puntos${multiplier > 1 ? ` · combo ×${multiplier}` : ""}`) : "",
+    ok ? el("span", { class: "lo-banner__sub" }, `+${fmt(gained)} puntos${streak >= 3 ? ` · racha de ${streak}` : ""}`) : "",
     !ok ? el("span", { class: "lo-banner__sub" }, "Mira la respuesta") : "");
   banner.style.top = `${Math.min(Math.max(at.y - 80, box.height * 0.18), box.height * 0.78)}px`;
   fx.append(banner);
@@ -208,6 +208,11 @@ export function starIcon(filled, { cls = "" } = {}) {
 export function renderResults(screen, run, { sfx, save, next, onRestart, onBack }) {
   const stars = starsFor(run.score, run.rounds);
   const saved = save ? save({ points: run.points, stars }) : { newRecord: false, best: { points: run.points } };
+  // Quien aloje el juego (las lecciones de Aprende) escucha este evento para guardar el avance (C44).
+  screen.dispatchEvent(new CustomEvent("lo:result", {
+    bubbles: true,
+    detail: { points: gamePoints(run.points, run.rounds), stars, correct: run.score, rounds: run.rounds },
+  }));
   const title = stars === 3 ? "¡Nivel perfecto!" : stars >= 1 ? "¡Nivel completado!" : "¡Sigue practicando!";
   const starRow = el("div", { class: "lo-results__stars" }, [0, 1, 2].map((i) => starIcon(i < stars, { cls: `s${i}` })));
   const num = el("b", { class: "lo-results__points" }, "0");

@@ -23,7 +23,7 @@ actividad y su evaluación, más sus metadatos (subconjunto de IEEE LOM) para ca
 ## Paquetes
 
 - `packages/lo-*`: un OA por paquete (metadatos, lógica, vista, portada y README).
-- `packages/lo-kit`: el juego común a los OA (pantalla de título, cuenta regresiva, marcador con puntos y combo,
+- `packages/lo-kit`: el juego común a los OA (pantalla de título, cuenta regresiva, marcador con puntos y racha,
   fichas de respuesta, efectos de acierto y error, resultados con estrellas y récord, teclado de piano y
   tipografía musical).
 - `packages/theme`: colores y tipografía de Acordia (copiados de `acordia_render`) y botones base.
