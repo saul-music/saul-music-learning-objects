@@ -151,3 +151,7 @@ sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pr
 - **Verificado en producción tras publicar:** `/aprende/` 200; el JS, el CSS y las muestras de guitarra con su tipo correcto; `/aprende` redirige a `/aprende/`; cabecera `noindex`; el sitio, una página de canción, `/privacidad.html`, `/entrar.html`, `/__/firebase/init.json` y `/__/auth/handler` siguen en 200; la API sin token da 404. Con un navegador real y el **SDK de Firebase real**: sin errores de consola, sin sesión pide entrar y el enlace lleva a `/entrar.html?volver=/aprende/`.
 - **Sin comprobar:** con una cuenta real (entrar, aceptar el aviso v3, jugar y guardar el avance), el audio en un celular real y en iPhone, y Safari.
 
+## O18 · Foco en la diapositiva (2026-11-23)
+
+Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de la diapositiva** (o al del juego), para que quien usa teclado o lector de pantalla sepa dónde está; al abrir una lección no se mueve el foco. El título lleva `tabindex="-1"` (recibe foco por programa, no entra en el orden del Tab) y sin contorno, porque no es un control. Comprobado en un navegador real. **Sin comprobar:** con un lector de pantalla real (VoiceOver, TalkBack).
+
