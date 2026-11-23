@@ -165,3 +165,7 @@ Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de 
 - **«Mi cuenta»** del encabezado va ahora a `/mi-acordia.html`.
 - **Pruebas:** el catálogo (solo id y título, sin contenido), el script que escribe el archivo y el cliente (`saveContinue`); y una corrida de navegador: abrir una lección anota «continuar», con sesión queda la marca y sin sesión no, y el enlace apunta a la página nueva.
 
+## O20 · Por ahora solo la ruta «Básico» (2026-11-24)
+
+**Decisión del usuario.** Se quitan de la portada de Aprende las tarjetas «Pronto» de Intermedio y Avanzado (C32 las anunciaba): hoy solo existe **Básico** y no se anuncia nada que no exista. `COMING` queda vacío y una prueba lo fija; para anunciar una ruta futura se agrega ahí. Los destinos por nivel del botón «Aprende teoría» siguen yendo al path básico.
+

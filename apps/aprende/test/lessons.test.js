@@ -76,7 +76,12 @@ describe("lecciones", () => {
     expect(text).not.toMatch(/@|https?:\/\//);
   });
 
-  it("las rutas anunciadas no chocan con las que existen", () => {
+  it("por ahora solo existe la ruta Básico y no se anuncia ninguna otra", () => {
+    expect(PATHS.map((p) => p.id)).toEqual(["basico"]);
+    expect(COMING).toEqual([]);
+  });
+
+  it("las rutas anunciadas (si las hay) no chocan con las que existen", () => {
     for (const c of COMING) {
       expect(c.id).toMatch(SLUG);
       expect(pathById(c.id)).toBeNull();
