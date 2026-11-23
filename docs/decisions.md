@@ -132,3 +132,11 @@ sin regla dura) y por qué casi nunca se ven E#, B#, Fb y Cb. Cuatro tipos de pr
 - **Pruebas:** lógica de avance, cliente de API (token solo en la cabecera, errores con su estado), forma y consistencia de las lecciones (3 a 6 diapositivas, el juego existe y su título coincide, identificadores válidos, notas MIDI en rango, figuras y tablas bien formadas) y el despliegue contra una API de Hosting falsa (10 casos). Además se probó en un navegador real, con la API y el SDK de Firebase simulados: sin sesión, inicio, ruta, lección, juego completo con un único `PUT`, avance visible al volver, flechas del teclado y celular sin desborde.
 - **Sin comprobar:** con cuentas reales en producción, el audio en un celular real (y en iPhone), el aspecto en Safari, y que `versions` y `populateFiles` se comporten en la API real como en la simulada (se verá en el primer despliegue).
 
+## O16 · Las URLs reservadas de Firebase no cuentan como archivos ajenos (2026-11-23)
+
+**Hallazgo del primer despliegue real de Aprende (O15).** El guardián de `deploy-hosting.mjs` se negó, sin publicar nada, porque la versión vigente traía 2 archivos que no eran de `/aprende/`: `/__/firebase/init.js` y similares. Son **URLs reservadas que Firebase Hosting agrega solo a cada versión** (de ahí salen `/__/auth/handler` y `/__/firebase/init.json`, de los que depende el login del sitio). No son archivos de nadie.
+
+- **Arreglo:** el guardián ignora todo lo que empiece con `/__/`. Una prueba lo cubre.
+- **Comprobación posterior (smoke):** el pipeline verifica que `/__/firebase/init.json` responda 200 y que `/__/auth/handler` traiga Firebase, además de `/privacidad.html` (que pasa por el rewrite a Cloud Run). Si una versión perdiera las URLs reservadas, el login se rompería y el pipeline lo diría.
+- **Lección:** el guardián hizo su trabajo (falló cerrado antes de tocar nada) y la suposición «versión sin archivos propios = 0 archivos» era falsa. Se descubrió porque el pipeline corre contra el Hosting real; con la API falsa no se veía.
+

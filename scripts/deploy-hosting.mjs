@@ -6,7 +6,7 @@
 //     lo fija infra/hosting.sh y este script no lo toca;
 //  2. crea una versión nueva con esa configuración y SOLO los archivos de Aprende;
 //  3. se niega si la versión vigente no tiene rewrites (el sitio quedaría sin rutas) o si trae archivos que no son de
-//     /aprende/ (se perderían);
+//     /aprende/ (se perderían), sin contar las URLs reservadas `/__/…` que Firebase agrega solo;
 //  4. sube solo lo que Hosting no tiene, finaliza y recién entonces lanza. Una versión que no finaliza no se lanza.
 //
 // Uso: node scripts/deploy-hosting.mjs <carpeta-dist> [--dry-run]
@@ -78,7 +78,9 @@ export async function publish({ dir, token, site, project = site, prefix = "/apr
   let pageToken = "";
   do {
     const page = await call("GET", `${live.name}/files?pageSize=1000${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ""}`);
-    for (const f of page.files ?? []) if (!f.path.startsWith(`${prefix}/`)) foreign.push(f.path);
+    // `/__/…` son las URLs reservadas de Firebase (init.js, init.json; de ahí sale `/__/auth/handler`): Hosting las agrega solo a
+    // cada versión y no son archivos nuestros ni ajenos.
+    for (const f of page.files ?? []) if (!f.path.startsWith(`${prefix}/`) && !f.path.startsWith("/__/")) foreign.push(f.path);
     pageToken = page.nextPageToken ?? "";
   } while (pageToken);
   if (foreign.length) throw new Error(`la versión vigente tiene ${foreign.length} archivo(s) que no son de ${prefix}/ (p. ej. ${foreign[0]}) y se perderían; no se publica nada`);

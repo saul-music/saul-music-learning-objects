@@ -91,6 +91,12 @@ describe("publicar Aprende en Hosting", () => {
     expect(fake.log.released).toBeNull();
   });
 
+  it("las URLs reservadas de Firebase (/__/…) no cuentan como archivos ajenos", async () => {
+    fake = await fakeHosting({ liveFiles: ["/__/firebase/init.js", "/__/firebase/init.json", "/aprende/index.html"] });
+    await expect(run()).resolves.toMatchObject({ dryRun: false });
+    expect(fake.log.released).toBe("sites/s/versions/v2");
+  });
+
   it("se niega si no hay versión vigente", async () => {
     fake = await fakeHosting({ noRelease: true });
     await expect(run()).rejects.toThrow(/hosting\.sh on/);

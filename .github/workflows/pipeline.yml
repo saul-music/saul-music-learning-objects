@@ -106,4 +106,7 @@ jobs:
         run: |
           curl -fsS https://saulapp-music.web.app/aprende/ | grep -q "Aprende"
           test "$(curl -s -o /dev/null -w '%{http_code}' https://saulapp-music.web.app/privacidad.html)" = "200"
+          # el login del sitio depende de las URLs reservadas de Firebase: si se perdieran, esto falla
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://saulapp-music.web.app/__/firebase/init.json)" = "200"
+          curl -fsS https://saulapp-music.web.app/__/auth/handler | grep -qi "firebase"
 
