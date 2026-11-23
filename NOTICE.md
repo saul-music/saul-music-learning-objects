@@ -12,6 +12,10 @@ Crédito sugerido:
   https://github.com/saul-music/saul-music-learning-objects, licencia CC BY 4.0.
   Indica si hiciste cambios.
 
+Queda fuera de esta licencia **`apps/aprende/`** (la aplicación Aprende y sus lecciones): © 2026 Acordia, todos los derechos
+reservados; se puede leer, pero no copiar ni redistribuir sin permiso (ver `apps/aprende/LICENSE`). Lo que esa app usa de este
+repositorio (los juegos de `packages/`, el kit y el tema) sigue siendo CC BY 4.0.
+
 Quedan fuera de esta licencia, con la suya propia (ver THIRD_PARTY_NOTICES.md):
 - las muestras de guitarra de apps/playground/public/samples/ (FluidR3_GM, CC BY 3.0);
 - las dependencias de npm (MIT) y las fuentes Marcellus y Work Sans (SIL OFL 1.1).

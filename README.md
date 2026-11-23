@@ -30,6 +30,8 @@ actividad y su evaluación, más sus metadatos (subconjunto de IEEE LOM) para ca
 - `packages/audio`: sampler sobre Web Audio con las muestras de guitarra de nailon (FluidR3_GM, CC BY 3.0) y
   efectos de sonido sintetizados.
 - `apps/playground`: la galería (Vite), publicada en GitHub Pages por el pipeline.
+- `apps/aprende`: Aprende, rutas de lecciones cortas que terminan en un juego (Vite). Se publica en Firebase Hosting
+  bajo `/aprende/` del sitio de Acordia por el pipeline, y exige cuenta. **Derechos reservados** (ver `apps/aprende/LICENSE`).
 
 ## Desarrollo
 
@@ -42,7 +44,8 @@ npm run build                        # apps/playground/dist (base relativa)
 
 ## Licencia
 
-**CC BY 4.0**, © 2026 Acordia (SAÚL música): puedes copiar, adaptar y usar estos juegos con cualquier fin,
+**CC BY 4.0**, © 2026 Acordia (SAÚL música), **excepto `apps/aprende/`** (la aplicación Aprende y sus lecciones: todos los
+derechos reservados, ver `apps/aprende/LICENSE`). Puedes copiar, adaptar y usar estos juegos con cualquier fin,
 **siempre que des crédito**. Crédito sugerido: «Nombre del juego», de Acordia (SAÚL música),
 https://github.com/saul-music/saul-music-learning-objects, CC BY 4.0. Las muestras de guitarra (CC BY 3.0), las
 dependencias y las fuentes conservan sus licencias: ver `NOTICE.md`, `LICENSE` y `THIRD_PARTY_NOTICES.md`.

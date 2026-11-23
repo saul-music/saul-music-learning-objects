@@ -1,0 +1,83 @@
+/* Marco de Aprende. Solo tokens --ac-* (estilo plano, sin sombras ni brillos). */
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+  background: var(--ac-bg); color: var(--ac-fg);
+  font-family: var(--ac-font-text); font-size: 1.0625rem; line-height: 1.6;
+}
+a { color: var(--ac-accent); }
+a:hover { color: var(--ac-accent-hover); }
+.ap-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ap-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 3rem); border-bottom: 1px solid var(--ac-line); }
+.ap-brand { font-family: var(--ac-font-display); font-size: 1.5rem; color: var(--ac-fg); text-decoration: none; white-space: nowrap; }
+.ap-brand span { font-family: var(--ac-font-text); font-size: 1rem; color: var(--ac-fg-muted); }
+.ap-nav { display: flex; align-items: center; gap: .6rem; flex-shrink: 0; }
+.ap-nav .lo-btn { white-space: nowrap; }
+@media (max-width: 480px) {
+  .ap-header { padding-inline: 1rem; }
+  .ap-brand { font-size: 1.25rem; }
+  .ap-brand span { display: none; }
+}
+.ap-main { flex: 1; width: 100%; max-width: 920px; margin: 0 auto; padding: 2rem clamp(1rem, 4vw, 3rem) 3rem; display: grid; gap: 1.5rem; align-content: start; }
+.ap-footer { padding: 1rem clamp(1rem, 4vw, 3rem); border-top: 1px solid var(--ac-line); color: var(--ac-fg-muted); font-size: .85rem; }
+.ap-loading { color: var(--ac-fg-muted); }
+
+.ap-back { justify-self: start; text-decoration: none; }
+.ap-back--btn { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; color: var(--ac-accent); }
+.ap-kicker { margin: 0; font-size: .85rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ac-second); }
+.ap-hero { display: grid; gap: .5rem; }
+.ap-hero h1, .ap-message h1 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); line-height: 1.05; }
+.ap-lead { margin: 0; max-width: 60ch; color: var(--ac-fg-muted); font-size: 1.15rem; }
+.ap-total { margin: .2rem 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-weight: 700; color: var(--ac-fg-muted); }
+.ap-meta { margin: 0; font-size: .9rem; color: var(--ac-fg-muted); }
+.ap-stars { display: inline-flex; gap: .15rem; }
+.ap-stars .lo-star { width: 1.4rem; height: 1.4rem; }
+.ap-badge:not(:empty) { display: inline-block; padding: .1rem .6rem; border-radius: 999px; background: var(--ac-fill); color: var(--ac-on-fill); font-size: .8rem; font-weight: 700; }
+
+/* Rutas */
+.ap-paths { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.ap-path__card { display: grid; gap: .5rem; align-content: start; height: 100%; padding: 1.2rem; border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); color: var(--ac-fg); text-decoration: none; }
+a.ap-path__card:hover { border-color: var(--ac-accent); }
+.ap-path__card h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: 1.7rem; }
+.ap-path__card p { margin: 0; color: var(--ac-fg-muted); }
+.ap-go { justify-self: start; margin-top: .4rem; }
+.ap-path.is-soon .ap-path__card { opacity: .6; border-style: dashed; }
+.ap-soon { justify-self: start; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; color: var(--ac-fg-muted); }
+
+/* Lecciones de una ruta */
+.ap-lessons { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.ap-lesson__card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); color: var(--ac-fg); text-decoration: none; }
+.ap-lesson__card:hover { border-color: var(--ac-accent); }
+.ap-lesson.is-next .ap-lesson__card { border-color: var(--ac-accent); }
+.ap-lesson__num { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--ac-tile); border: 2px solid var(--ac-line); font: 800 1.1rem var(--ac-font-game); }
+.ap-lesson.is-played .ap-lesson__num { background: var(--ac-win); border-color: var(--ac-win-deep); color: var(--ac-on-win); }
+.ap-lesson__body h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: 1.4rem; }
+.ap-lesson__body p { margin: .1rem 0 0; color: var(--ac-fg-muted); }
+.ap-lesson__state { display: grid; justify-items: end; gap: .2rem; }
+@media (max-width: 560px) {
+  .ap-lesson__card { grid-template-columns: auto 1fr; }
+  .ap-lesson__state { grid-column: 2; justify-items: start; display: flex; align-items: center; gap: .6rem; }
+}
+
+/* Lección: diapositivas */
+.ap-lesson-host { display: grid; gap: 1.2rem; }
+.ap-dots { list-style: none; margin: 0; padding: 0; display: flex; gap: .4rem; }
+.ap-dots li { flex: 1; height: .5rem; border-radius: 999px; background: var(--ac-line); }
+.ap-dots li.is-done { background: var(--ac-win); }
+.ap-dots li.is-here { background: var(--ac-accent); }
+.ap-slide { display: grid; gap: 1rem; padding: clamp(1.2rem, 4vw, 2rem); border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); animation: lo-rise .35s both; }
+.ap-slide h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.1; }
+.ap-slide p { margin: 0; max-width: 60ch; font-size: 1.15rem; }
+.ap-figure { max-width: 100%; overflow-x: auto; }
+.ap-listen { display: flex; flex-wrap: wrap; gap: .6rem; }
+.ap-table { border-collapse: collapse; min-width: 16rem; }
+.ap-table th, .ap-table td { padding: .45rem 1rem; text-align: left; border-bottom: 1px solid var(--ac-line); }
+.ap-table th { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ac-fg-muted); }
+.ap-nav-row { display: flex; justify-content: space-between; gap: 1rem; }
+.ap-save { margin: 0; min-height: 1.6rem; color: var(--ac-fg-muted); }
+
+/* Mensajes (entrar, aceptar, errores) */
+.ap-message { display: grid; gap: 1rem; justify-items: start; max-width: 36rem; }
+.ap-message p { margin: 0; color: var(--ac-fg-muted); font-size: 1.15rem; }
+
+@media (prefers-reduced-motion: reduce) { .ap-slide { animation: none; } }

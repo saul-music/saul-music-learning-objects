@@ -1,0 +1,231 @@
+// Aprende (C44): rutas de lecciones cortas que terminan en un juego. Solo con cuenta (C23, C24): la sesión y el consentimiento
+// los gestiona la página de entrada del sitio; aquí se lee la sesión y se guarda el avance por `/api/me/progress` (S103).
+import "@saul-music/theme/acordia.css";
+import "@saul-music/theme/base.css";
+import "@saul-music/lo-kit/kit.css";
+import "./aprende.css";
+import { createSampler, createSfx, GUITAR_NYLON_NOTES, installGestureUnlock, resumeAudio } from "@saul-music/audio";
+import { el, rich } from "@saul-music/lo-kit";
+import { ApiError, createApi } from "./api.js";
+import { createAuth } from "./auth.js";
+import { COMING, PATHS, lessonById, pathById } from "./lessons/index.js";
+import { OBJECTS } from "./objects.js";
+import { lessonMinutes, nextLesson, pathSummary, recommendedLesson, resultOf, withResult } from "./progress.js";
+import { messageView, slideCard, stars } from "./views.js";
+
+const app = document.getElementById("app");
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY ?? "";
+// La dirección de retorno va codificada: un `#` sin codificar sería el fragmento de esta URL y no parte de `volver`.
+const LOGIN = (hash = location.hash) => `/entrar.html?volver=${encodeURIComponent(`/aprende/${hash}`).replace(/%2F/g, "/")}`;
+
+const guitar = createSampler({ baseUrl: `${import.meta.env.BASE_URL}samples/guitar-nylon`, notes: GUITAR_NYLON_NOTES });
+const sfx = createSfx();
+installGestureUnlock(document);
+
+const state = { api: null, auth: null, progress: {} };
+let unmount = null;
+
+// --- tema
+const themeBtn = document.getElementById("ap-theme");
+themeBtn.addEventListener("click", () => {
+  const dark = document.documentElement.dataset.theme !== "light";
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  themeBtn.textContent = dark ? "Noche" : "Marfil";
+});
+
+const show = (...nodes) => app.replaceChildren(...nodes);
+const link = (href, cls, ...children) => el("a", { href, class: cls }, ...children);
+
+// --- inicio: las rutas
+function home() {
+  const total = PATHS.reduce((acc, p) => {
+    const s = pathSummary(state.progress, p);
+    return { stars: acc.stars + s.stars, max: acc.max + s.maxStars, points: acc.points + s.points };
+  }, { stars: 0, max: 0, points: 0 });
+  show(
+    el("header", { class: "ap-hero" },
+      el("p", { class: "ap-kicker" }, "Aprende"),
+      el("h1", {}, "Música, paso a paso"),
+      el("p", { class: "ap-lead" }, "Lecciones cortas que terminan en un juego. Elige una ruta y avanza a tu ritmo: tu avance queda guardado en tu cuenta."),
+      el("p", { class: "ap-total" }, stars(Math.round((total.stars / Math.max(1, total.max)) * 3)), `${total.stars}/${total.max} estrellas · ${total.points} puntos`)),
+    el("ul", { class: "ap-paths" },
+      PATHS.map((p) => {
+        const s = pathSummary(state.progress, p);
+        return el("li", { class: "ap-path" },
+          link(`#/${p.id}`, "ap-path__card",
+            el("h2", {}, p.title), el("p", {}, p.blurb),
+            el("p", { class: "ap-meta" }, `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas`),
+            el("span", { class: "lo-btn lo-btn--game ap-go" }, s.played ? "Continuar" : "Empezar")));
+      }),
+      COMING.map((c) => el("li", { class: "ap-path is-soon" },
+        el("div", { class: "ap-path__card" }, el("h2", {}, c.title), el("p", {}, c.blurb), el("span", { class: "ap-soon" }, "Pronto"))))));
+}
+
+// --- una ruta: el mapa de lecciones
+function pathView(path) {
+  const s = pathSummary(state.progress, path);
+  const next = recommendedLesson(state.progress, path);
+  show(
+    link("#/", "ap-back", "← Rutas"),
+    el("header", { class: "ap-hero" },
+      el("p", { class: "ap-kicker" }, "Ruta"),
+      el("h1", {}, path.title),
+      el("p", { class: "ap-lead" }, path.blurb),
+      el("p", { class: "ap-total" }, `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas · ${s.points} puntos`)),
+    el("ol", { class: "ap-lessons" },
+      path.lessons.map((l, i) => {
+        const best = resultOf(state.progress, path.id, l.id);
+        const oa = OBJECTS[l.oa];
+        return el("li", { class: `ap-lesson${best ? " is-played" : ""}${next?.id === l.id ? " is-next" : ""}` },
+          link(`#/${path.id}/${l.id}`, "ap-lesson__card",
+            el("span", { class: "ap-lesson__num", "aria-hidden": "true" }, String(i + 1)),
+            el("div", { class: "ap-lesson__body" },
+              el("h2", {}, rich(l.title)),
+              el("p", {}, rich(l.summary)),
+              el("p", { class: "ap-meta" }, `⏱ ${lessonMinutes(l, oa?.metadata.educational.typicalLearningTime)} min · ${l.slides.length} diapositivas y un juego`)),
+            el("div", { class: "ap-lesson__state" },
+              best ? [stars(best.stars), el("span", { class: "ap-meta" }, `${best.points} pts`)] : el("span", { class: "ap-meta" }, "Sin jugar"),
+              next?.id === l.id ? el("span", { class: "ap-badge" }, best ? "" : "Sigue aquí") : "")));
+      })));
+}
+
+// --- una lección: diapositivas y, al final, el juego
+function lessonView(path, lesson, startAt = 0) {
+  const oa = OBJECTS[lesson.oa];
+  const n = lesson.slides.length;
+  let at = Math.min(Math.max(0, startAt), n); // n = el juego
+  const eyebrow = `Lección ${path.lessons.indexOf(lesson) + 1} · ${lesson.title}`;
+  const host = el("div", { class: "ap-lesson-host" });
+  let gameUnmount = null;
+  show(link(`#/${path.id}`, "ap-back", `← ${path.title}`), host);
+
+  const dots = () => el("ol", { class: "ap-dots", "aria-label": "Progreso de la lección" },
+    Array.from({ length: n + 1 }, (_, i) => el("li", { class: `${i < at ? "is-done" : ""}${i === at ? " is-here" : ""}`, "aria-current": i === at ? "step" : null }, el("span", { class: "ap-sr" }, i === n ? "Juego" : `Diapositiva ${i + 1}`))));
+
+  const listen = ({ notes, gap }) => {
+    resumeAudio();
+    guitar.preload();
+    guitar.sequence(notes, { gap: gap ?? 0.45 });
+  };
+
+  function slides() {
+    gameUnmount?.();
+    gameUnmount = null;
+    const last = at === n - 1;
+    host.replaceChildren(
+      dots(),
+      slideCard(lesson.slides[at], { eyebrow, onListen: listen }),
+      el("div", { class: "ap-nav-row" },
+        el("button", { class: "lo-btn lo-btn--ghost", type: "button", disabled: at === 0 ? "" : null, onclick: () => go(at - 1) }, "← Anterior"),
+        el("button", { class: "lo-btn lo-btn--game", type: "button", onclick: () => go(at + 1) }, last ? "¡A jugar! ▶" : "Siguiente →")));
+  }
+
+  function game() {
+    const status = el("p", { class: "ap-save", role: "status" });
+    const stage = el("div");
+    host.replaceChildren(
+      dots(),
+      el("button", { class: "ap-back ap-back--btn", type: "button", onclick: () => go(n - 1) }, "← Volver a la lección"),
+      stage,
+      status);
+    const after = nextLesson(path, lesson.id);
+    stage.addEventListener("lo:result", async (event) => {
+      const { points, stars: got } = event.detail;
+      status.textContent = "Guardando tu avance…";
+      try {
+        const saved = await state.api.saveResult({ path: path.id, lesson: lesson.id, points, stars: got });
+        state.progress = withResult(state.progress, path.id, lesson.id, saved);
+        status.textContent = `Avance guardado: tu mejor resultado en esta lección es ${saved.points} puntos y ${saved.stars} de 3 estrellas.`;
+      } catch (error) {
+        status.textContent = error instanceof ApiError && error.status === 403
+          ? "Tu consentimiento no está al día: entra de nuevo desde Mi cuenta para guardar tu avance."
+          : "No pudimos guardar tu avance (revisa tu conexión). Este resultado no quedó guardado.";
+      }
+    });
+    gameUnmount?.();
+    gameUnmount = oa.module.mount(stage, {
+      sampler: guitar,
+      sfx,
+      metadata: oa.metadata,
+      cover: oa.cover,
+      next: after ? { title: after.title, go: () => { location.hash = `#/${path.id}/${after.id}`; } } : null,
+    });
+  }
+
+  function go(i) {
+    at = Math.min(Math.max(0, i), n);
+    scrollTo(0, 0);
+    at === n ? game() : slides();
+  }
+
+  const onKey = (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey || at === n || e.target instanceof HTMLButtonElement) return;
+    if (e.key === "ArrowRight") go(at + 1);
+    else if (e.key === "ArrowLeft") go(at - 1);
+  };
+  addEventListener("keydown", onKey);
+  // Al salir de la lección (otra ruta de la barra de direcciones) se apaga el juego y las flechas del teclado.
+  unmount = () => {
+    gameUnmount?.();
+    removeEventListener("keydown", onKey);
+  };
+  go(at);
+}
+
+function route() {
+  unmount?.();
+  unmount = null;
+  scrollTo(0, 0);
+  const [pathId, lessonId] = location.hash.replace(/^#\/?/, "").split("/");
+  if (!pathId) return home();
+  const path = pathById(pathId);
+  if (!path) return show(messageView({ title: "No encontramos esa ruta", text: "Puede que aún no exista.", action: { href: "#/", label: "Ver las rutas" } }));
+  if (!lessonId) return pathView(path);
+  const lesson = lessonById(path, lessonId);
+  if (!lesson) return pathView(path);
+  lessonView(path, lesson);
+}
+
+// --- arranque: sesión, consentimiento y avance
+async function boot() {
+  if (!apiKey) {
+    return show(messageView({ title: "Aprende no está disponible aquí", text: "Esta copia no tiene configurado el inicio de sesión. Entra desde la dirección oficial del sitio." }));
+  }
+  show(el("p", { class: "ap-loading" }, "Cargando…"));
+  try {
+    state.auth = await createAuth(apiKey);
+  } catch {
+    return show(messageView({ title: "No pudimos cargar tu sesión", text: "Revisa tu conexión e inténtalo de nuevo.", action: { label: "Reintentar", onclick: () => location.reload() } }));
+  }
+  if (!state.auth.user) {
+    return show(messageView({
+      title: "Entra para aprender",
+      text: "Aprende guarda tu avance en tu cuenta, así que necesitas una (es gratis y puedes eliminarla cuando quieras).",
+      action: { href: LOGIN(), label: "Entrar o crear mi cuenta" },
+    }));
+  }
+  document.getElementById("ap-account").hidden = false;
+  document.getElementById("ap-account").href = LOGIN("");
+  state.api = createApi({ getToken: state.auth.getToken });
+  try {
+    const consent = await state.api.consent();
+    if (consent.accepted !== consent.current) {
+      return show(messageView({
+        title: "Un paso más antes de empezar",
+        text: "Para guardar tu avance necesitamos que aceptes el aviso de privacidad vigente.",
+        action: { href: LOGIN(), label: "Revisar y aceptar" },
+      }));
+    }
+    state.progress = await state.api.progress();
+  } catch (error) {
+    return show(messageView({
+      title: "No pudimos consultar tu cuenta",
+      text: error instanceof ApiError && error.status === 404 ? "El sitio no reconoció tu sesión. Entra de nuevo." : "Inténtalo de nuevo en un minuto.",
+      action: error instanceof ApiError && error.status === 404 ? { href: LOGIN(), label: "Entrar de nuevo" } : { label: "Reintentar", onclick: () => location.reload() },
+    }));
+  }
+  addEventListener("hashchange", route);
+  route();
+}
+
+boot();

@@ -1,7 +1,8 @@
 name: pipeline
 
-# Un solo pipeline por repo (D45 de saul), secuencial: tests -> build -> deploy (GitHub Pages, solo en main).
-# Sin GCP ni secretos: el playground es estático. npm instala solo del registro público (.npmrc).
+# Un solo pipeline por repo (D45 de saul), secuencial: tests -> build -> deploy (GitHub Pages) -> publicar Aprende (Hosting).
+# El playground es estático y no usa GCP. Aprende (C44) se publica en Firebase Hosting con Workload Identity Federation
+# (sin llaves), solo desde main. npm instala solo del registro público (.npmrc).
 on:
   pull_request:
   push:
@@ -43,6 +44,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: build de Aprende (llave pública del navegador, de una variable)
+        run: npm run build -w @saul-music/aprende
+        env:
+          VITE_FIREBASE_API_KEY: ${{ vars.FIREBASE_SITE_API_KEY }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: aprende-dist
+          path: apps/aprende/dist
+          if-no-files-found: error
+          retention-days: 3
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: apps/playground/dist
@@ -62,3 +73,37 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  aprende:
+    name: publicar Aprende en Hosting
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [deploy]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: aprende-dist
+          path: apps/aprende/dist
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SA_APRENDE }}
+          token_format: access_token
+      - name: publicar en Hosting (conserva la configuración vigente)
+        run: node scripts/deploy-hosting.mjs apps/aprende/dist
+        env:
+          AUTH_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+      - name: comprobar (Aprende responde y el sitio sigue enrutando a Cloud Run)
+        run: |
+          curl -fsS https://saulapp-music.web.app/aprende/ | grep -q "Aprende"
+          test "$(curl -s -o /dev/null -w '%{http_code}' https://saulapp-music.web.app/privacidad.html)" = "200"
+
