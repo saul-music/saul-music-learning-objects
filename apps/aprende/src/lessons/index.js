@@ -3,11 +3,11 @@ import { BASICO } from "./basico.js";
 /** Las rutas con lecciones, en orden. */
 export const PATHS = [BASICO];
 
-/** Rutas anunciadas que aún no existen (C32): se muestran como «Pronto». */
-export const COMING = [
-  { id: "intermedio", title: "Intermedio", blurb: "Escalas, tonalidades y acordes de séptima." },
-  { id: "avanzado", title: "Avanzado", blurb: "Armonía, extensiones y voces." },
-];
+/**
+ * Rutas anunciadas que aún no existen: se muestran como «Pronto». Por ahora no se anuncia ninguna (solo existe
+ * «Básico», decisión del usuario, 2026-11-24); para anunciar una, se agrega aquí con `{ id, title, blurb }`.
+ */
+export const COMING = [];
 
 export const pathById = (id) => PATHS.find((p) => p.id === id) ?? null;
 export const lessonById = (path, id) => path?.lessons.find((l) => l.id === id) ?? null;
