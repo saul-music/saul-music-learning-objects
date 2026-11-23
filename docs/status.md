@@ -30,3 +30,5 @@
 ```
 2026-11-20 · arreglos de juego y juego nuevo · cuenta regresiva sin recorte y un sonido a la vez con «Reproduciendo…» (PR #5, O11); «Nombra bien la nota», ortografía enarmónica (O12) · pendiente: ojo y oído en celular real
 2026-11-20 · errores de la carpeta BUGS · alfabeto sin delatar la vecina, descripción y tarjetas de «Luz y sombra» (texto en línea, un sonido a la vez), `[object HTMLSpanElement]` en «Pulso», notas de acordes en tipografía musical en «Nombra bien la nota» (O13) · pendiente: celular real
+2026-11-23 · puntaje templado (O14) · hasta 10 por acierto y 100 por partida, la racha no multiplica, récords del navegador en clave nueva y evento `lo:result` para alojar los juegos en Aprende; 63 pruebas y build en verde · pendiente: verlo a ojo en celular real · O14, C44
+

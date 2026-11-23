@@ -1,14 +1,17 @@
 // Puntuación del juego (lógica pura, se prueba sola). Las preguntas y el orden no cambian:
-// la puntuación solo premia acertar, hacerlo rápido y encadenar aciertos.
+// la puntuación premia acertar y hacerlo rápido. Es templada (C44): hasta 10 puntos por acierto
+// y, con 10 preguntas, hasta 100 por partida. La racha no multiplica: solo se celebra.
 
 export const SCORING = {
-  base: 100, // puntos por acierto
-  speedMax: 100, // bono máximo por rapidez
+  base: 7, // puntos por acierto
+  speedMax: 3, // bono máximo por rapidez (base + bono = 10 como máximo)
   speedWindow: 12000, // ms: después de esto el bono es 0 (no se pierde la pregunta)
   fastMs: 3000, // responder antes de esto cuenta como «rápido»
+  perAnswer: 10, // lo máximo que vale una respuesta
+  perGame: 100, // lo máximo que vale una partida completa, sea cual sea el número de rondas
 };
 
-/** Multiplicador de combo según la racha (contando el acierto actual). */
+/** Nivel de celebración según la racha (contando el acierto actual). No cambia los puntos. */
 export function comboMultiplier(streak) {
   if (streak >= 8) return 4;
   if (streak >= 5) return 3;
@@ -22,10 +25,16 @@ export function speedBonus(ms) {
   return Math.round(SCORING.speedMax * f);
 }
 
-/** Puntos de una respuesta. `streak` es la racha incluida esta respuesta. */
-export function pointsFor({ ok, ms, streak }) {
+/** Puntos de una respuesta: la base más el bono por rapidez. Un error no da nada. */
+export function pointsFor({ ok, ms }) {
   if (!ok) return 0;
-  return (SCORING.base + speedBonus(ms)) * comboMultiplier(streak);
+  return SCORING.base + speedBonus(ms);
+}
+
+/** Puntos de una partida llevados a la escala de 0 a 100, aunque tenga otro número de rondas. */
+export function gamePoints(points, rounds) {
+  if (!rounds) return 0;
+  return Math.min(SCORING.perGame, Math.round((points * SCORING.perGame) / (rounds * SCORING.perAnswer)));
 }
 
 /** Estrellas por aciertos: 3 con 9 o 10 de 10, 2 con 7 u 8, 1 con 4 a 6. */
@@ -67,7 +76,7 @@ export function createRun(rounds, now = () => performance.now()) {
       this.results.push(ok);
       this.streak = ok ? this.streak + 1 : 0;
       this.maxStreak = Math.max(this.maxStreak, this.streak);
-      const gained = pointsFor({ ok, ms, streak: this.streak });
+      const gained = pointsFor({ ok, ms });
       this.points += gained;
       if (ok) this.score += 1;
       else if (missText) this.misses.push(missText);
@@ -80,7 +89,8 @@ export function createRun(rounds, now = () => performance.now()) {
 }
 
 // Récords por juego, guardados solo en este navegador (sin datos personales).
-const KEY = (id) => `acordia-lo:${id}`;
+// v2: la escala cambió de miles a cientos (C44); los récords viejos no sirven de comparación.
+const KEY = (id) => `acordia-lo:v2:${id}`;
 
 export function loadBest(id, storage = globalThis.localStorage) {
   try {
