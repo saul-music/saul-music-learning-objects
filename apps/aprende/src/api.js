@@ -27,6 +27,10 @@ export function createApi({ getToken, fetchImpl = (...a) => fetch(...a), base = 
     async progress() {
       return (await call("progress")).progress ?? {};
     },
+    /** Anota lo último que la persona vio: `{ lesson: { path, lesson } }` o `{ song }` (S104). */
+    async saveContinue(value) {
+      await call("continue", { method: "PUT", body: JSON.stringify(value) });
+    },
     /** Guarda el resultado de una lección y devuelve el mejor (`{ points, stars, plays }`). */
     async saveResult({ path, lesson, points, stars }) {
       const saved = await call("progress", { method: "PUT", body: JSON.stringify({ path, lesson, points, stars }) });
