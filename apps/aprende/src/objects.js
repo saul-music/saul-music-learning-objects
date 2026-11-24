@@ -35,10 +35,10 @@ import * as dimAug from "@saul-music/lo-dim-aug";
 import dimAugMeta from "@saul-music/lo-dim-aug/metadata.json";
 import dimAugCover from "@saul-music/lo-dim-aug/cover.svg";
 import "@saul-music/lo-dim-aug/style.css";
-import * as readChart from "@saul-music/lo-read-chart";
-import readChartMeta from "@saul-music/lo-read-chart/metadata.json";
-import readChartCover from "@saul-music/lo-read-chart/cover.svg";
-import "@saul-music/lo-read-chart/style.css";
+import * as readBars from "@saul-music/lo-read-bars";
+import readBarsMeta from "@saul-music/lo-read-bars/metadata.json";
+import readBarsCover from "@saul-music/lo-read-bars/cover.svg";
+import "@saul-music/lo-read-bars/style.css";
 import * as strumRhythm from "@saul-music/lo-strum-rhythm";
 import strumRhythmMeta from "@saul-music/lo-strum-rhythm/metadata.json";
 import strumRhythmCover from "@saul-music/lo-strum-rhythm/cover.svg";
@@ -56,6 +56,6 @@ export const OBJECTS = Object.fromEntries([
   entry(chordShapes, chordShapesMeta, chordShapesCover),
   entry(powerChords, powerChordsMeta, powerChordsCover),
   entry(dimAug, dimAugMeta, dimAugCover),
-  entry(readChart, readChartMeta, readChartCover),
+  entry(readBars, readBarsMeta, readBarsCover),
   entry(strumRhythm, strumRhythmMeta, strumRhythmCover),
 ]);

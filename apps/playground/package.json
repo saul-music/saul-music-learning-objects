@@ -20,7 +20,7 @@
     "@saul-music/lo-kit": "*",
     "@saul-music/lo-major-minor-ear": "*",
     "@saul-music/lo-power-chords": "*",
-    "@saul-music/lo-read-chart": "*",
+    "@saul-music/lo-read-bars": "*",
     "@saul-music/lo-strum-rhythm": "*",
     "@saul-music/theme": "*"
   },

@@ -2,6 +2,7 @@
   "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
   "id": "lo-read-chart",
   "version": "0.1.0",
+  "archived": "2026-11-24. Escribir partituras con la notación de Acordia es trabajo del equipo editorial; este juego queda para un onboarding privado. No está en Aprende ni en el playground (O23).",
   "general": {
     "title": "Lee la partitura",
     "subtitle": "Compases, %, _ , . y x2",

@@ -19,7 +19,7 @@ describe("lecciones", () => {
   it("el path básico tiene una lección por cada juego, en el orden del recorrido", () => {
     expect(pathById("basico").lessons.map((l) => l.oa)).toEqual([
       "lo-american-notation", "lo-intervals", "lo-enharmonic-spelling", "lo-fretboard-notes",
-      "lo-arpeggios", "lo-major-minor-ear", "lo-chord-shapes", "lo-power-chords", "lo-dim-aug", "lo-read-chart",
+      "lo-arpeggios", "lo-major-minor-ear", "lo-chord-shapes", "lo-power-chords", "lo-dim-aug", "lo-read-bars",
     ]);
   });
 
@@ -85,7 +85,7 @@ describe("lecciones", () => {
       expect(c.id).toMatch(SLUG);
       expect(pathById(c.id)).toBeNull();
     }
-    expect(lessonById(pathById("basico"), "lee-la-partitura")?.oa).toBe("lo-read-chart");
+    expect(lessonById(pathById("basico"), "lee-los-compases")?.oa).toBe("lo-read-bars");
     expect(lessonById(pathById("basico"), "pulso")).toBeNull();
     expect(lessonById(pathById("basico"), "no-existe")).toBeNull();
   });

@@ -1,0 +1,26 @@
+/* OA «Lee los compases»: la grilla de un tema como la ve quien toca. */
+.lo-rb { display: grid; gap: .6rem; justify-items: center; width: 100%; }
+.lo-rb__title { margin: 0; justify-self: start; font-weight: 700; font-size: 1.1rem; color: var(--ac-fg); }
+.lo-rb__times { margin-left: .5rem; font: 800 1rem var(--ac-font-game); color: var(--ac-second); }
+.lo-rb__grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); border-left: 2px solid var(--ac-line); width: 100%; max-width: 34rem; }
+.lo-rb__grid--one { grid-template-columns: minmax(0, 1fr); max-width: 15rem; }
+.lo-rb__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 20rem; }
+.lo-rb__bar { position: relative; display: flex; align-items: center; justify-content: center; min-height: 3.6rem; padding: .4rem .3rem; border: 2px solid var(--ac-line); border-left: 0; font-size: 1.35rem; color: var(--ac-fg); background: var(--ac-surface); }
+.lo-rb__bar.is-split { padding-inline: 0; }
+.lo-rb__bar.is-repeat { color: var(--ac-fg-muted); opacity: .75; }
+.lo-rb__bar.is-marked { outline: 3px dashed var(--ac-accent); outline-offset: -4px; }
+.lo-rb__bar.has-clef { padding-inline-start: 1.3rem; }
+.lo-rb__bar.is-split.has-clef { padding-inline-start: 1.3rem; }
+.lo-rb__clef { position: absolute; left: .25rem; top: 50%; transform: translateY(-50%); display: grid; line-height: .9; font: 800 .7rem var(--ac-font-game); color: var(--ac-fg-muted); text-align: center; }
+.lo-rb__part { flex-basis: 0; min-width: 0; display: flex; align-items: center; justify-content: center; padding-inline: .15rem; }
+.lo-rb__rest { display: inline-flex; color: var(--ac-fg-muted); opacity: .8; }
+.lo-rb__tie { display: inline-flex; align-items: center; gap: .1rem; color: var(--ac-fg-muted); opacity: .8; }
+.lo-rb__arc { flex: none; transform: translateY(-.35em); }
+.lo-rb__hint { margin: 0; font-size: .95rem; color: var(--ac-fg-muted); }
+/* Alternativas de oído: cada casilla es una figura; sin clave, en un tamaño que deja ver las partes. */
+.lo-tiles--figures .lo-rb { gap: 0; margin-top: 1rem; }
+.lo-tiles--figures .lo-rb__grid { border-left: 0; max-width: none; }
+.lo-tiles--figures .lo-rb__bar { border: 2px solid var(--ac-line); min-height: 3.2rem; width: 100%; font-size: 1.05rem; color: var(--ac-fg); }
+.lo-tiles--figures .lo-rb__bar .lo-note { color: inherit; font-size: 1.05rem; }
+.lo-tiles--figures .lo-rb__part + .lo-rb__part { border-left: 1px dashed var(--ac-line); }
+@media (max-width: 560px) { .lo-rb__bar { font-size: 1.1rem; min-height: 3.2rem; } }

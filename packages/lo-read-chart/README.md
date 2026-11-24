@@ -1,5 +1,7 @@
 # Lee la partitura
 
+> **Archivado (2026-11-24, O23).** Enseña a *escribir* con la notación de Acordia, que es trabajo del equipo editorial. Ya no está en Aprende ni en el playground; queda para un onboarding privado. Para lectores, ver `lo-read-bars`.
+
 ![Portada de «Lee la partitura»](cover.svg)
 
 **Compases, %, _ , . y x2** · teoría · 6 min
