@@ -67,6 +67,8 @@ const shapes = (...names) => names.map((n) => SHAPES[n]);
 export const INTERMEDIO = {
   id: "intermedio",
   title: "Intermedio",
+  level: 2,
+  chips: ["Para leer", "Juegos próximamente"],
   blurb: "Cejilla, séptimas, acordes con bajo, tensiones y tonalidad. Diez lecciones para leer: al terminar podrás tocar los temas de nivel medio de la Biblioteca en su versión Original.",
   lessons: [
     {

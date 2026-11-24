@@ -34,10 +34,24 @@ a:hover { color: var(--ac-accent-hover); }
 .ap-stars .lo-star { width: 1.4rem; height: 1.4rem; }
 .ap-badge:not(:empty) { display: inline-block; padding: .1rem .6rem; border-radius: 999px; background: var(--ac-fill); color: var(--ac-on-fill); font-size: .8rem; font-weight: 700; }
 
+/* Identidad de cada ruta: Básico en oro y nodos redondos; Intermedio en jade y nodos de esquinas redondeadas.
+   Solo tokens del tema. «--tone» es el color de la ruta; «--tone-fill» y «--on-tone», su relleno y el texto sobre él. */
+[data-path="basico"] { --tone: var(--ac-accent); --tone-fill: var(--ac-fill); --on-tone: var(--ac-on-fill); --node-radius: 50%; }
+[data-path="intermedio"] { --tone: var(--ac-second); --tone-fill: var(--ac-fill-2); --on-tone: var(--ac-on-fill-2); --node-radius: 28%; }
+.ap-level { display: inline-grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: var(--node-radius, 50%); background: var(--tone-fill, var(--ac-fill)); color: var(--on-tone, var(--ac-on-fill)); font: 800 1.3rem var(--ac-font-game); flex: none; }
+.ap-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.ap-chips li { font-size: .78rem; font-weight: 700; padding: .05rem .6rem; border: 2px solid var(--ac-line); border-radius: 999px; color: var(--tone, var(--ac-second)); }
+.ap-hero__level { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .8rem; }
+.ap-hero__level .ap-kicker { color: var(--tone); }
+
 /* Rutas */
 .ap-paths { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
-.ap-path__card { display: grid; gap: .5rem; align-content: start; height: 100%; padding: 1.2rem; border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); color: var(--ac-fg); text-decoration: none; }
-a.ap-path__card:hover { border-color: var(--ac-accent); }
+.ap-path__card { display: grid; gap: .6rem; align-content: start; height: 100%; padding: 1.3rem 1.3rem 1.4rem; border: 2px solid var(--ac-line); border-top: 8px solid var(--tone, var(--ac-line)); border-radius: 18px; background: var(--ac-surface); color: var(--ac-fg); text-decoration: none; transition: transform .15s, border-color .2s; }
+a.ap-path__card:hover, a.ap-path__card:focus-visible { transform: translateY(-4px); border-color: var(--tone, var(--ac-accent)); border-top-color: var(--tone, var(--ac-accent)); outline: none; color: var(--ac-fg); }
+.ap-path__top { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+.ap-path__tag { font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: .15rem .7rem; border-radius: 999px; border: 2px solid var(--tone, var(--ac-line)); color: var(--tone, var(--ac-fg-muted)); }
+.ap-path .ap-kicker { color: var(--tone, var(--ac-second)); }
+.ap-go { background: var(--tone-fill, var(--ac-fill)); color: var(--on-tone, var(--ac-on-fill)); }
 .ap-path__card h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: 1.7rem; }
 .ap-path__card p { margin: 0; color: var(--ac-fg-muted); }
 .ap-go { justify-self: start; margin-top: .4rem; }
@@ -47,28 +61,29 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 /* Camino de lecciones de una ruta (como el mapa de niveles del playground) */
 .ap-map { position: relative; list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 1.6rem; }
 .ap-map::before { content: ""; position: absolute; top: 2rem; bottom: 2rem; left: 50%; margin-left: -4px; border-left: 8px dotted var(--ac-line); }
+[data-path="intermedio"] .ap-map::before { border-left-style: dashed; border-left-width: 6px; margin-left: -3px; border-left-color: var(--ac-line); } /* Intermedio: línea de trazos en vez de puntos */
 .ap-step { position: relative; display: grid; grid-template-columns: 1fr 9rem 1fr; align-items: center; gap: 1rem; animation: lo-rise .6s calc(.1s + var(--i) * 70ms) cubic-bezier(.2, .8, .2, 1) both; }
 .ap-step.is-left { grid-template-areas: "card node ."; }
 .ap-step.is-right { grid-template-areas: ". node card"; }
 .ap-step__card { grid-area: card; position: relative; display: grid; gap: .35rem; padding: 1.1rem 1.25rem 1.2rem; text-decoration: none; color: var(--ac-fg); background: var(--ac-surface); border: 2px solid var(--ac-line); border-bottom-width: 7px; border-radius: 18px; transition: transform .15s, border-color .2s; }
-.ap-step__card:hover, .ap-step__card:focus-visible { transform: translateY(-4px); border-color: var(--ac-accent); color: var(--ac-fg); outline: none; }
+.ap-step__card:hover, .ap-step__card:focus-visible { transform: translateY(-4px); border-color: var(--tone, var(--ac-accent)); color: var(--ac-fg); outline: none; }
 .ap-step.is-left .ap-step__card { text-align: right; justify-items: end; }
-.ap-step__node { grid-area: node; position: relative; justify-self: center; width: 8.5rem; height: 8.5rem; transition: transform .2s; }
+.ap-step__node { text-decoration: none; grid-area: node; position: relative; justify-self: center; width: 8.5rem; height: 8.5rem; transition: transform .2s; }
 .ap-step:hover .ap-step__node, .ap-step:focus-within .ap-step__node { transform: scale(1.06) rotate(-3deg); }
-.ap-step__disc { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; border: 5px solid var(--ac-line); border-bottom-width: 10px; background: var(--ac-noche); transition: border-color .2s; }
+.ap-step__disc { display: block; width: 100%; height: 100%; border-radius: var(--node-radius, 50%); overflow: hidden; border: 5px solid var(--ac-line); border-bottom-width: 10px; background: var(--ac-noche); transition: border-color .2s; }
 .ap-step__disc img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ap-step__num { position: absolute; bottom: -.2rem; right: -.2rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%; background: var(--ac-fill); color: var(--ac-on-fill); font: 800 1.15rem var(--ac-font-game); border: 3px solid var(--ac-bg); }
+.ap-step__num { position: absolute; bottom: -.2rem; right: -.2rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: var(--node-radius, 50%); background: var(--tone-fill, var(--ac-fill)); color: var(--on-tone, var(--ac-on-fill)); font: 800 1.15rem var(--ac-font-game); border: 3px solid var(--ac-bg); }
 .ap-step.is-played .ap-step__disc { border-color: var(--ac-win); }
 .ap-step.is-played .ap-step__num { background: var(--ac-win); color: var(--ac-on-win); }
-.ap-step.is-next .ap-step__disc { border-color: var(--ac-accent); }
+.ap-step.is-next .ap-step__disc { border-color: var(--tone, var(--ac-accent)); }
 .ap-step.is-next .ap-step__node { animation: lo-breathe 1.8s ease-in-out infinite; }
-.ap-step__kicker { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ac-second); }
+.ap-step__kicker { margin: 0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--tone, var(--ac-second)); }
 .ap-step__card h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: 1.75rem; line-height: 1.1; }
 .ap-step__desc { margin: 0; color: var(--ac-fg-muted); }
 .ap-step__meta { margin: .2rem 0 0; display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: .9rem; color: var(--ac-fg-muted); }
 .ap-step.is-left .ap-step__meta { justify-content: flex-end; }
 .ap-step__badge:empty { display: none; }
-.ap-step__badge { position: absolute; top: -.85rem; padding: .2rem .8rem; border-radius: 999px; background: var(--ac-fill); color: var(--ac-on-fill); font: 800 .85rem var(--ac-font-game); letter-spacing: .06em; text-transform: uppercase; animation: lo-wobble 1.6s ease-in-out infinite; }
+.ap-step__badge { position: absolute; top: -.85rem; padding: .2rem .8rem; border-radius: 999px; background: var(--tone-fill, var(--ac-fill)); color: var(--on-tone, var(--ac-on-fill)); font: 800 .85rem var(--ac-font-game); letter-spacing: .06em; text-transform: uppercase; animation: lo-wobble 1.6s ease-in-out infinite; }
 .ap-step.is-left .ap-step__badge { right: 1rem; }
 .ap-step.is-right .ap-step__badge { left: 1rem; }
 @media (max-width: 760px) {
@@ -88,7 +103,7 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 .ap-dots { list-style: none; margin: 0; padding: 0; display: flex; gap: .4rem; }
 .ap-dots li { flex: 1; height: .5rem; border-radius: 999px; background: var(--ac-line); }
 .ap-dots li.is-done { background: var(--ac-win); }
-.ap-dots li.is-here { background: var(--ac-accent); }
+.ap-dots li.is-here { background: var(--tone, var(--ac-accent)); }
 .ap-slide { display: grid; gap: 1rem; padding: clamp(1.2rem, 4vw, 2rem); border: 2px solid var(--ac-line); border-radius: var(--ac-radius, 14px); background: var(--ac-surface); animation: lo-rise .35s both; }
 .ap-slide h2 { margin: 0; font-family: var(--ac-font-display); font-weight: 400; font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.1; }
 .ap-slide p { margin: 0; max-width: 60ch; font-size: 1.15rem; }
@@ -109,7 +124,7 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 
 /* Lecciones de solo lectura (Intermedio): el disco lleva una insignia en lugar de la portada del juego */
 .ap-step__disc.is-badge { display: grid; place-items: center; }
-.ap-step__badgeText { text-decoration: none; font-family: var(--ac-font-display); font-size: 2.1rem; line-height: 1; color: var(--ac-accent); text-align: center; padding: 0 .4rem; overflow-wrap: anywhere; }
+.ap-step__badgeText { text-decoration: none; font-family: var(--ac-font-display); font-size: 2.1rem; line-height: 1; color: var(--tone, var(--ac-accent)); text-align: center; padding: 0 .4rem; overflow-wrap: anywhere; }
 @media (max-width: 760px) { .ap-step__badgeText { font-size: 1.5rem; } }
 
 /* Diagramas de acorde de las diapositivas */
@@ -118,3 +133,8 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 .ap-chord .lo-cs__box { width: 7.2rem; height: auto; }
 .ap-chord figcaption { display: grid; justify-items: center; text-align: center; font-size: 1.25rem; }
 .ap-chord figcaption small { font-size: .78rem; color: var(--ac-fg-muted); max-width: 8rem; }
+
+/* Dentro de una lección, el tono de la ruta marca la tarjeta */
+.ap-lesson-host .ap-slide { border-top: 6px solid var(--tone, var(--ac-line)); }
+.ap-lesson-host .ap-slide .ap-kicker { color: var(--tone, var(--ac-second)); }
+[data-path="intermedio"] .ap-dots li.is-done { background: var(--tone); opacity: .5; } /* en Intermedio «hecho» y «aquí» eran del mismo jade */
