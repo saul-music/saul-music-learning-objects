@@ -1,0 +1,17 @@
+{
+  "name": "@saul-music/lo-sevenths",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./metadata.json": "./metadata.json",
+    "./cover.svg": "./cover.svg"
+  },
+  "dependencies": {
+    "@saul-music/chord-core": "*",
+    "@saul-music/lo-kit": "*",
+    "tonal": "^6.7.1"
+  },
+  "license": "CC-BY-4.0"
+}

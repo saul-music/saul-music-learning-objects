@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-ninths",
+  "version": "0.1.0",
+  "general": {
+    "title": "Novenas y 6/9",
+    "subtitle": "La 9ª sobre las séptimas",
+    "description": "Aprende cómo se arman 9, m9, maj9 y 6/9: qué nota suma la 9ª, cuándo hay 7ª y cuándo no, y cómo suenan.",
+    "language": "es",
+    "keywords": [
+      "novena",
+      "9",
+      "m9",
+      "maj9",
+      "6/9"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-sus-add9",
+        "description": "sus y add9: la 9ª sin 7ª que ahora sumas a una séptima."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Armar y reconocer 9, m9, maj9 y 6/9, y decir cuál es la 9ª de un acorde.",
+    "content": [
+      {
+        "title": "La 9ª",
+        "text": "Es la 2ª una octava arriba (14 semitonos sobre la raíz)."
+      },
+      {
+        "title": "Cuatro familias",
+        "text": "9 = 7 + 9ª, m9 = m7 + 9ª, maj9 = maj7 + 9ª; el 6/9 es un 6 con 9ª, sin 7ª."
+      },
+      {
+        "title": "Cómo se escribe",
+        "text": "D6/9, D(6/9) y D69 son lo mismo."
+      },
+      {
+        "title": "Sin la 9ª",
+        "text": "Un 9 sin la 9ª es un 7: suena parecido, menos lleno."
+      }
+    ],
+    "activity": "Diez preguntas: las notas de cada acorde, qué acorde forman unas notas, qué nota es la 9ª, si lleva 7ª y de oído.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

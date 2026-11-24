@@ -1,7 +1,8 @@
 import { BASICO } from "./basico.js";
+import { INTERMEDIO } from "./intermedio.js";
 
 /** Las rutas con lecciones, en orden. */
-export const PATHS = [BASICO];
+export const PATHS = [BASICO, INTERMEDIO];
 
 /**
  * Rutas anunciadas que aún no existen: se muestran como «Pronto». Por ahora no se anuncia ninguna (solo existe

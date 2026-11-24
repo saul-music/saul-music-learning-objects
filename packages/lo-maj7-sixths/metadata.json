@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-maj7-sixths",
+  "version": "0.1.0",
+  "general": {
+    "title": "maj7 y acordes de 6",
+    "subtitle": "Dos colores luminosos",
+    "description": "Aprende la 7ª mayor y la 6ª: en qué se diferencian del 7, qué notas llevan maj7, 6 y m6 y por qué C6 suena como Am7.",
+    "language": "es",
+    "keywords": [
+      "maj7",
+      "6",
+      "m6",
+      "séptima mayor",
+      "sexta"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-sevenths",
+        "description": "Séptimas: la 7ª menor que ahora vas a comparar con la mayor."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Distinguir maj7, 7, m7, 6 y m6 por sus notas y por su sonido.",
+    "content": [
+      {
+        "title": "7 o maj7",
+        "text": "Solo cambia una nota, por medio tono: Bb en el 7, B en el maj7."
+      },
+      {
+        "title": "Los de 6",
+        "text": "Un acorde de 6 suma la 6ª al mayor (C6) o al menor (Am6)."
+      },
+      {
+        "title": "Mismas notas",
+        "text": "C6 y Am7 tienen las mismas notas; cambia cuál es la más grave."
+      },
+      {
+        "title": "Resumen",
+        "text": "maj7, 7, m7, 6 y m6 son cinco recetas sobre la misma triada."
+      }
+    ],
+    "activity": "Diez preguntas: las notas de cada acorde, qué acorde forman unas notas, qué nota cambia entre dos acordes, qué acorde tiene las mismas notas y de oído.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

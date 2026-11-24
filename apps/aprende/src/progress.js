@@ -15,21 +15,22 @@ export function withResult(progress, pathId, lessonId, saved) {
 
 /** Resumen de una ruta: lecciones jugadas, estrellas y puntos (los mejores de cada lección). */
 export function pathSummary(progress, path) {
-  const results = path.lessons.map((l) => resultOf(progress, path.id, l.id));
+  const games = path.lessons.filter((l) => l.oa); // las lecciones de solo lectura no dan puntos ni estrellas
+  const results = games.map((l) => resultOf(progress, path.id, l.id));
   const played = results.filter(Boolean);
   return {
     played: played.length,
-    total: path.lessons.length,
+    total: games.length,
     stars: played.reduce((n, r) => n + r.stars, 0),
-    maxStars: path.lessons.length * MAX_STARS,
+    maxStars: games.length * MAX_STARS,
     points: played.reduce((n, r) => n + r.points, 0),
-    complete: played.length === path.lessons.length,
+    complete: played.length === games.length,
   };
 }
 
 /** La lección recomendada: la primera que aún no se jugó. `null` si ya se jugaron todas. */
 export function recommendedLesson(progress, path) {
-  return path.lessons.find((l) => !resultOf(progress, path.id, l.id)) ?? null;
+  return path.lessons.find((l) => l.oa && !resultOf(progress, path.id, l.id)) ?? null;
 }
 
 /** La lección que sigue a otra en la ruta, o `null` si es la última. */

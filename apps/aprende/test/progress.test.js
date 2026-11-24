@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { lessonMinutes, nextLesson, pathSummary, recommendedLesson, resultOf, withResult } from "../src/progress.js";
 
-const path = { id: "basico", lessons: [{ id: "a", readMinutes: 2 }, { id: "b", readMinutes: 3 }, { id: "c", readMinutes: 1 }] };
+const path = { id: "basico", lessons: [{ id: "a", oa: "x", readMinutes: 2 }, { id: "b", oa: "x", readMinutes: 3 }, { id: "c", oa: "x", readMinutes: 1 }] };
 const r = (points, stars, plays = 1) => ({ points, stars, plays });
 
 describe("avance", () => {
@@ -46,5 +46,13 @@ describe("avance", () => {
     expect(lessonMinutes(path.lessons[0], "PT4M")).toBe(6);
     expect(lessonMinutes(path.lessons[0], undefined)).toBe(2);
     expect(lessonMinutes(path.lessons[0], "algo raro")).toBe(2);
+  });
+
+  it("las lecciones de solo lectura no cuentan como jugables ni se recomiendan", () => {
+    const mixed = { id: "m", lessons: [{ id: "a", readMinutes: 2 }, { id: "b", oa: "x", readMinutes: 3 }] };
+    expect(pathSummary({}, mixed)).toMatchObject({ total: 1, maxStars: 3 });
+    expect(recommendedLesson({}, mixed).id).toBe("b");
+    expect(recommendedLesson({ m: { b: r(1, 1) } }, mixed)).toBeNull();
+    expect(pathSummary({}, { id: "r", lessons: [{ id: "a", readMinutes: 2 }] })).toMatchObject({ total: 0, complete: true });
   });
 });

@@ -11,6 +11,8 @@ const C_MAJOR = [60, 62, 64, 65, 67, 69, 71];
 export const BASICO = {
   id: "basico",
   title: "Básico",
+  level: 1,
+  chips: ["Con juegos"],
   blurb: "Las notas, los intervalos, el mástil, los acordes y la lectura de partituras. Diez lecciones cortas; cada una termina en un juego. Al final podrás leer los temas básicos de la Biblioteca.",
   lessons: [
     {

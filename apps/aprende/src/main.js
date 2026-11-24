@@ -5,9 +5,12 @@ import "@saul-music/theme/base.css";
 import "@saul-music/lo-kit/kit.css";
 import "./aprende.css";
 import { createSampler, createSfx, GUITAR_NYLON_NOTES, installGestureUnlock, resumeAudio } from "@saul-music/audio";
+import { shapeMidis } from "@saul-music/lo-chord-shapes";
 import { el, rich } from "@saul-music/lo-kit";
 import { ApiError, createApi } from "./api.js";
 import { createAuth } from "./auth.js";
+import { backdrop } from "./backdrop.js";
+import { previewApi } from "./preview.js";
 import { COMING, PATHS, lessonById, pathById } from "./lessons/index.js";
 import { OBJECTS } from "./objects.js";
 import { lessonMinutes, nextLesson, pathSummary, recommendedLesson, resultOf, withResult } from "./progress.js";
@@ -46,15 +49,26 @@ function home() {
     el("header", { class: "ap-hero" },
       el("p", { class: "ap-kicker" }, "Aprende"),
       el("h1", {}, "Música, paso a paso"),
-      el("p", { class: "ap-lead" }, "Lecciones cortas que terminan en un juego. Elige una ruta y avanza a tu ritmo: tu avance queda guardado en tu cuenta."),
+      el("p", { class: "ap-lead" }, "Lecciones cortas para aprender música paso a paso. Elige un nivel y avanza a tu ritmo: tu avance queda guardado en tu cuenta."),
       el("p", { class: "ap-total" }, stars(Math.round((total.stars / Math.max(1, total.max)) * 3)), `${total.stars}/${total.max} estrellas · ${total.points} puntos`)),
     el("ul", { class: "ap-paths" },
       PATHS.map((p) => {
         const s = pathSummary(state.progress, p);
-        return el("li", { class: "ap-path" },
+        const hasGames = s.total > 0;
+        const basicDone = pathSummary(state.progress, PATHS[0]).complete;
+        // Una etiqueta que orienta: por dónde empezar, qué sigue.
+        const tag = p.level === 1
+          ? (s.complete ? "Completado" : s.played ? "En curso" : "Empieza aquí")
+          : (basicDone ? "Siguiente nivel" : "Después del Básico");
+        return el("li", { class: "ap-path", "data-path": p.id },
           link(`#/${p.id}`, "ap-path__card",
-            el("h2", {}, p.title), el("p", {}, p.blurb),
-            el("p", { class: "ap-meta" }, `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas`),
+            el("div", { class: "ap-path__top" },
+              el("span", { class: "ap-level", "aria-hidden": "true" }, String(p.level)),
+              el("span", { class: "ap-path__tag" }, tag)),
+            el("p", { class: "ap-kicker" }, `Nivel ${p.level}`),
+            el("h2", {}, p.title), el("p", { class: "ap-path__blurb" }, p.blurb),
+            el("ul", { class: "ap-chips" }, [`${p.lessons.length} lecciones`, ...(p.chips ?? [])].map((c) => el("li", {}, c))),
+            el("p", { class: "ap-meta" }, hasGames ? `${s.played}/${s.total} lecciones jugadas · ${s.stars}/${s.maxStars} estrellas` : "Sin puntos todavía: por ahora son lecciones para leer"),
             el("span", { class: "lo-btn lo-btn--game ap-go" }, s.played ? "Continuar" : "Empezar")));
       }),
       COMING.map((c) => el("li", { class: "ap-path is-soon" },
@@ -68,36 +82,42 @@ function pathView(path) {
   show(
     link("#/", "ap-back", "← Rutas"),
     el("header", { class: "ap-hero" },
-      el("p", { class: "ap-kicker" }, "Ruta"),
+      el("div", { class: "ap-hero__level" },
+        el("span", { class: "ap-level", "aria-hidden": "true" }, String(path.level)),
+        el("p", { class: "ap-kicker" }, `Nivel ${path.level}`),
+        el("ul", { class: "ap-chips" }, (path.chips ?? []).map((c) => el("li", {}, c)))),
       el("h1", {}, path.title),
       el("p", { class: "ap-lead" }, path.blurb),
-      el("p", { class: "ap-total" }, `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas · ${s.points} puntos`)),
+      el("p", { class: "ap-total" }, s.total ? `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas · ${s.points} puntos` : `${path.lessons.length} lecciones de lectura`)),
+    el("div", { class: "ap-stage" },
+      backdrop(path.id),
     el("ol", { class: "ap-map" },
       path.lessons.map((l, i) => {
         const best = resultOf(state.progress, path.id, l.id);
         const oa = OBJECTS[l.oa];
         const href = `#/${path.id}/${l.id}`;
-        const isNext = next?.id === l.id;
+        const isNext = Boolean(oa) && next?.id === l.id;
         return el("li", { class: `ap-step ${i % 2 ? "is-right" : "is-left"}${best ? " is-played" : ""}${isNext ? " is-next" : ""}`, style: `--i:${i}` },
           link(href, "ap-step__card",
             el("p", { class: "ap-step__kicker" }, `Lección ${i + 1}`),
             el("h2", {}, rich(l.title)),
             el("p", { class: "ap-step__desc" }, rich(l.summary)),
-            el("p", { class: "ap-step__meta" }, best ? [stars(best.stars), `${best.points} pts`] : "Sin jugar"),
-            el("p", { class: "ap-meta" }, `⏱ ${lessonMinutes(l, oa?.metadata.educational.typicalLearningTime)} min · ${l.slides.length} diapositivas y un juego`),
+            oa ? el("p", { class: "ap-step__meta" }, best ? [stars(best.stars), `${best.points} pts`] : "Sin jugar") : "",
+            el("p", { class: "ap-meta" }, `⏱ ${lessonMinutes(l, oa?.metadata.educational.typicalLearningTime)} min · ${l.slides.length} diapositivas${oa ? " y un juego" : ""}`),
             isNext ? el("span", { class: "ap-step__badge" }, best ? "" : "¡Sigue aquí!") : ""),
           el("a", { href, class: "ap-step__node", tabindex: "-1", "aria-hidden": "true" },
-            el("span", { class: "ap-step__disc" }, oa?.cover ? el("img", { src: oa.cover, alt: "", loading: "lazy" }) : ""),
+            el("span", { class: `ap-step__disc${oa ? "" : " is-badge"}` }, oa?.cover ? el("img", { src: oa.cover, alt: "", loading: "lazy" }) : el("span", { class: "ap-step__badgeText" }, l.badge ?? "♪")),
             el("span", { class: "ap-step__num" }, String(i + 1))),
           el("span", { class: "ap-step__spacer" }));
-      })));
+      }))));
 }
 
 // --- una lección: diapositivas y, al final, el juego
 function lessonView(path, lesson, startAt = 0) {
   const oa = OBJECTS[lesson.oa];
   const n = lesson.slides.length;
-  let at = Math.min(Math.max(0, startAt), n); // n = el juego
+  const steps = oa ? n + 1 : n; // con juego, el último paso es el juego; sin él, la lección termina en la última diapositiva
+  let at = Math.min(Math.max(0, startAt), steps - 1);
   const eyebrow = `Lección ${path.lessons.indexOf(lesson) + 1} · ${lesson.title}`;
   // «Continuar» (C30): al abrir una lección se anota; si falla, no importa (no hay que molestar a nadie por esto).
   state.api?.saveContinue({ lesson: { path: path.id, lesson: lesson.id } }).catch(() => {});
@@ -106,12 +126,13 @@ function lessonView(path, lesson, startAt = 0) {
   show(link(`#/${path.id}`, "ap-back", `← ${path.title}`), host);
 
   const dots = () => el("ol", { class: "ap-dots", "aria-label": "Progreso de la lección" },
-    Array.from({ length: n + 1 }, (_, i) => el("li", { class: `${i < at ? "is-done" : ""}${i === at ? " is-here" : ""}`, "aria-current": i === at ? "step" : null }, el("span", { class: "ap-sr" }, i === n ? "Juego" : `Diapositiva ${i + 1}`))));
+    Array.from({ length: steps }, (_, i) => el("li", { class: `${i < at ? "is-done" : ""}${i === at ? " is-here" : ""}`, "aria-current": i === at ? "step" : null }, el("span", { class: "ap-sr" }, i === n ? "Juego" : `Diapositiva ${i + 1}`))));
 
-  const listen = ({ notes, gap }) => {
+  const listen = ({ notes, shapes, gap }) => {
     resumeAudio();
     guitar.preload();
-    guitar.sequence(notes, { gap: gap ?? 0.45 });
+    if (shapes) shapes.forEach((shape, i) => guitar.chord(shapeMidis(shape), { delay: i * (gap ?? 1.4), strum: 0.045 }));
+    else guitar.sequence(notes, { gap: gap ?? 0.45 });
   };
 
   function slides() {
@@ -123,7 +144,7 @@ function lessonView(path, lesson, startAt = 0) {
       slideCard(lesson.slides[at], { eyebrow, onListen: listen }),
       el("div", { class: "ap-nav-row" },
         el("button", { class: "lo-btn lo-btn--ghost", type: "button", disabled: at === 0 ? "" : null, onclick: () => go(at - 1) }, "← Anterior"),
-        el("button", { class: "lo-btn lo-btn--game", type: "button", onclick: () => go(at + 1) }, last ? "¡A jugar! ▶" : "Siguiente →")));
+        el("button", { class: "lo-btn lo-btn--game", type: "button", onclick: () => (last && !oa ? finish() : go(at + 1)) }, last ? (oa ? "¡A jugar! ▶" : "Terminar lección ✓") : "Siguiente →")));
   }
 
   function game() {
@@ -158,18 +179,24 @@ function lessonView(path, lesson, startAt = 0) {
     });
   }
 
+  // Lección de solo lectura: al terminar pasa a la siguiente (o vuelve al camino si era la última).
+  function finish() {
+    const after = nextLesson(path, lesson.id);
+    location.hash = after ? `#/${path.id}/${after.id}` : `#/${path.id}`;
+  }
+
   function go(i, { focus = true } = {}) {
-    at = Math.min(Math.max(0, i), n);
+    at = Math.min(Math.max(0, i), steps - 1);
     scrollTo(0, 0);
-    at === n ? game() : slides();
+    oa && at === n ? game() : slides();
     // El foco pasa al título de la diapositiva (o al del juego) para quien navega con teclado o lector de pantalla;
     // al abrir la lección no, para no quitarle el foco al enlace con el que llegó.
     if (focus) host.querySelector(".ap-slide h2, .lo-intro h2")?.focus({ preventScroll: true });
   }
 
   const onKey = (e) => {
-    if (e.altKey || e.ctrlKey || e.metaKey || at === n || e.target instanceof HTMLButtonElement) return;
-    if (e.key === "ArrowRight") go(at + 1);
+    if (e.altKey || e.ctrlKey || e.metaKey || (oa && at === n) || e.target instanceof HTMLButtonElement) return;
+    if (e.key === "ArrowRight") go(Math.min(at + 1, steps - 1));
     else if (e.key === "ArrowLeft") go(at - 1);
   };
   addEventListener("keydown", onKey);
@@ -186,8 +213,11 @@ function route() {
   unmount = null;
   scrollTo(0, 0);
   const [pathId, lessonId] = location.hash.replace(/^#\/?/, "").split("/");
-  if (!pathId) return home();
   const path = pathById(pathId);
+  // El color y la forma de cada ruta salen de este atributo (ver aprende.css).
+  if (path) app.dataset.path = path.id;
+  else delete app.dataset.path;
+  if (!pathId) return home();
   if (!path) return show(messageView({ title: "No encontramos esa ruta", text: "Puede que aún no exista.", action: { href: "#/", label: "Ver las rutas" } }));
   if (!lessonId) return pathView(path);
   const lesson = lessonById(path, lessonId);
@@ -197,6 +227,13 @@ function route() {
 
 // --- arranque: sesión, consentimiento y avance
 async function boot() {
+  // Vista previa local de las lecciones (`npm run dev:preview`): sin sesión ni servidor. Solo existe si la variable se define al
+  // construir; el pipeline no la define, así que en producción este bloque no queda en el paquete.
+  if (import.meta.env.VITE_LOCAL_PREVIEW) {
+    state.api = previewApi();
+    addEventListener("hashchange", route);
+    return route();
+  }
   if (!apiKey) {
     return show(messageView({ title: "Aprende no está disponible aquí", text: "Esta copia no tiene configurado el inicio de sesión. Entra desde la dirección oficial del sitio." }));
   }
