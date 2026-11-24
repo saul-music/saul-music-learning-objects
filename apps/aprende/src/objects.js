@@ -27,6 +27,18 @@ import * as chordShapes from "@saul-music/lo-chord-shapes";
 import chordShapesMeta from "@saul-music/lo-chord-shapes/metadata.json";
 import chordShapesCover from "@saul-music/lo-chord-shapes/cover.svg";
 import "@saul-music/lo-chord-shapes/style.css";
+import * as powerChords from "@saul-music/lo-power-chords";
+import powerChordsMeta from "@saul-music/lo-power-chords/metadata.json";
+import powerChordsCover from "@saul-music/lo-power-chords/cover.svg";
+import "@saul-music/lo-power-chords/style.css";
+import * as dimAug from "@saul-music/lo-dim-aug";
+import dimAugMeta from "@saul-music/lo-dim-aug/metadata.json";
+import dimAugCover from "@saul-music/lo-dim-aug/cover.svg";
+import "@saul-music/lo-dim-aug/style.css";
+import * as readChart from "@saul-music/lo-read-chart";
+import readChartMeta from "@saul-music/lo-read-chart/metadata.json";
+import readChartCover from "@saul-music/lo-read-chart/cover.svg";
+import "@saul-music/lo-read-chart/style.css";
 import * as strumRhythm from "@saul-music/lo-strum-rhythm";
 import strumRhythmMeta from "@saul-music/lo-strum-rhythm/metadata.json";
 import strumRhythmCover from "@saul-music/lo-strum-rhythm/cover.svg";
@@ -42,5 +54,8 @@ export const OBJECTS = Object.fromEntries([
   entry(arpeggios, arpeggiosMeta, arpeggiosCover),
   entry(majorMinorEar, majorMinorEarMeta, majorMinorEarCover),
   entry(chordShapes, chordShapesMeta, chordShapesCover),
+  entry(powerChords, powerChordsMeta, powerChordsCover),
+  entry(dimAug, dimAugMeta, dimAugCover),
+  entry(readChart, readChartMeta, readChartCover),
   entry(strumRhythm, strumRhythmMeta, strumRhythmCover),
 ]);

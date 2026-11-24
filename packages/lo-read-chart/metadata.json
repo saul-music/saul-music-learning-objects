@@ -1,0 +1,68 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-read-chart",
+  "version": "0.1.0",
+  "general": {
+    "title": "Lee la partitura",
+    "subtitle": "Compases, %, _ , . y x2",
+    "description": "Aprende a leer una línea de acordes de Acordia: el compás, el guion que lo parte, el % que repite, el _ que liga, el . que calla y el x2 que repite la sección.",
+    "language": "es",
+    "keywords": [
+      "partitura",
+      "compás",
+      "cifrado",
+      "%",
+      "ligado",
+      "silencio"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-chord-shapes",
+        "description": "Manos de acorde: cómo se tocan los acordes que vas a leer."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Leer una línea de acordes básica: cuánto dura cada acorde en el compás y qué significan %, _, . y x2.",
+    "content": [
+      {
+        "title": "El compás",
+        "text": "Cada espacio separa un compás. Un acorde solo dura todo el compás (4 tiempos en 4/4)."
+      },
+      {
+        "title": "El guion",
+        "text": "Parte el compás en partes iguales: C-G son dos acordes de 2 tiempos; C-G-Am-F, uno por tiempo."
+      },
+      {
+        "title": "% y _",
+        "text": "El % solo repite el compás anterior; dentro de un compás alarga el acorde anterior. El _ liga: el acorde sigue sonando sin volver a tocarlo."
+      },
+      {
+        "title": "El . y el x2",
+        "text": "El . es un silencio. El x2 al lado del título toca toda la sección dos veces."
+      }
+    ],
+    "activity": "Diez preguntas: qué acorde suena donde hay un %, cuántos tiempos dura un acorde, cuántos tiempos suenan en un compás con silencio, cuántos compases tiene una sección repetida y qué significa cada símbolo.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

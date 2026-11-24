@@ -11,7 +11,7 @@ const C_MAJOR = [60, 62, 64, 65, 67, 69, 71];
 export const BASICO = {
   id: "basico",
   title: "Básico",
-  blurb: "Las notas, los intervalos, el mástil, los acordes y el pulso. Ocho lecciones cortas; cada una termina en un juego.",
+  blurb: "Las notas, los intervalos, el mástil, los acordes y la lectura de partituras. Diez lecciones cortas; cada una termina en un juego. Al final podrás leer los temas básicos de la Biblioteca.",
   lessons: [
     {
       id: "do-es-c",
@@ -415,53 +415,192 @@ export const BASICO = {
       ],
     },
     {
-      id: "pulso",
-      oa: "lo-strum-rhythm",
-      title: "Pulso",
-      summary: "Las figuras del rasgueo y la regla del compás.",
+      id: "acordes-de-quinta",
+      oa: "lo-power-chords",
+      title: "Acordes de quinta",
+      summary: "Dos notas bastan: la raíz y la 5ª. Así suena y así se escribe E5.",
       readMinutes: 3,
       slides: [
         {
-          title: "El pulso",
-          text: [
-            "Es el latido parejo de la música. Cada latido es un tiempo: un compás de 4/4 tiene 4 tiempos y uno de 3/4 tiene 3.",
-          ],
+          title: "Dos notas bastan",
+          text: ["Un acorde de quinta usa solo dos notas: la raíz y la 5ª. E5 son E y B."],
+          figure: {
+            type: "keyboard", from: 64, to: 71,
+            marks: [{ midi: 64, kind: "source", label: "E" }, { midi: 71, kind: "answer", label: "B" }],
+          },
+          listen: [{ label: "▶ Oír E5", notes: [64, 71], gap: 0.5 }],
         },
         {
-          title: "Los números del compás",
-          text: [
-            "El número de arriba dice cuántos tiempos tiene el compás; el de abajo, qué figura vale un tiempo (4 es la negra).",
-            "Por eso 4/4 son cuatro negras por compás y 3/4 son tres.",
-          ],
-        },
-        {
-          title: "Las figuras",
-          text: ["Cada figura dura una cantidad de tiempos. El punto suma la mitad de lo que dura."],
+          title: "La fórmula",
+          text: ["X5 = raíz + 5ª. La 5ª está a 7 semitonos de la raíz, igual que en los acordes mayores y menores."],
           figure: {
             type: "table",
-            head: ["Figura", "Tiempos"],
-            rows: [["Redonda", "4"], ["Blanca con punto", "3"], ["Blanca", "2"], ["Negra", "1"]],
+            head: ["Acorde", "Notas"],
+            rows: [["C5", "C G"], ["A5", "A E"], ["D5", "D A"], ["G5", "G D"]],
           },
         },
         {
-          title: "La regla del rasgueo",
+          title: "¿Dónde quedó la 3ª?",
           text: [
-            "Un acorde en el compás: un golpe al inicio que dura todo el compás.",
-            "Dos acordes de medio compás: un golpe al empezar cada uno (blancas).",
-            "Más acordes: un golpe por tiempo (negras).",
+            "El mayor y el menor tienen 3ª (la nota del medio). El acorde de quinta no la tiene.",
+            "Sin 3ª no es ni mayor ni menor: no suena alegre ni triste.",
+          ],
+          figure: {
+            type: "table",
+            head: ["Acorde", "Notas"],
+            rows: [["E", "E G# B"], ["Em", "E G B"], ["E5", "E B"]],
+          },
+        },
+        {
+          title: "Cómo suena",
+          text: ["Compara los tres. El de quinta suena abierto y firme: por eso se usa tanto en el rock."],
+          listen: [
+            { label: "▶ E mayor", notes: [64, 68, 71], gap: 0.45 },
+            { label: "▶ E menor", notes: [64, 67, 71], gap: 0.45 },
+            { label: "▶ E5", notes: [64, 71], gap: 0.45 },
           ],
         },
         {
-          title: "Escucha el clic",
+          title: "Cómo se escribe",
           text: [
-            "El metrónomo marca cada tiempo y suena más agudo en el 1. Cuenta los golpes de guitarra entre un 1 y el siguiente.",
+            "La letra con un 5: E5, A5, D5. Así lo verás en las canciones de Acordia, por ejemplo «E5 % A5 %».",
+            "El 5 viene de la 5ª, la única nota que acompaña a la raíz.",
           ],
         },
         {
-          title: "Cuenta en voz alta",
+          title: "¿Tiene 3ª?",
           text: [
-            "Cuenta 1 – 2 – 3 – 4 mientras suena el clic. El 1 es el más fuerte: ahí empieza cada compás.",
-            "Si te pierdes, escucha el clic más agudo y vuelve a contar desde el 1.",
+            "En el juego verás las notas de un acorde y tendrás que decir cuál es: mayor, menor o de quinta.",
+            "Cuenta las notas: si hay tres, hay 3ª y es mayor o menor. Si hay solo dos, la raíz y la 5ª, es de quinta.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "disminuidos-y-aumentados",
+      oa: "lo-dim-aug",
+      title: "Disminuidos y aumentados",
+      summary: "Si la 5ª baja medio tono, el acorde es disminuido; si sube, aumentado.",
+      readMinutes: 4,
+      slides: [
+        {
+          title: "Dos acordes más",
+          text: [
+            "Los acordes mayores y menores tienen una 5ª justa. Si la 5ª cambia medio tono, nacen dos acordes nuevos.",
+          ],
+          figure: {
+            type: "table",
+            head: ["Acorde", "3ª", "5ª"],
+            rows: [["Mayor", "mayor", "justa"], ["Menor", "menor", "justa"], ["Disminuido", "menor", "disminuida"], ["Aumentado", "mayor", "aumentada"]],
+          },
+        },
+        {
+          title: "Disminuido",
+          text: ["Parte del menor y baja la 5ª medio tono: Cm es C E♭ G; Cdim es C E♭ G♭."],
+          figure: {
+            type: "keyboard", from: 60, to: 67,
+            marks: [
+              { midi: 60, kind: "source", label: "C" }, { midi: 63, kind: "hint", label: "Eb" }, { midi: 66, kind: "answer", label: "Gb" },
+            ],
+          },
+          listen: [
+            { label: "▶ C menor", notes: [60, 63, 67], gap: 0.45 },
+            { label: "▶ C disminuido", notes: [60, 63, 66], gap: 0.45 },
+          ],
+        },
+        {
+          title: "Aumentado",
+          text: ["Parte del mayor y sube la 5ª medio tono: C es C E G; Caug es C E G♯."],
+          figure: {
+            type: "keyboard", from: 60, to: 68,
+            marks: [
+              { midi: 60, kind: "source", label: "C" }, { midi: 64, kind: "hint", label: "E" }, { midi: 68, kind: "answer", label: "G#" },
+            ],
+          },
+          listen: [
+            { label: "▶ C mayor", notes: [60, 64, 67], gap: 0.45 },
+            { label: "▶ C aumentado", notes: [60, 64, 68], gap: 0.45 },
+          ],
+        },
+        {
+          title: "Cuenta los semitonos",
+          text: ["Lo que cambia es siempre la 5ª. Mide desde la raíz:"],
+          figure: {
+            type: "table",
+            head: ["5ª", "Semitonos"],
+            rows: [["Disminuida", "6"], ["Justa", "7"], ["Aumentada", "8"]],
+          },
+        },
+        {
+          title: "Cómo se escriben",
+          text: [
+            "Con un sufijo: Cdim y Caug (el aumentado también se escribe C+).",
+            "Lo oirás tenso, con ganas de resolver: por eso suelen ser acordes de paso entre otros dos.",
+          ],
+        },
+        {
+          title: "Nombres con sorpresa",
+          text: [
+            "La letra de cada nota sigue el orden 1ª, 3ª, 5ª. Por eso E aug es E G♯ B♯: la 5ª lleva la letra B.",
+            "B♯ suena igual que C, como viste en «El misterio de E#», pero se escribe con la letra que toca.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "lee-la-partitura",
+      oa: "lo-read-chart",
+      title: "Lee la partitura",
+      summary: "Cómo se lee una línea de acordes: compases, %, _, . y x2.",
+      readMinutes: 4,
+      slides: [
+        {
+          title: "Un acorde por compás",
+          text: [
+            "En Acordia una sección es una línea de compases separados por espacios. Cada espacio es un compás.",
+            "Un acorde solo ocupa todo el compás: en 4/4 son 4 tiempos. «Estrofa: C G Am F» son cuatro compases.",
+          ],
+          figure: {
+            type: "table",
+            head: ["Compás", "Acorde", "Tiempos"],
+            rows: [["1", "C", "4"], ["2", "G", "4"], ["3", "Am", "4"], ["4", "F", "4"]],
+          },
+        },
+        {
+          title: "El guion parte el compás",
+          text: ["Un guion divide el compás en partes iguales. Cada parte dura lo mismo."],
+          figure: {
+            type: "table",
+            head: ["Se escribe", "Cada acorde dura"],
+            rows: [["C-G (4/4)", "2 tiempos"], ["C-G-Am-F (4/4)", "1 tiempo"], ["C-G-Am (3/4)", "1 tiempo"]],
+          },
+        },
+        {
+          title: "El % repite",
+          text: [
+            "Un % solo repite el compás anterior: «C % G %» son cuatro compases, C, C, G y G.",
+            "Dentro de un compás partido, el % alarga el acorde anterior: «C-%-G-Am» es C 2 tiempos, G 1 y Am 1.",
+          ],
+        },
+        {
+          title: "El _ liga y el . calla",
+          text: [
+            "El _ liga: el acorde anterior sigue sonando sin volver a tocarlo. «G-_-C-D»: G dura 2 tiempos con un solo golpe.",
+            "El . es un silencio: «G-.» son 2 tiempos de G y 2 de silencio. Solo, es un compás entero en silencio.",
+          ],
+        },
+        {
+          title: "Secciones y x2",
+          text: [
+            "Cada línea lleva el nombre de la sección y dos puntos: Intro, Estrofa, Coro, Puente, Final.",
+            "Un x2 junto al nombre toca toda la sección dos veces: «Coro x2: C G Am F» son 8 compases en total.",
+          ],
+        },
+        {
+          title: "Ya puedes leer una canción",
+          text: [
+            "Recorre cada línea compás a compás: ¿cuántos acordes tiene?, ¿hay guiones, %, _ o puntos?, ¿cuántas veces se toca?",
+            "Con las notas, los acordes mayores, menores y de quinta y estas marcas, ya puedes leer la versión simplificada de los temas de la Biblioteca.",
           ],
         },
       ],

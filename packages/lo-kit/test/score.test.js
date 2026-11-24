@@ -13,8 +13,8 @@ describe("puntuación", () => {
 
   it("el bono por rapidez baja parejo hasta 0 y nunca es negativo", () => {
     expect(speedBonus(0)).toBe(3);
-    expect(speedBonus(6000)).toBe(2);
-    expect(speedBonus(12000)).toBe(0);
+    expect(speedBonus(12000)).toBe(2);
+    expect(speedBonus(24000)).toBe(0);
     expect(speedBonus(60000)).toBe(0);
   });
 
@@ -25,7 +25,7 @@ describe("puntuación", () => {
   });
 
   it("una respuesta vale como mucho 10 y la racha no multiplica", () => {
-    for (const ms of [0, 500, 3000, 12000, 99999]) {
+    for (const ms of [0, 500, 6000, 24000, 99999]) {
       for (const streak of [1, 3, 5, 8, 30]) {
         const p = pointsFor({ ok: true, ms, streak });
         expect(p).toBeGreaterThanOrEqual(SCORING.base);
