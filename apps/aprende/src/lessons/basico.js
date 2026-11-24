@@ -1,4 +1,4 @@
-// Ruta «Básico» de Aprende (C32, C44). Lecciones de 3 a 6 diapositivas que terminan en un juego (un OA de packages/).
+// Ruta «Básico» de Aprende (C32, C44). Lecciones de 6 diapositivas que terminan en un juego (un OA de packages/).
 // Contenido original de Acordia, con derechos reservados (C22). Clave americana siempre (C, D, E…): la forma latina solo
 // como apoyo hablado. Los números de nota son MIDI (C4 = 60) y solo sirven para el botón «Oír».
 //
@@ -30,6 +30,15 @@ export const BASICO = {
           listen: [{ label: "▶ Oír de C a B", notes: C_MAJOR, gap: 0.35 }],
         },
         {
+          title: "Las siete equivalencias",
+          text: ["Cada letra tiene su nombre en español. Apréndelas en este orden, que es el de la escala:"],
+          figure: {
+            type: "table",
+            head: ["Letra", "Se dice"],
+            rows: [["C", "Do"], ["D", "Re"], ["E", "Mi"], ["F", "Fa"], ["G", "Sol"], ["A", "La"], ["B", "Si"]],
+          },
+        },
+        {
           title: "Acordia escribe con letras",
           text: [
             "En Acordia las notas y los acordes siempre van en letras: así los verás en las canciones y en los cifrados.",
@@ -53,6 +62,13 @@ export const BASICO = {
           text: [
             "Solo hay siete letras. Después de G vuelve A, y antes de A viene G, como las horas en un reloj.",
             "Eso es lo que practicarás: de letra a nombre, de nombre a letra y qué letra viene antes o después.",
+          ],
+        },
+        {
+          title: "Los acordes usan las mismas letras",
+          text: [
+            "Un acorde se nombra con la letra de su nota principal: G es el acorde de Sol y C es el de Do.",
+            "Una m después de la letra lo vuelve menor: Am es La menor. Verás esto en todos los cifrados.",
           ],
         },
       ],
@@ -105,6 +121,14 @@ export const BASICO = {
             head: ["Intervalo", "Medios tonos"],
             rows: [["2ª menor", "1"], ["2ª mayor", "2"], ["3ª menor", "3"], ["3ª mayor", "4"], ["4ª justa", "5"], ["5ª justa", "7"], ["6ª mayor", "9"], ["8ª", "12"]],
           },
+        },
+        {
+          title: "El patrón de la escala mayor",
+          text: [
+            "La escala mayor sube en este orden: tono, tono, medio tono, tono, tono, tono, medio tono.",
+            "En C mayor los dos medios tonos caen justo donde no hay tecla negra: entre E y F, y entre B y C.",
+          ],
+          listen: [{ label: "▶ Oír la escala de C mayor", notes: C_MAJOR.concat([72]), gap: 0.35 }],
         },
         {
           title: "¿Por qué existen E# y compañía?",
@@ -161,6 +185,14 @@ export const BASICO = {
             "Si un acorde suena bien pero se ve raro, probablemente esté mal escrito.",
           ],
         },
+        {
+          title: "Tres preguntas antes de nombrar",
+          text: [
+            "1. ¿En qué tonalidad estoy? Ella decide si toca sostenido o bemol.",
+            "2. ¿Qué letra toca? Cada letra se usa una sola vez y en orden.",
+            "3. ¿Qué signo necesita esa letra (# o b) para sonar donde suena? Ese es el nombre correcto.",
+          ],
+        },
       ],
     },
     {
@@ -170,6 +202,19 @@ export const BASICO = {
       summary: "La misma nota en otra cuerda: encuéntrala en la guitarra.",
       readMinutes: 3,
       slides: [
+        {
+          title: "Las cuerdas al aire",
+          text: [
+            "La guitarra tiene seis cuerdas. De la más grave (6ª) a la más aguda (1ª) suenan: E A D G B E.",
+            "Es el punto de partida para encontrar cualquier nota en el mástil.",
+          ],
+          figure: {
+            type: "table",
+            head: ["Cuerda", "Nota al aire"],
+            rows: [["6ª", "E"], ["5ª", "A"], ["4ª", "D"], ["3ª", "G"], ["2ª", "B"], ["1ª", "E"]],
+          },
+          listen: [{ label: "▶ Oír las cuerdas al aire", notes: [40, 45, 50, 55, 59, 64], gap: 0.5 }],
+        },
         {
           title: "Medio tono por traste",
           text: [
@@ -198,6 +243,13 @@ export const BASICO = {
           title: "Una nota, muchos lugares",
           text: [
             "La misma nota aparece en varias cuerdas: a veces con el mismo sonido exacto (unísono) y a veces una o más octavas arriba o abajo.",
+          ],
+        },
+        {
+          title: "Cómo practicar",
+          text: [
+            "Elige una nota, por ejemplo A. Encuéntrala en la 5ª cuerda al aire y de nuevo en la 6ª cuerda, traste 5.",
+            "Tócalas una tras otra: suenan igual. Eso es el eco que da nombre al juego.",
           ],
         },
       ],
@@ -239,6 +291,14 @@ export const BASICO = {
           title: "La 8ª",
           text: ["La octava es la raíz otra vez, 12 medios tonos más arriba: mismo nombre, sonido más agudo."],
         },
+        {
+          title: "Pruébalo con A menor",
+          text: [
+            "La 1ª es A, la 3ª menor es C, la 5ª es E y la 8ª es A otra vez: A – C – E – A.",
+            "Con la misma receta puedes armar el arpegio de cualquier acorde mayor o menor.",
+          ],
+          listen: [{ label: "▶ Oír el arpegio de A menor", notes: [57, 60, 64, 69], gap: 0.45 }],
+        },
       ],
     },
     {
@@ -255,6 +315,15 @@ export const BASICO = {
           ],
         },
         {
+          title: "Mayor y menor, lado a lado",
+          text: ["Mira las notas de C mayor y de C menor. Solo cambia la del medio:"],
+          figure: {
+            type: "table",
+            head: ["Acorde", "Notas"],
+            rows: [["C mayor", "C E G"], ["C menor", "C Eb G"]],
+          },
+        },
+        {
           title: "Luz y sombra",
           text: [
             "Muchas personas oyen el mayor más abierto y luminoso, y el menor más oscuro y melancólico. Usa la imagen que a ti te sirva.",
@@ -262,6 +331,23 @@ export const BASICO = {
           listen: [
             { label: "▶ C mayor", notes: [60, 64, 67], gap: 0.45 },
             { label: "▶ C menor", notes: [60, 63, 67], gap: 0.45 },
+          ],
+        },
+        {
+          title: "Cómo se escribe",
+          text: [
+            "La letra sola es el acorde mayor: C, D, G. Con una m es menor: Cm, Dm, Gm.",
+            "Así los verás en las canciones, y así los reconocerás de oído.",
+          ],
+        },
+        {
+          title: "Compara antes de decidir",
+          text: [
+            "Si dudas, imagina el otro acorde: ¿la nota del medio subiría o bajaría? Si el acorde te suena más oscuro que el mayor que conoces, es menor.",
+          ],
+          listen: [
+            { label: "▶ D mayor", notes: [62, 66, 69], gap: 0.45 },
+            { label: "▶ D menor", notes: [62, 65, 69], gap: 0.45 },
           ],
         },
         {
@@ -280,6 +366,15 @@ export const BASICO = {
       summary: "Cómo se leen las formas de los acordes en la guitarra.",
       readMinutes: 3,
       slides: [
+        {
+          title: "Los primeros acordes",
+          text: ["Estos cuatro acordes abiertos son la base de muchísimas canciones. Cada uno son solo tres notas:"],
+          figure: {
+            type: "table",
+            head: ["Acorde", "Notas"],
+            rows: [["C", "C E G"], ["G", "G B D"], ["Am", "A C E"], ["Em", "E G B"]],
+          },
+        },
         {
           title: "Cómo se lee un diagrama",
           text: [
@@ -310,6 +405,13 @@ export const BASICO = {
             "Una barra sobre varias cuerdas es una cejilla: el índice las aprieta todas en el mismo traste. Así una misma forma sirve para varios acordes.",
           ],
         },
+        {
+          title: "Cambiar de acorde",
+          text: [
+            "Para cambiar rápido, busca los dedos que pueden quedarse quietos y mueve solo los demás.",
+            "Practica despacio: primero que suene limpio, después que suene rápido.",
+          ],
+        },
       ],
     },
     {
@@ -323,6 +425,13 @@ export const BASICO = {
           title: "El pulso",
           text: [
             "Es el latido parejo de la música. Cada latido es un tiempo: un compás de 4/4 tiene 4 tiempos y uno de 3/4 tiene 3.",
+          ],
+        },
+        {
+          title: "Los números del compás",
+          text: [
+            "El número de arriba dice cuántos tiempos tiene el compás; el de abajo, qué figura vale un tiempo (4 es la negra).",
+            "Por eso 4/4 son cuatro negras por compás y 3/4 son tres.",
           ],
         },
         {
@@ -346,6 +455,13 @@ export const BASICO = {
           title: "Escucha el clic",
           text: [
             "El metrónomo marca cada tiempo y suena más agudo en el 1. Cuenta los golpes de guitarra entre un 1 y el siguiente.",
+          ],
+        },
+        {
+          title: "Cuenta en voz alta",
+          text: [
+            "Cuenta 1 – 2 – 3 – 4 mientras suena el clic. El 1 es el más fuerte: ahí empieza cada compás.",
+            "Si te pierdes, escucha el clic más agudo y vuelve a contar desde el 1.",
           ],
         },
       ],

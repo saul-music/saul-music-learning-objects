@@ -1,6 +1,6 @@
 # Estado de saul-music-learning-objects
 
-> Registro vivo. Última actualización: 2026-11-20.
+> Registro vivo. Última actualización: 2026-11-24 (seis diapositivas por lección y pregunta centrada en el teléfono, O21).
 
 ## Paso actual
 
@@ -35,4 +35,4 @@
 2026-11-23 · Aprende en producción (O17) · publicado en `https://saulapp-music.web.app/aprende/` tras tres intentos (URLs reservadas, `run.viewer`, y una comprobación que no esperaba al CDN); verificado con `curl` y con un navegador real y el SDK real: sin sesión pide entrar · pendiente: probarlo con una cuenta real (entrar, aceptar v3, jugar, guardar), celular real, iPhone · O17, O16, O15, C44
 2026-11-24 · Aprende y Mi cuenta (O19, en PR) · publica `/aprende/lessons.json` (solo id y título), anota «continuar» al abrir una lección, deja la marca de sesión y enlaza a `/mi-acordia.html`; 96 pruebas y corrida de navegador · pendiente: cuenta real · O19, C45
 2026-11-24 · solo «Básico» (O20, en PR) · se quitan de la portada de Aprende las tarjetas «Pronto» de Intermedio y Avanzado; `COMING` vacío y fijado por una prueba · O20
-
+2026-11-24 · seis diapositivas y pregunta centrada (O21, en PR) · las 8 lecciones de Aprende pasan a 6 diapositivas (13 nuevas) y `lo-kit` centra cada pregunta en pantallas de hasta 700 px; 101 pruebas · pendiente: revisar el texto nuevo y verlo en celular real (iPhone) · O21
