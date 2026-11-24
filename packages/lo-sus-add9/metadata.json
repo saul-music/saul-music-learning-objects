@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-sus-add9",
+  "version": "0.1.0",
+  "general": {
+    "title": "sus y add9",
+    "subtitle": "Sin 3ª o con una más",
+    "description": "Aprende qué hacen sus2, sus4 y add9: qué nota reemplazan o suman, cómo se resuelve un sus4 y en qué se diferencia el sus2 del add9.",
+    "language": "es",
+    "keywords": [
+      "sus2",
+      "sus4",
+      "add9",
+      "suspendido",
+      "novena agregada"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-passing-chords",
+        "description": "Acordes de paso: los acordes tensos que ahora comparas con los abiertos."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Armar y reconocer sus2, sus4 y add9, y explicar qué pasa con la 3ª en cada uno.",
+    "content": [
+      {
+        "title": "sus",
+        "text": "Reemplaza la 3ª por la 2ª (sus2) o la 4ª (sus4)."
+      },
+      {
+        "title": "add9",
+        "text": "Conserva la 3ª y suma la 9ª, sin 7ª."
+      },
+      {
+        "title": "Resolver",
+        "text": "El sus4 vuelve al mayor: la 4ª baja medio tono a la 3ª."
+      },
+      {
+        "title": "Cómo se escriben",
+        "text": "Dsus2, Dsus4, Dadd9, Dmadd9 y G7sus4."
+      }
+    ],
+    "activity": "Diez preguntas: las notas de cada acorde, qué nota desaparece, qué nota baja al resolver, si conserva la 3ª y de oído.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

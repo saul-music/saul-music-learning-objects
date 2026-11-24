@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-sevenths",
+  "version": "0.1.0",
+  "general": {
+    "title": "Séptimas",
+    "subtitle": "El 7 y el m7",
+    "description": "Aprende cómo se arman el 7 y el m7: qué nota suman al acorde de siempre, cómo suenan y por qué un 7 pide resolver.",
+    "language": "es",
+    "keywords": [
+      "séptima",
+      "7",
+      "m7",
+      "dominante",
+      "resolver"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-barre-chords",
+        "description": "Cejilla en movimiento: las formas que ya manejas."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Armar y reconocer acordes con 7 y m7, y explicar por qué un acorde con 7 apunta a otro.",
+    "content": [
+      {
+        "title": "Una nota más",
+        "text": "El 7 y el m7 suman la 7ª menor (10 semitonos sobre la raíz)."
+      },
+      {
+        "title": "7 y m7",
+        "text": "El 7 es mayor con 7ª menor; el m7, menor con 7ª menor."
+      },
+      {
+        "title": "Resolver",
+        "text": "El 7 apunta a un acorde una 4ª arriba: G7 va a C."
+      },
+      {
+        "title": "Cómo se leen",
+        "text": "Un 7 sin más lleva la 7ª menor; la mayor se escribe «maj7»."
+      }
+    ],
+    "activity": "Diez preguntas: las notas de cada acorde, qué acorde forman unas notas, qué nota se suma, a cuál resuelve un 7 y de oído.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

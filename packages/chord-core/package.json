@@ -1,0 +1,18 @@
+{
+  "name": "@saul-music/chord-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Teoría y pieza de juego compartidas por los OA de la ruta Intermedio (acordes con extensiones, bajo, tonalidad).",
+  "exports": {
+    ".": "./src/index.js",
+    "./theory": "./src/theory.js",
+    "./testing": "./src/testing.js"
+  },
+  "dependencies": {
+    "@saul-music/lo-chord-shapes": "*",
+    "@saul-music/lo-kit": "*",
+    "tonal": "^6.7.1"
+  },
+  "license": "CC-BY-4.0"
+}

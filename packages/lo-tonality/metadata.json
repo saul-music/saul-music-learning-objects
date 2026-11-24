@@ -1,0 +1,66 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-tonality",
+  "version": "0.1.0",
+  "general": {
+    "title": "La tonalidad",
+    "subtitle": "Los acordes de la casa",
+    "description": "Aprende los siete acordes de una escala mayor: qué grado es cada uno, de qué tipo, con y sin séptima, y cuál no pertenece a la tonalidad.",
+    "language": "es",
+    "keywords": [
+      "tonalidad",
+      "campo armónico",
+      "grados",
+      "relativo menor"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT7M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-tensions",
+        "description": "Tensiones: los colores que ahora ubicas en su tonalidad."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Nombrar los acordes de una tonalidad mayor, su grado y su tipo, y reconocer el que no pertenece.",
+    "content": [
+      {
+        "title": "La escala",
+        "text": "Un acorde sobre cada nota de la escala da los siete de la tonalidad."
+      },
+      {
+        "title": "Mismo orden",
+        "text": "1 mayor, 2 menor, 3 menor, 4 mayor, 5 mayor, 6 menor y 7 disminuido, en toda tonalidad mayor."
+      },
+      {
+        "title": "Con séptimas",
+        "text": "1 y 4 son maj7; 2, 3 y 6, m7; 5 es 7; 7 es m7b5."
+      },
+      {
+        "title": "Relativo menor",
+        "text": "Es el acorde del grado 6: C mayor y Am comparten acordes."
+      }
+    ],
+    "activity": "Diez preguntas: qué acorde es el grado N, qué grado es un acorde, cuál no es de la tonalidad, el relativo menor y el tipo de cada grado.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

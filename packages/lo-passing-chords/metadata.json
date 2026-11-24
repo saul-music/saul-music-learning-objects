@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-passing-chords",
+  "version": "0.1.0",
+  "general": {
+    "title": "Acordes de paso",
+    "subtitle": "dim7, m7b5, aug y mmaj7",
+    "description": "Aprende los acordes tensos que unen a otros: cómo se arman dim7, m7b5, aug y mmaj7 y por qué algunos suenan igual con otro nombre.",
+    "language": "es",
+    "keywords": [
+      "dim7",
+      "m7b5",
+      "aug",
+      "mmaj7",
+      "acordes de paso"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-slash-chords",
+        "description": "Acordes con bajo: ya lees acordes con nota grave distinta."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Armar y reconocer dim7, m7b5, aug y mmaj7, y explicar su simetría.",
+    "content": [
+      {
+        "title": "dim7",
+        "text": "Apila terceras menores: cada 3 semitonos. Se repite cada 3 trastes."
+      },
+      {
+        "title": "m7b5",
+        "text": "Un m7 con la 5ª bajada medio tono."
+      },
+      {
+        "title": "aug",
+        "text": "Apila terceras mayores: cada 4 semitonos. Se repite cada 4 trastes."
+      },
+      {
+        "title": "mmaj7",
+        "text": "Menor con 7ª mayor: misterioso."
+      }
+    ],
+    "activity": "Diez preguntas: las notas de cada acorde, qué acorde forman unas notas, qué nota cambia, cada cuántos semitonos se repiten, qué acorde suena igual y de oído.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

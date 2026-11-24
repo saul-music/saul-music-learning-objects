@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-study-song",
+  "version": "0.1.0",
+  "general": {
+    "title": "Estudia un tema Original",
+    "subtitle": "Ordena tu práctica",
+    "description": "Aprende a organizar el estudio de un tema Original: por dónde empezar, cómo repetir una parte y qué familia es cada acorde nuevo.",
+    "language": "es",
+    "keywords": [
+      "estudio",
+      "versión Original",
+      "loop",
+      "práctica",
+      "familias de acordes"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-tonality",
+        "description": "La tonalidad: el mapa con que lees los acordes de un tema."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Clasificar un acorde nuevo en su familia y elegir cómo estudiar un tema con el reproductor.",
+    "content": [
+      {
+        "title": "Original y Simplificada",
+        "text": "Empieza por la Simplificada y pasa a la Original cuando fluya."
+      },
+      {
+        "title": "Tu lista",
+        "text": "Marca los acordes nuevos, ábrelos y agrúpalos por familia."
+      },
+      {
+        "title": "El reproductor",
+        "text": "Metrónomo con el tempo bajo, «Desde aquí», loop y modo estudio."
+      },
+      {
+        "title": "Cambios difíciles",
+        "text": "Aíslalos: dos acordes, despacio, hasta que salgan limpios."
+      }
+    ],
+    "activity": "Diez preguntas: a qué familia pertenece un acorde y qué haces en cada situación de estudio.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

@@ -1,5 +1,4 @@
-// Ruta «Intermedio» de Aprende. Diez lecciones de 6 diapositivas, de solo lectura por ahora: el juego de cada una llega en una segunda
-// etapa (por eso `oa` falta). El objetivo es poder tocar los temas de nivel «medio» de la Biblioteca en su versión Original.
+// Ruta «Intermedio» de Aprende. Diez lecciones de 6 diapositivas que terminan en un juego (un OA de packages/). El objetivo es poder tocar los temas de nivel «medio» de la Biblioteca en su versión Original.
 // Contenido original de Acordia, con derechos reservados (C22). Clave americana siempre. Los acordes se dibujan como diagramas
 // (`figure.type = "chords"`; `f` = traste por cuerda de la 6ª a la 1ª, -1 no se toca, `d` = dedos, `b` = trastes con cejilla).
 //
@@ -68,15 +67,15 @@ export const INTERMEDIO = {
   id: "intermedio",
   title: "Intermedio",
   level: 2,
-  chips: ["Para leer", "Juegos próximamente"],
-  blurb: "Cejilla, séptimas, acordes con bajo, tensiones y tonalidad. Diez lecciones para leer: al terminar podrás tocar los temas de nivel medio de la Biblioteca en su versión Original.",
+  chips: ["Con juegos"],
+  blurb: "Cejilla, séptimas, acordes con bajo, tensiones y tonalidad. Diez lecciones cortas; cada una termina en un juego. Al final podrás tocar los temas de nivel medio de la Biblioteca en su versión Original.",
   lessons: [
     {
       id: "cejilla-en-movimiento",
+      oa: "lo-barre-chords",
       title: "Cejilla en movimiento",
       summary: "Dos formas que viajan por el mástil y te dan F, Bm, F#m, Bb y muchos más.",
       readMinutes: 5,
-      badge: "F",
       slides: [
         {
           title: "Acordes que viajan",
@@ -134,10 +133,10 @@ export const INTERMEDIO = {
     },
     {
       id: "septimas",
+      oa: "lo-sevenths",
       title: "Séptimas",
       summary: "El 7 y el m7: un acorde de siempre con una nota más.",
       readMinutes: 5,
-      badge: "7",
       slides: [
         {
           title: "Una nota más",
@@ -201,10 +200,10 @@ export const INTERMEDIO = {
     },
     {
       id: "septima-mayor-y-seis",
+      oa: "lo-maj7-sixths",
       title: "maj7 y acordes de 6",
       summary: "La 7ª mayor, el color soñador de maj7 y los acordes de 6.",
       readMinutes: 5,
-      badge: "maj7",
       slides: [
         {
           title: "Dos colores luminosos",
@@ -267,10 +266,10 @@ export const INTERMEDIO = {
     },
     {
       id: "acordes-con-bajo",
+      oa: "lo-slash-chords",
       title: "Acordes con bajo",
       summary: "Qué significa la barra de G/B y D/F#, y cómo se tocan.",
       readMinutes: 5,
-      badge: "G/B",
       slides: [
         {
           title: "La barra",
@@ -334,10 +333,10 @@ export const INTERMEDIO = {
     },
     {
       id: "acordes-de-paso",
+      oa: "lo-passing-chords",
       title: "Acordes de paso",
       summary: "dim7, m7b5, aug y mmaj7: tensión que lleva al acorde siguiente.",
       readMinutes: 5,
-      badge: "dim7",
       slides: [
         {
           title: "Acordes que no se quedan",
@@ -397,10 +396,10 @@ export const INTERMEDIO = {
     },
     {
       id: "sus-y-novena-agregada",
+      oa: "lo-sus-add9",
       title: "sus y add9",
       summary: "Cambiar la 3ª con sus2 y sus4, o sumar una 9ª con add9.",
       readMinutes: 5,
-      badge: "sus",
       slides: [
         {
           title: "Sin 3ª, o con una más",
@@ -460,10 +459,10 @@ export const INTERMEDIO = {
     },
     {
       id: "novenas-y-seis-nueve",
+      oa: "lo-ninths",
       title: "Novenas y 6/9",
       summary: "9, m9, maj9 y 6/9: la 9ª sumada a las séptimas.",
       readMinutes: 5,
-      badge: "9",
       slides: [
         {
           title: "Más allá de la 7ª",
@@ -518,10 +517,10 @@ export const INTERMEDIO = {
     },
     {
       id: "tensiones",
+      oa: "lo-tensions",
       title: "Tensiones",
       summary: "9, 11 y 13, y las alteradas b9, #9, #11 y b13.",
       readMinutes: 5,
-      badge: "#9",
       slides: [
         {
           title: "Notas por encima de la 7ª",
@@ -585,10 +584,10 @@ export const INTERMEDIO = {
     },
     {
       id: "la-tonalidad",
+      oa: "lo-tonality",
       title: "La tonalidad",
       summary: "El campo armónico: qué acordes son «de la casa» y cómo anticiparlos.",
       readMinutes: 6,
-      badge: "I IV V",
       slides: [
         {
           title: "Un tema vive en una tonalidad",
@@ -658,10 +657,10 @@ export const INTERMEDIO = {
     },
     {
       id: "estudia-un-tema-original",
+      oa: "lo-study-song",
       title: "Estudia un tema Original",
       summary: "De la versión Simplificada a la Original: cómo organizar tu práctica.",
       readMinutes: 6,
-      badge: "▶",
       slides: [
         {
           title: "Original y Simplificada",

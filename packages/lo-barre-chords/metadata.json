@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-barre-chords",
+  "version": "0.1.0",
+  "general": {
+    "title": "Cejilla en movimiento",
+    "subtitle": "Dos formas que viajan",
+    "description": "Aprende a mover la forma de E y la de A por el mástil: qué acorde sale en cada traste, dónde va la cejilla y qué cambia de mayor a menor.",
+    "language": "es",
+    "keywords": [
+      "cejilla",
+      "barre",
+      "mástil",
+      "forma de E",
+      "forma de A"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT5M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-chord-shapes",
+        "description": "Manos de acorde: las formas de los acordes abiertos y la cejilla."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Reconocer los acordes de cejilla que salen de la forma de E y de la de A, y decir en qué traste va la cejilla para cada uno.",
+    "content": [
+      {
+        "title": "Dos formas",
+        "text": "La forma de E y la de A, con el índice de cejilla, dan casi todos los acordes de cejilla."
+      },
+      {
+        "title": "El nombre",
+        "text": "La cuerda grave de la forma (la 6 en E, la 5 en A) en el traste de la cejilla da el nombre del acorde."
+      },
+      {
+        "title": "Mayor y menor",
+        "text": "De mayor a menor baja la 3ª: cambia la cuerda 3 en la forma de E y la 2 en la de A."
+      },
+      {
+        "title": "Diagramas",
+        "text": "Con un número a la izquierda, el diagrama indica en qué traste empieza."
+      }
+    ],
+    "activity": "Diez preguntas: qué acorde es un diagrama con cejilla, en qué traste va la cejilla para tocar un acorde y qué cuerda cambia de mayor a menor.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

@@ -1,6 +1,6 @@
 # Estado de saul-music-learning-objects
 
-> Registro vivo. Última actualización: 2026-11-24 («Lee la partitura» archivado y «Lee los compases» en su lugar, O23; antes, path básico a diez lecciones, camino visual y el doble de tiempo, O22; antes, seis diapositivas por lección y pregunta centrada en el teléfono, O21).
+> Registro vivo. Última actualización: 2026-11-24 (ruta Intermedio con diez lecciones y diez juegos, identidad por ruta y fondo animado, O24; antes, «Lee la partitura» archivado y «Lee los compases» en su lugar, O23; antes, path básico a diez lecciones, camino visual y el doble de tiempo, O22; antes, seis diapositivas por lección y pregunta centrada en el teléfono, O21).
 
 ## Paso actual
 
@@ -39,3 +39,4 @@
 2026-11-24 · seis diapositivas y pregunta centrada (O21, en PR) · las 8 lecciones de Aprende pasan a 6 diapositivas (13 nuevas) y `lo-kit` centra cada pregunta en pantallas de hasta 700 px; 101 pruebas · pendiente: revisar el texto nuevo y verlo en celular real (iPhone) · O21
 2026-11-24 · path básico a diez lecciones (O22, en PR) · sin Pulso en Aprende, tres juegos nuevos, camino visual y tiempo doble; 110 pruebas y recorrido en Chromium sin errores · pendiente: revisar el texto, celular real y oído · O22
 2026-11-24 · «Lee los compases» (O23, en PR) · se archiva `lo-read-chart` (escribir partituras es de admin; queda para un onboarding privado) y entra `lo-read-bars`, que enseña a leer la grilla (reparto de tiempos, orden, arco, gris, silencio, × 2, clave de tiempo y un cuarto de oído); misma posición en Aprende, 115 pruebas y recorrido en Chromium sin errores · pendiente: texto de la lección, oído del juego y celular real, por el usuario · O23
+2026-11-24 · ruta Intermedio (O24, en PR) · diez lecciones de 6 diapositivas con diagramas de guitarra y diez juegos (`lo-barre-chords` … `lo-study-song`) sobre `chord-core`; identidad visual por ruta (oro y jade) y fondo animado del hilo; 137 pruebas y recorrido de los diez juegos en Chromium sin errores · pendiente: el usuario revisa el plan de estudio de punta a punta (≈ 2 semanas) · O24

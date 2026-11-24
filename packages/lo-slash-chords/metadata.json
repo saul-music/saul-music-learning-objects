@@ -1,0 +1,67 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-slash-chords",
+  "version": "0.1.0",
+  "general": {
+    "title": "Acordes con bajo",
+    "subtitle": "G/B y D/F#",
+    "description": "Aprende qué significa la barra de G/B: el acorde es G y la nota más grave es B. Reconoce el bajo, su lugar en el acorde y cómo camina.",
+    "language": "es",
+    "keywords": [
+      "bajo",
+      "inversión",
+      "G/B",
+      "barra",
+      "línea de bajo"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-maj7-sixths",
+        "description": "maj7 y acordes de 6: los acordes que ahora llevan otra nota abajo."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Leer un acorde con bajo (X/Y), decir qué nota va abajo y qué lugar ocupa en el acorde.",
+    "content": [
+      {
+        "title": "La barra",
+        "text": "G/B se lee «G sobre B»: el acorde es G y el bajo es B."
+      },
+      {
+        "title": "El bajo no es la raíz",
+        "text": "Las notas son las mismas; cambia cuál suena más grave."
+      },
+      {
+        "title": "Para qué sirven",
+        "text": "Un bajo que baja de grado en grado conecta acordes: C, G/B, Am, Am/G."
+      },
+      {
+        "title": "Si no llegas",
+        "text": "Puedes tocar el acorde sin el bajo; pierdes la línea, no la armonía."
+      }
+    ],
+    "activity": "Diez preguntas: qué nota va en el bajo, qué lugar ocupa en el acorde, qué acorde forman unas notas con su bajo y cuál sigue en una línea de bajo.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

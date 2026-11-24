@@ -16,13 +16,11 @@ describe("lecciones", () => {
     }
   });
 
-  it("el path intermedio tiene diez lecciones de solo lectura (el juego de cada una llega en la segunda etapa)", () => {
-    const p = pathById("intermedio");
-    expect(p.lessons).toHaveLength(10);
-    for (const l of p.lessons) {
-      expect(l.oa, l.id).toBeUndefined();
-      expect(l.badge?.length, l.id).toBeGreaterThan(0);
-    }
+  it("el path intermedio tiene diez lecciones, cada una con su juego, en el orden del recorrido", () => {
+    expect(pathById("intermedio").lessons.map((l) => l.oa)).toEqual([
+      "lo-barre-chords", "lo-sevenths", "lo-maj7-sixths", "lo-slash-chords", "lo-passing-chords",
+      "lo-sus-add9", "lo-ninths", "lo-tensions", "lo-tonality", "lo-study-song",
+    ]);
   });
 
   it("el path básico tiene una lección por cada juego, en el orden del recorrido", () => {

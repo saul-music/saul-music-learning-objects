@@ -1,0 +1,8 @@
+/* Pieza de juego compartida de la ruta Intermedio. */
+.lo-cc { display: grid; gap: .6rem; justify-items: center; overflow-x: auto; width: 100%; }
+.lo-cc__line { margin: 0; font-weight: 700; color: var(--ac-fg-muted); font-size: 1.15rem; text-align: center; }
+.lo-cc__line b { color: var(--ac-fg); }
+.lo-cc--shapes { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.4rem; }
+.lo-cc__shape { margin: 0; display: grid; justify-items: center; gap: .1rem; }
+.lo-cc__shape .lo-cs__box { width: 9rem; height: auto; }
+.lo-cc__shape figcaption { font-size: 1.2rem; }
