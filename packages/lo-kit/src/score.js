@@ -5,8 +5,8 @@
 export const SCORING = {
   base: 7, // puntos por acierto
   speedMax: 3, // bono máximo por rapidez (base + bono = 10 como máximo)
-  speedWindow: 12000, // ms: después de esto el bono es 0 (no se pierde la pregunta)
-  fastMs: 3000, // responder antes de esto cuenta como «rápido»
+  speedWindow: 24000, // ms: después de esto el bono es 0 (no se pierde la pregunta). Era 12000; se dobló (O22)
+  fastMs: 6000, // responder antes de esto cuenta como «rápido» (era 3000; se dobló, O22)
   perAnswer: 10, // lo máximo que vale una respuesta
   perGame: 100, // lo máximo que vale una partida completa, sea cual sea el número de rondas
 };

@@ -1,0 +1,68 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-dim-aug",
+  "version": "0.1.0",
+  "general": {
+    "title": "Disminuidos y aumentados",
+    "subtitle": "Tríadas con la 5ª alterada",
+    "description": "Si la 5ª de un acorde baja medio tono, es disminuido (dim); si sube, aumentado (aug). Aprende cómo se forman a partir del menor y del mayor.",
+    "language": "es",
+    "keywords": [
+      "disminuido",
+      "aumentado",
+      "dim",
+      "aug",
+      "tríada",
+      "5ª"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "hard",
+    "typicalLearningTime": "PT5M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-arpeggios",
+        "description": "Escalera del acorde: 1ª, 3ª y 5ª del acorde."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Formar los acordes disminuidos y aumentados alterando la 5ª del menor y del mayor, y reconocerlos por sus notas.",
+    "content": [
+      {
+        "title": "Disminuido",
+        "text": "Como el menor (1 – 3m), pero con la 5ª disminuida: medio tono más abajo. Cdim = C – E♭ – G♭."
+      },
+      {
+        "title": "Aumentado",
+        "text": "Como el mayor (1 – 3M), pero con la 5ª aumentada: medio tono más arriba. Caug = C – E – G♯."
+      },
+      {
+        "title": "Cómo se escriben",
+        "text": "Con el sufijo dim y aug (a veces también con + para el aumentado)."
+      },
+      {
+        "title": "La ortografía",
+        "text": "Algunas notas llevan nombres menos comunes (E aug es E – G♯ – B♯): la letra sigue el orden 1ª, 3ª, 5ª."
+      }
+    ],
+    "activity": "Diez preguntas: reconocer el acorde por sus notas, decir la 5ª de un dim o un aug y qué cambia al pasar del mayor al aumentado o del menor al disminuido.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

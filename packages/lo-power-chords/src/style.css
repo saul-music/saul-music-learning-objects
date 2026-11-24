@@ -1,0 +1,3 @@
+/* OA «Acordes de quinta». */
+.lo-pw { display: grid; gap: .6rem; justify-items: center; overflow-x: auto; }
+.lo-pw__hint { margin: 0; font-weight: 700; color: var(--ac-fg-muted); font-size: 1.2rem; }

@@ -72,20 +72,24 @@ function pathView(path) {
       el("h1", {}, path.title),
       el("p", { class: "ap-lead" }, path.blurb),
       el("p", { class: "ap-total" }, `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas · ${s.points} puntos`)),
-    el("ol", { class: "ap-lessons" },
+    el("ol", { class: "ap-map" },
       path.lessons.map((l, i) => {
         const best = resultOf(state.progress, path.id, l.id);
         const oa = OBJECTS[l.oa];
-        return el("li", { class: `ap-lesson${best ? " is-played" : ""}${next?.id === l.id ? " is-next" : ""}` },
-          link(`#/${path.id}/${l.id}`, "ap-lesson__card",
-            el("span", { class: "ap-lesson__num", "aria-hidden": "true" }, String(i + 1)),
-            el("div", { class: "ap-lesson__body" },
-              el("h2", {}, rich(l.title)),
-              el("p", {}, rich(l.summary)),
-              el("p", { class: "ap-meta" }, `⏱ ${lessonMinutes(l, oa?.metadata.educational.typicalLearningTime)} min · ${l.slides.length} diapositivas y un juego`)),
-            el("div", { class: "ap-lesson__state" },
-              best ? [stars(best.stars), el("span", { class: "ap-meta" }, `${best.points} pts`)] : el("span", { class: "ap-meta" }, "Sin jugar"),
-              next?.id === l.id ? el("span", { class: "ap-badge" }, best ? "" : "Sigue aquí") : "")));
+        const href = `#/${path.id}/${l.id}`;
+        const isNext = next?.id === l.id;
+        return el("li", { class: `ap-step ${i % 2 ? "is-right" : "is-left"}${best ? " is-played" : ""}${isNext ? " is-next" : ""}`, style: `--i:${i}` },
+          link(href, "ap-step__card",
+            el("p", { class: "ap-step__kicker" }, `Lección ${i + 1}`),
+            el("h2", {}, rich(l.title)),
+            el("p", { class: "ap-step__desc" }, rich(l.summary)),
+            el("p", { class: "ap-step__meta" }, best ? [stars(best.stars), `${best.points} pts`] : "Sin jugar"),
+            el("p", { class: "ap-meta" }, `⏱ ${lessonMinutes(l, oa?.metadata.educational.typicalLearningTime)} min · ${l.slides.length} diapositivas y un juego`),
+            isNext ? el("span", { class: "ap-step__badge" }, best ? "" : "¡Sigue aquí!") : ""),
+          el("a", { href, class: "ap-step__node", tabindex: "-1", "aria-hidden": "true" },
+            el("span", { class: "ap-step__disc" }, oa?.cover ? el("img", { src: oa.cover, alt: "", loading: "lazy" }) : ""),
+            el("span", { class: "ap-step__num" }, String(i + 1))),
+          el("span", { class: "ap-step__spacer" }));
       })));
 }
 

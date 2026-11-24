@@ -1,0 +1,66 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-power-chords",
+  "version": "0.1.0",
+  "general": {
+    "title": "Acordes de quinta",
+    "subtitle": "X5: raíz y 5ª, sin 3ª",
+    "description": "Un acorde de quinta (E5, A5) usa solo la raíz y la 5ª. Sin 3ª, no es ni mayor ni menor. Aprende a reconocerlo y a escribirlo.",
+    "language": "es",
+    "keywords": [
+      "acorde de quinta",
+      "power chord",
+      "5ª",
+      "tríada"
+    ]
+  },
+  "educational": {
+    "learningResourceType": [
+      "exercise",
+      "questionnaire"
+    ],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT4M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-major-minor-ear",
+        "description": "Luz y sombra: la 3ª decide si el acorde es mayor o menor."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Reconocer que un acorde de quinta (X5) tiene solo raíz y 5ª, decir qué notas lo forman y distinguirlo del mayor y del menor.",
+    "content": [
+      {
+        "title": "La fórmula",
+        "text": "X5 = raíz + 5ª (7 semitonos). E5 son E y B."
+      },
+      {
+        "title": "Sin 3ª",
+        "text": "Al no tener 3ª, no es ni mayor ni menor: suena abierto y firme."
+      },
+      {
+        "title": "Cómo se escribe",
+        "text": "La letra con un 5: E5, A5, D5. Así aparece en las partituras de Acordia."
+      },
+      {
+        "title": "Frente al mayor y al menor",
+        "text": "De E o Em a E5 solo desaparece la 3ª."
+      }
+    ],
+    "activity": "Diez preguntas: reconocer el acorde por sus notas, decir qué notas forman un X5 y qué nota desaparece al pasar de un mayor o menor a uno de quinta.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

@@ -23,6 +23,6 @@ describe("catálogo público", () => {
     execFileSync("node", ["apps/aprende/scripts/lessons-json.mjs", dist]);
     const written = JSON.parse(readFileSync(join(dist, "lessons.json"), "utf8"));
     expect(written).toEqual(lessonsCatalog());
-    expect(written[0].lessons.length).toBe(8);
+    expect(written[0].lessons.length).toBe(10);
   });
 });

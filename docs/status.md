@@ -1,6 +1,6 @@
 # Estado de saul-music-learning-objects
 
-> Registro vivo. Última actualización: 2026-11-24 (seis diapositivas por lección y pregunta centrada en el teléfono, O21).
+> Registro vivo. Última actualización: 2026-11-24 (path básico a diez lecciones, camino visual y el doble de tiempo, O22; antes, seis diapositivas por lección y pregunta centrada en el teléfono, O21).
 
 ## Paso actual
 
@@ -12,6 +12,7 @@
 - Un solo sonido a la vez y cuenta regresiva sin recorte (O11).
 - Look de juego (O9): pantallas de título, cuenta regresiva, marcador con puntos y combo, resultados con estrellas
   y récord, mapa de niveles, tipografía musical (Petaluma, Noto Music), colores de ganar/perder y efectos de sonido.
+- Aprende: ruta Básico de diez lecciones (sin «Pulso»; con «Acordes de quinta», «Disminuidos y aumentados» y «Lee la partitura»), camino visual y bono de rapidez con el doble de tiempo (O22). 110 pruebas.
 
 ## Pendientes
 
@@ -36,3 +37,4 @@
 2026-11-24 · Aprende y Mi cuenta (O19, en PR) · publica `/aprende/lessons.json` (solo id y título), anota «continuar» al abrir una lección, deja la marca de sesión y enlaza a `/mi-acordia.html`; 96 pruebas y corrida de navegador · pendiente: cuenta real · O19, C45
 2026-11-24 · solo «Básico» (O20, en PR) · se quitan de la portada de Aprende las tarjetas «Pronto» de Intermedio y Avanzado; `COMING` vacío y fijado por una prueba · O20
 2026-11-24 · seis diapositivas y pregunta centrada (O21, en PR) · las 8 lecciones de Aprende pasan a 6 diapositivas (13 nuevas) y `lo-kit` centra cada pregunta en pantallas de hasta 700 px; 101 pruebas · pendiente: revisar el texto nuevo y verlo en celular real (iPhone) · O21
+2026-11-24 · path básico a diez lecciones (O22, en PR) · sin Pulso en Aprende, tres juegos nuevos, camino visual y tiempo doble; 110 pruebas y recorrido en Chromium sin errores · pendiente: revisar el texto, celular real y oído · O22
