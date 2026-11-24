@@ -548,59 +548,57 @@ export const BASICO = {
       ],
     },
     {
-      id: "lee-la-partitura",
-      oa: "lo-read-chart",
-      title: "Lee la partitura",
-      summary: "Cómo se lee una línea de acordes: compases, %, _, . y x2.",
+      id: "lee-los-compases",
+      oa: "lo-read-bars",
+      title: "Lee los compases",
+      summary: "Cómo se lee la grilla de un tema: casillas, tiempos, orden, arco, silencio y × 2.",
       readMinutes: 4,
       slides: [
         {
-          title: "Un acorde por compás",
+          title: "Una casilla, un compás",
           text: [
-            "En Acordia una sección es una línea de compases separados por espacios. Cada espacio es un compás.",
-            "Un acorde solo ocupa todo el compás: en 4/4 son 4 tiempos. «Estrofa: C G Am F» son cuatro compases.",
+            "En la página de un tema, los acordes están en una grilla de casillas. Cada casilla es un compás.",
+            "Un acorde solo ocupa toda la casilla: en 4/4 son 4 tiempos. Cuatro casillas con acordes distintos son cuatro compases.",
+          ],
+        },
+        {
+          title: "Varios acordes en una casilla",
+          text: [
+            "Si una casilla tiene dos acordes, se reparten el ancho en partes iguales: cada uno dura 2 tiempos en 4/4.",
+            "Con cuatro acordes, uno por tiempo. Y si un acorde se ve más ancho que otro, dura más: el ancho de cada parte es su duración.",
           ],
           figure: {
             type: "table",
-            head: ["Compás", "Acorde", "Tiempos"],
-            rows: [["1", "C", "4"], ["2", "G", "4"], ["3", "Am", "4"], ["4", "F", "4"]],
+            head: ["En la casilla", "Cada acorde dura"],
+            rows: [["1 acorde (4/4)", "4 tiempos"], ["2 acordes (4/4)", "2 tiempos"], ["4 acordes (4/4)", "1 tiempo"], ["3 acordes (3/4)", "1 tiempo"]],
           },
         },
         {
-          title: "El guion parte el compás",
-          text: ["Un guion divide el compás en partes iguales. Cada parte dura lo mismo."],
-          figure: {
-            type: "table",
-            head: ["Se escribe", "Cada acorde dura"],
-            rows: [["C-G (4/4)", "2 tiempos"], ["C-G-Am-F (4/4)", "1 tiempo"], ["C-G-Am (3/4)", "1 tiempo"]],
-          },
-        },
-        {
-          title: "El % repite",
+          title: "En qué orden se lee",
           text: [
-            "Un % solo repite el compás anterior: «C % G %» son cuatro compases, C, C, G y G.",
-            "Dentro de un compás partido, el % alarga el acorde anterior: «C-%-G-Am» es C 2 tiempos, G 1 y Am 1.",
+            "La grilla se lee como un texto: de izquierda a derecha, y al terminar una fila se sigue con la de abajo.",
+            "Con 4 casillas por fila, la primera casilla de la segunda fila es el compás 5.",
           ],
         },
         {
-          title: "El _ liga y el . calla",
+          title: "Arco, gris y silencio",
           text: [
-            "El _ liga: el acorde anterior sigue sonando sin volver a tocarlo. «G-_-C-D»: G dura 2 tiempos con un solo golpe.",
-            "El . es un silencio: «G-.» son 2 tiempos de G y 2 de silencio. Solo, es un compás entero en silencio.",
+            "Un arco junto a un acorde atenuado es un ligado: ese acorde sigue sonando, sin volver a tocarlo.",
+            "Un acorde en gris es una casilla que repite el compás anterior. Y el ícono de silencio es un tiempo en que no suena nada.",
           ],
         },
         {
-          title: "Secciones y x2",
+          title: "Secciones y clave de tiempo",
           text: [
-            "Cada línea lleva el nombre de la sección y dos puntos: Intro, Estrofa, Coro, Puente, Final.",
-            "Un x2 junto al nombre toca toda la sección dos veces: «Coro x2: C G Am F» son 8 compases en total.",
+            "Cada grupo de casillas lleva el nombre de su sección: Intro, Estrofa, Coro, Puente. Un × 2 junto al nombre toca la sección dos veces.",
+            "El número de la esquina, como 4/4 o 3/4, dice cuántos tiempos tiene cada compás. En 3/4 se cuenta 1, 2, 3.",
           ],
         },
         {
-          title: "Ya puedes leer una canción",
+          title: "Ya puedes leer un tema",
           text: [
-            "Recorre cada línea compás a compás: ¿cuántos acordes tiene?, ¿hay guiones, %, _ o puntos?, ¿cuántas veces se toca?",
-            "Con las notas, los acordes mayores, menores y de quinta y estas marcas, ya puedes leer la versión simplificada de los temas de la Biblioteca.",
+            "Recorre la grilla casilla a casilla: ¿cuántos acordes hay?, ¿hay arco, gris o silencio?, ¿cuántas veces se repite la sección?",
+            "Con las notas, los acordes mayores, menores y de quinta y esta lectura, ya puedes seguir la versión simplificada de los temas de la Biblioteca.",
           ],
         },
       ],

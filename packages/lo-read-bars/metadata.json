@@ -1,0 +1,46 @@
+{
+  "$comment": "Metadatos del OA: subconjunto de IEEE LOM 1484.12.1 (estructura externa) más sus componentes internos (objetivo, contenido, actividad, evaluación).",
+  "id": "lo-read-bars",
+  "version": "0.1.0",
+  "general": {
+    "title": "Lee los compases",
+    "subtitle": "La grilla de un tema",
+    "description": "Aprende a leer la grilla de acordes de un tema: qué es una casilla, cuánto dura cada acorde, en qué orden se lee, qué dicen el arco, el gris y el silencio, y cómo se cuenta una sección repetida.",
+    "language": "es",
+    "keywords": ["compás", "grilla", "acordes", "ligado", "silencio", "clave de tiempo"]
+  },
+  "educational": {
+    "learningResourceType": ["exercise", "questionnaire"],
+    "interactivityType": "active",
+    "interactivityLevel": "medium",
+    "intendedEndUserRole": "learner",
+    "difficulty": "medium",
+    "typicalLearningTime": "PT6M",
+    "instrument": "theory"
+  },
+  "rights": {
+    "cost": "no",
+    "copyrightAndOtherRestrictions": "yes",
+    "description": "© 2026 Acordia (SAÚL música). Licencia CC BY 4.0: se puede usar y adaptar dando crédito. Muestras de guitarra: FluidR3_GM (CC BY 3.0)."
+  },
+  "relation": [
+    {
+      "kind": "requires",
+      "resource": {
+        "identifier": "lo-chord-shapes",
+        "description": "Manos de acorde: cómo se tocan los acordes que vas a leer."
+      }
+    }
+  ],
+  "pedagogy": {
+    "objective": "Leer la grilla de acordes de un tema: cuánto dura cada acorde, en qué orden se lee y qué significan el arco, el gris, el silencio, la clave de tiempo y el × 2.",
+    "content": [
+      { "title": "Una casilla, un compás", "text": "Cada casilla es un compás. Un acorde solo ocupa todo el compás; dos o más se reparten el ancho y, con él, los tiempos." },
+      { "title": "El orden", "text": "Se lee por filas, de izquierda a derecha; al terminar una fila se sigue con la de abajo." },
+      { "title": "Arco, gris y silencio", "text": "El arco liga: el acorde sigue sonando. Un acorde en gris repite el compás anterior. El ícono de silencio es un tiempo sin sonido." },
+      { "title": "Secciones y clave de tiempo", "text": "El × 2 junto al título toca la sección dos veces. El 4/4 o 3/4 de la esquina dice cuántos tiempos tiene cada compás." }
+    ],
+    "activity": "Diez preguntas: cuántos tiempos dura un acorde, qué número de compás es una casilla, qué acorde sigue al terminar una fila, qué dice cada símbolo, cuántos compases suenan en una sección repetida, cuántos tiempos tiene un compás y, de oído, qué casilla es la que suena.",
+    "evaluation": "Retroalimentación inmediata con la figura y el sonido; al final, el puntaje y un repaso de los errores."
+  }
+}

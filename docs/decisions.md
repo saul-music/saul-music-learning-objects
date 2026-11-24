@@ -186,3 +186,12 @@ Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de 
 - **Tiempo doble:** la ventana del bono de rapidez pasa de 12 a 24 s y «rápido» de 3 a 6 s. Sigue sin perder la pregunta por tiempo (duda 1 de O9 resuelta: no hay modo contrarreloj). El récord guardado no cambia de escala.
 - **Camino visual:** la ruta ya no es una lista de tarjetas: nodos con la portada del juego, tarjetas a izquierda y derecha, línea punteada, estado jugado (jade) y siguiente (oro, con «¡Sigue aquí!»), como el mapa de niveles del playground. No bloquea el orden. Los tres juegos nuevos también están en el playground, antes de «Pulso».
 - **Sin comprobar:** el texto nuevo de las lecciones lo revisa el usuario; celular real, iPhone y audio de los tres juegos a oído; el camino con una cuenta real en producción.
+
+## O23 · «Lee la partitura» se archiva y entra «Lee los compases» (2026-11-24)
+
+**Decisión del usuario.** Quien aprende no escribe partituras: escribir con la notación de Acordia es trabajo del equipo editorial. Ese juego servirá más adelante para un onboarding privado.
+
+- **Archivado:** `lo-read-chart` queda en `packages/` con sus pruebas y una nota de archivado (`metadata.json` y README), sin carpeta nueva. Ya no se importa ni en Aprende ni en el playground.
+- **Nuevo OA `lo-read-bars` («Lee los compases»):** enseña a leer la grilla que ve quien toca un tema: la casilla es un compás; el reparto de tiempos (el ancho de cada parte es su duración); el orden de lectura (por filas, de izquierda a derecha); el arco (ligado), el acorde en gris (repite el compás anterior) y el ícono de silencio; el «× 2» de una sección; y la clave de tiempo (4/4 y 3/4). Una de cada diez preguntas es de oído (suena un compás con clic y se elige la casilla que lo dibuja). Las figuras se dibujan como las del sitio y **no aparece texto de partitura** (`%`, `_`, `.`, guiones). 6/8 queda fuera.
+- **Aprende:** la lección `lee-la-partitura` se reemplaza por `lee-los-compases` en la misma posición (sigue en diez lecciones de seis diapositivas). El avance guardado de la lección vieja no cuenta en la ruta.
+- **Sin comprobar:** el texto de la lección, el oído del juego y celular real, a cargo del usuario.
