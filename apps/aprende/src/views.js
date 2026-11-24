@@ -1,14 +1,22 @@
 // Piezas de pantalla de Aprende. Todo texto entra al DOM con nodos de texto (`el`/`rich`), nunca con innerHTML.
-import { drawKeyboard, el, LETTERS, noteLabel, rich, spoken, starIcon } from "@saul-music/lo-kit";
+import { drawChordBox } from "@saul-music/lo-chord-shapes";
+import { chordLabel, drawKeyboard, el, LETTERS, noteLabel, rich, spoken, starIcon } from "@saul-music/lo-kit";
 
 export const stars = (n) => el("span", { class: "ap-stars", role: "img", "aria-label": `${n} de 3 estrellas` }, [0, 1, 2].map((i) => starIcon(i < n)));
 
-/** Dibuja la figura de una diapositiva (ver lessons/basico.js). */
+/** Dibuja la figura de una diapositiva (ver lessons/basico.js y lessons/intermedio.js). */
 export function figureNode(figure) {
   if (figure.type === "keyboard") return el("div", { class: "ap-figure" }, drawKeyboard(figure));
   if (figure.type === "notes") {
     return el("div", { class: "ap-figure lo-keys" },
       LETTERS.map((n, k) => el("span", { class: "lo-key", style: `--k:${k}` }, noteLabel(n), el("small", {}, spoken(n)))));
+  }
+  if (figure.type === "chords") {
+    // Diagramas de guitarra: { type: "chords", items: [{ name, shape: { f, d, b }, note? }] } (f = traste por cuerda de la 6ª a la 1ª)
+    return el("div", { class: "ap-figure ap-chords" },
+      figure.items.map((it) => el("figure", { class: "ap-chord" },
+        drawChordBox(it.shape, { label: `Diagrama de ${it.name}` }),
+        el("figcaption", {}, el("b", {}, chordLabel(it.name)), it.note ? el("small", {}, rich(it.note)) : ""))));
   }
   return el("table", { class: "ap-table" },
     el("thead", {}, el("tr", {}, figure.head.map((h) => el("th", { scope: "col" }, rich(h))))),

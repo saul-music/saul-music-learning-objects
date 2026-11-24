@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:preview": "VITE_LOCAL_PREVIEW=1 vite --port 5180",
     "build": "vite build && node scripts/lessons-json.mjs",
     "preview": "vite preview"
   },

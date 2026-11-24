@@ -106,3 +106,15 @@ a.ap-path__card:hover { border-color: var(--ac-accent); }
 .ap-message p { margin: 0; color: var(--ac-fg-muted); font-size: 1.15rem; }
 
 @media (prefers-reduced-motion: reduce) { .ap-slide, .ap-step, .ap-step__node, .ap-step__badge { animation: none; transition: none; } }
+
+/* Lecciones de solo lectura (Intermedio): el disco lleva una insignia en lugar de la portada del juego */
+.ap-step__disc.is-badge { display: grid; place-items: center; }
+.ap-step__badgeText { text-decoration: none; font-family: var(--ac-font-display); font-size: 2.1rem; line-height: 1; color: var(--ac-accent); text-align: center; padding: 0 .4rem; overflow-wrap: anywhere; }
+@media (max-width: 760px) { .ap-step__badgeText { font-size: 1.5rem; } }
+
+/* Diagramas de acorde de las diapositivas */
+.ap-chords { display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; align-items: flex-start; }
+.ap-chord { margin: 0; display: grid; justify-items: center; gap: .15rem; }
+.ap-chord .lo-cs__box { width: 7.2rem; height: auto; }
+.ap-chord figcaption { display: grid; justify-items: center; text-align: center; font-size: 1.25rem; }
+.ap-chord figcaption small { font-size: .78rem; color: var(--ac-fg-muted); max-width: 8rem; }
