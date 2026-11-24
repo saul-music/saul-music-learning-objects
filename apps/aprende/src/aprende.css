@@ -138,3 +138,22 @@ a.ap-path__card:hover, a.ap-path__card:focus-visible { transform: translateY(-4p
 .ap-lesson-host .ap-slide { border-top: 6px solid var(--tone, var(--ac-line)); }
 .ap-lesson-host .ap-slide .ap-kicker { color: var(--tone, var(--ac-second)); }
 [data-path="intermedio"] .ap-dots li.is-done { background: var(--tone); opacity: .5; } /* en Intermedio «hecho» y «aquí» eran del mismo jade */
+
+/* El hilo de la ruta vive dentro de un escenario con pentagrama y figuras que flotan despacio (backdrop.js). Estilo plano. */
+.ap-stage { position: relative; overflow: hidden; margin-top: 1rem; padding: 2.4rem clamp(.6rem, 3vw, 2rem) 2.6rem; border: 2px solid var(--ac-line); border-radius: 28px; isolation: isolate;
+  background-color: color-mix(in srgb, var(--tone, var(--ac-accent)) 7%, var(--ac-bg)); }
+.ap-stage .ap-map { margin-top: 0; z-index: 1; }
+.ap-stage .ap-map::before { border-left-color: color-mix(in srgb, var(--tone, var(--ac-line)) 55%, var(--ac-bg)); }
+.ap-backdrop { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  /* pentagramas repetidos: cinco líneas finas cada 170px */
+  background-image: linear-gradient(to bottom, transparent 0 48px, var(--ap-line) 48px 50px, transparent 50px 62px, var(--ap-line) 62px 64px, transparent 64px 76px, var(--ap-line) 76px 78px, transparent 78px 90px, var(--ap-line) 90px 92px, transparent 92px 104px, var(--ap-line) 104px 106px, transparent 106px);
+  background-size: 100% 170px; --ap-line: color-mix(in srgb, var(--tone, var(--ac-accent)) 16%, transparent); }
+.ap-fig { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); color: var(--tone, var(--ac-accent)); opacity: var(--o, .2);
+  transform: rotate(var(--r, 0deg)); animation: ap-drift var(--d, 14s) ease-in-out var(--delay, 0s) infinite alternate; }
+.ap-fig svg { display: block; width: 100%; height: 100%; }
+.ap-fig.is-label { width: auto; height: auto; font: 400 calc(var(--s) * .8) / 1 var(--ac-font-display); white-space: nowrap; }
+@keyframes ap-drift {
+  from { transform: translate(0, 0) rotate(var(--r, 0deg)); }
+  to { transform: translate(22px, -34px) rotate(calc(var(--r, 0deg) * -1 - 8deg)); }
+}
+@media (prefers-reduced-motion: reduce) { .ap-fig { animation: none; } }

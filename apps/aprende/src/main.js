@@ -9,6 +9,7 @@ import { shapeMidis } from "@saul-music/lo-chord-shapes";
 import { el, rich } from "@saul-music/lo-kit";
 import { ApiError, createApi } from "./api.js";
 import { createAuth } from "./auth.js";
+import { backdrop } from "./backdrop.js";
 import { previewApi } from "./preview.js";
 import { COMING, PATHS, lessonById, pathById } from "./lessons/index.js";
 import { OBJECTS } from "./objects.js";
@@ -88,6 +89,8 @@ function pathView(path) {
       el("h1", {}, path.title),
       el("p", { class: "ap-lead" }, path.blurb),
       el("p", { class: "ap-total" }, s.total ? `${s.played}/${s.total} lecciones · ${s.stars}/${s.maxStars} estrellas · ${s.points} puntos` : `${path.lessons.length} lecciones de lectura`)),
+    el("div", { class: "ap-stage" },
+      backdrop(path.id),
     el("ol", { class: "ap-map" },
       path.lessons.map((l, i) => {
         const best = resultOf(state.progress, path.id, l.id);
@@ -106,7 +109,7 @@ function pathView(path) {
             el("span", { class: `ap-step__disc${oa ? "" : " is-badge"}` }, oa?.cover ? el("img", { src: oa.cover, alt: "", loading: "lazy" }) : el("span", { class: "ap-step__badgeText" }, l.badge ?? "♪")),
             el("span", { class: "ap-step__num" }, String(i + 1))),
           el("span", { class: "ap-step__spacer" }));
-      })));
+      }))));
 }
 
 // --- una lección: diapositivas y, al final, el juego
