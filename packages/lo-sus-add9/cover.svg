@@ -3,7 +3,21 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="186" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="72" fill="#d4a64a">sus</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <circle cx="165" cy="200" r="11" fill="#d4a64a"/>
+  <circle cx="165" cy="110" r="11" fill="#d4a64a"/>
+  <circle cx="165" cy="155" r="11" fill="#5fb39b"/>
+  <text x="165" y="236" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="22" fill="#bcb5cc" >D</text>
+  <circle cx="240" cy="200" r="11" fill="#d4a64a"/>
+  <circle cx="240" cy="110" r="11" fill="#d4a64a"/>
+  <circle cx="240" cy="125" r="11" fill="#5fb39b"/>
+  <text x="240" y="236" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="22" fill="#bcb5cc" >Dsus4</text>
+  <circle cx="315" cy="200" r="11" fill="#d4a64a"/>
+  <circle cx="315" cy="110" r="11" fill="#d4a64a"/>
+  <circle cx="315" cy="185" r="11" fill="#5fb39b"/>
+  <text x="315" y="236" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="22" fill="#bcb5cc" >Dsus2</text>
+  <path d="M185 150H220M213 144l8 6-8 6" fill="none" stroke="#f1ece2" stroke-width="3" stroke-linecap="round"/><path d="M260 150H295M288 144l8 6-8 6" fill="none" stroke="#f1ece2" stroke-width="3" stroke-linecap="round"/>
+  <text x="240" y="78" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="34" fill="#d4a64a" >sus</text>
+  </g>
 </svg>

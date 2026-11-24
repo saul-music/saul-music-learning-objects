@@ -3,7 +3,19 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="181" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="54" fill="#d4a64a">I IV V</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <polygon points="240.0,74.0 299.4,102.6 314.1,166.9 273.0,218.5 207.0,218.5 165.9,166.9 180.6,102.6" fill="none" stroke="#5fb39b" stroke-width="2.5" stroke-linejoin="round" opacity=".7"/>
+  <circle cx="240.0" cy="74.0" r="15" fill="#d4a64a"/>
+  <text x="240.0" y="79.0" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="15" fill="#191430" font-weight="800">I</text>
+  <circle cx="299.4" cy="102.6" r="8" fill="#5fb39b"/>
+  <circle cx="314.1" cy="166.9" r="8" fill="#5fb39b"/>
+  <circle cx="273.0" cy="218.5" r="15" fill="#d4a64a"/>
+  <text x="273.0" y="223.5" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="15" fill="#191430" font-weight="800">IV</text>
+  <circle cx="207.0" cy="218.5" r="15" fill="#d4a64a"/>
+  <text x="207.0" y="223.5" text-anchor="middle" font-family="Work Sans, system-ui, sans-serif" font-size="15" fill="#191430" font-weight="800">V</text>
+  <circle cx="165.9" cy="166.9" r="8" fill="#5fb39b"/>
+  <circle cx="180.6" cy="102.6" r="8" fill="#5fb39b"/>
+  <text x="240" y="166" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="48" fill="#f1ece2" >C</text>
+  </g>
 </svg>

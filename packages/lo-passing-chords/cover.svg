@@ -3,7 +3,21 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="186" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="72" fill="#d4a64a">dim7</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <circle cx="240.0" cy="72.0" r="9" fill="#d4a64a"/>
+  <circle cx="279.0" cy="82.5" r="4" fill="#342c5c"/>
+  <circle cx="307.5" cy="111.0" r="4" fill="#342c5c"/>
+  <circle cx="318.0" cy="150.0" r="9" fill="#d4a64a"/>
+  <circle cx="307.5" cy="189.0" r="4" fill="#342c5c"/>
+  <circle cx="279.0" cy="217.5" r="4" fill="#342c5c"/>
+  <circle cx="240.0" cy="228.0" r="9" fill="#d4a64a"/>
+  <circle cx="201.0" cy="217.5" r="4" fill="#342c5c"/>
+  <circle cx="172.5" cy="189.0" r="4" fill="#342c5c"/>
+  <circle cx="162.0" cy="150.0" r="9" fill="#d4a64a"/>
+  <circle cx="172.5" cy="111.0" r="4" fill="#342c5c"/>
+  <circle cx="201.0" cy="82.5" r="4" fill="#342c5c"/>
+  <polygon points="240.0,72.0 318.0,150.0 240.0,228.0 162.0,150.0" fill="none" stroke="#5fb39b" stroke-width="3" stroke-linejoin="round"/>
+  <text x="240" y="162" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="34" fill="#f1ece2" >dim7</text>
+  </g>
 </svg>
