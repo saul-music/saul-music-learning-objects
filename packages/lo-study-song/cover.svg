@@ -3,7 +3,11 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="192" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="96" fill="#d4a64a">▶</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <circle cx="240" cy="150" r="70" fill="none" stroke="#5fb39b" stroke-width="8" stroke-dasharray="330 110" stroke-linecap="round" transform="rotate(-60 240 150)"/>
+  <path d="M300 92l22-4-4 22" fill="none" stroke="#5fb39b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M222 118L270 150 222 182Z" fill="#d4a64a" stroke="#d4a64a" stroke-width="8" stroke-linejoin="round"/>
+  <g fill="#bcb5cc"><rect x="170" y="236" width="18" height="10" rx="3"/><rect x="198" y="230" width="18" height="16" rx="3"/><rect x="226" y="224" width="18" height="22" rx="3"/><rect x="254" y="218" width="18" height="28" rx="3"/><rect x="282" y="212" width="18" height="34" rx="3"/></g>
+  </g>
 </svg>

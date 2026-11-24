@@ -3,7 +3,24 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="192" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="96" fill="#d4a64a">F</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <line x1="170" y1="100" x2="290" y2="100" stroke="#f1ece2" stroke-width="6"/>
+  <line x1="170" y1="132" x2="290" y2="132" stroke="#342c5c" stroke-width="2"/>
+  <line x1="170" y1="164" x2="290" y2="164" stroke="#342c5c" stroke-width="2"/>
+  <line x1="170" y1="196" x2="290" y2="196" stroke="#342c5c" stroke-width="2"/>
+  <line x1="170" y1="228" x2="290" y2="228" stroke="#342c5c" stroke-width="2"/>
+  <line x1="170" y1="100" x2="170" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="194" y1="100" x2="194" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="218" y1="100" x2="218" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="242" y1="100" x2="242" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="266" y1="100" x2="266" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="290" y1="100" x2="290" y2="228" stroke="#bcb5cc" stroke-width="1.6"/>
+  <rect x="160" y="108" width="140" height="22" rx="11" fill="#d4a64a"/>
+  <circle cx="194" cy="180" r="9" fill="#d4a64a"/>
+  <circle cx="218" cy="180" r="9" fill="#d4a64a"/>
+  <circle cx="242" cy="148" r="9" fill="#5fb39b"/>
+  <text x="240" y="82" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="30" fill="#d4a64a" >F</text>
+  <g fill="none" stroke="#5fb39b" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M318 150q16 18 0 36"/><path d="M330 140q26 28 0 56"/></g>
+  </g>
 </svg>

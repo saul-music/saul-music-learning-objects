@@ -3,7 +3,20 @@
   <!-- Portada de la galería. Colores de los tokens de Acordia (noche, marfil, oro, jade). -->
   <rect width="480" height="300" fill="#191430"/>
   <circle cx="60" cy="52" r="3" fill="#342c5c"/><circle cx="420" cy="70" r="4" fill="#342c5c"/><circle cx="395" cy="250" r="3" fill="#342c5c"/><circle cx="88" cy="236" r="4" fill="#342c5c"/>
-  <rect x="110" y="70" width="260" height="160" rx="18" fill="#221c40" stroke="#5fb39b" stroke-width="2"/>
-  <text x="240" y="192" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="96" fill="#d4a64a">7</text>
-  <path d="M150 208 H330" stroke="#5fb39b" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <g transform="translate(240 150) scale(1.2) translate(-240 -150)">
+  <rect x="125" y="40" width="230" height="220" rx="24" fill="#221c40" stroke="#342c5c" stroke-width="2"/>
+  <line x1="160" y1="110" x2="330" y2="110" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="160" y1="130" x2="330" y2="130" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="160" y1="150" x2="330" y2="150" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="160" y1="170" x2="330" y2="170" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="160" y1="190" x2="330" y2="190" stroke="#bcb5cc" stroke-width="1.6"/>
+  <line x1="216" y1="190" x2="264" y2="190" stroke="#bcb5cc" stroke-width="1.6"/>
+  <ellipse cx="240" cy="190" rx="11" ry="8" fill="#d4a64a" transform="rotate(-20 240 190)"/>
+  <ellipse cx="240" cy="170" rx="11" ry="8" fill="#d4a64a" transform="rotate(-20 240 170)"/>
+  <ellipse cx="240" cy="150" rx="11" ry="8" fill="#d4a64a" transform="rotate(-20 240 150)"/>
+  <ellipse cx="240" cy="130" rx="11" ry="8" fill="#5fb39b" transform="rotate(-20 240 130)"/>
+  <path d="M251 130V70" stroke="#5fb39b" stroke-width="3"/>
+  <g transform="translate(196 111) scale(.8)" fill="none" stroke="#5fb39b" stroke-width="2.8" stroke-linecap="round"><path d="M13 4V33C24 28 31 22 24 17 20 14 14 18 13 24"/></g>
+  <text x="240" y="236" text-anchor="middle" font-family="Marcellus, Georgia, serif" font-size="34" fill="#d4a64a" >C7</text>
+  </g>
 </svg>
