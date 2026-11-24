@@ -169,3 +169,9 @@ Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de 
 
 **Decisión del usuario.** Se quitan de la portada de Aprende las tarjetas «Pronto» de Intermedio y Avanzado (C32 las anunciaba): hoy solo existe **Básico** y no se anuncia nada que no exista. `COMING` queda vacío y una prueba lo fija; para anunciar una ruta futura se agrega ahí. Los destinos por nivel del botón «Aprende teoría» siguen yendo al path básico.
 
+
+## O21 · Seis diapositivas por lección y pregunta centrada en el teléfono (2026-11-24)
+
+- **Decisión (del usuario):** todas las lecciones de Aprende tienen exactamente 6 diapositivas antes del juego (antes, de 3 a 5), y en el teléfono cada pregunta del juego se centra en la pantalla.
+- **Contenido:** 13 diapositivas nuevas, originales, en clave americana y sin datos de terceros. La prueba de `lessons.test.js` exige 6 (antes aceptaba de 3 a 6). Su exactitud teórica la revisa el usuario.
+- **Centrado:** `centerOnPhone` en `lo-kit` (`scrollIntoView` al centro) tras renderizar cada pregunta nueva, solo con ancho ≤ 700 px y sin animación con `prefers-reduced-motion`. Va en el kit, así que lo heredan los ocho juegos. No se mueve la pantalla al responder, solo al aparecer la pregunta.

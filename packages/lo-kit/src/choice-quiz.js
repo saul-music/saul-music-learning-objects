@@ -3,7 +3,7 @@
 import { el } from "./dom.js";
 import { renderIntro } from "./intro.js";
 import { chordLabel, noteLabel } from "./notes.js";
-import { celebrate, countdown, createRun, createShell, feedback, hud, questionCard, renderResults, rich } from "./quiz.js";
+import { celebrate, centerOnPhone, countdown, createRun, createShell, feedback, hud, questionCard, renderResults, rich } from "./quiz.js";
 import { loadBest, saveResult } from "./score.js";
 
 /**
@@ -62,6 +62,7 @@ export function mountChoiceQuiz(container, { metadata, sampler, sfx, cover, next
     q = makeQuestion(Math.random);
     fresh = true;
     render(null);
+    centerOnPhone(screen);
     run.startQuestion();
     q.onShow?.(sampler);
   }

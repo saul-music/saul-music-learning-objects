@@ -98,6 +98,17 @@ export function hud(run, { sfx, answered = false, gained = 0, timer = true } = {
     el("div", { class: `lo-timer${answered ? " is-stopped" : ""}`, role: "presentation", title: "Bono por rapidez" }, fill));
 }
 
+/**
+ * En el teléfono, centra la pregunta en la pantalla (la tarjeta, las alternativas y el marcador quedan a la vista).
+ * Solo con ancho de teléfono; en escritorio no hace nada. Sin animación si se pidió menos movimiento.
+ */
+export function centerOnPhone(node, win = globalThis.window) {
+  if (!node?.scrollIntoView || !win?.matchMedia || !win.matchMedia("(max-width: 700px)").matches) return false;
+  const calm = win.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  node.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" });
+  return true;
+}
+
 /** Tarjeta grande de la pregunta. `big` y `ask` pueden ser texto o nodos. */
 export function questionCard({ eyebrow, big, spoken, sub, ask, entering, bigClass = "" }) {
   return el("div", { class: `lo-card${entering ? " is-entering" : ""}` },

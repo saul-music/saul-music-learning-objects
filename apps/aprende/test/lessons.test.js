@@ -31,10 +31,9 @@ describe("lecciones", () => {
     }
   });
 
-  it("cada lección tiene de 3 a 6 diapositivas con título y texto", () => {
+  it("cada lección tiene exactamente 6 diapositivas con título y texto", () => {
     for (const { lesson } of lessons) {
-      expect(lesson.slides.length, lesson.id).toBeGreaterThanOrEqual(3);
-      expect(lesson.slides.length, lesson.id).toBeLessThanOrEqual(6);
+      expect(lesson.slides.length, lesson.id).toBe(6);
       for (const s of lesson.slides) {
         expect(s.title?.length, `${lesson.id}: título`).toBeGreaterThan(0);
         expect(s.text.length, `${lesson.id}/${s.title}`).toBeGreaterThan(0);
