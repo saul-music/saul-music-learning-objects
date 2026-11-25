@@ -248,11 +248,14 @@ async function boot() {
     state.auth.user ? localStorage.setItem("acordia-session", "1") : localStorage.removeItem("acordia-session");
   } catch { /* sin almacenamiento */ }
   if (!state.auth.user) {
-    return show(messageView({
+    // Sin sesión no hay nada que ver: directo a entrar, y de vuelta aquí (misma ruta) al terminar. La pantalla queda de respaldo
+    // por si el navegador no deja redirigir.
+    show(messageView({
       title: "Entra para aprender",
       text: "Aprende guarda tu avance en tu cuenta, así que necesitas una (es gratis y puedes eliminarla cuando quieras).",
       action: { href: LOGIN(), label: "Entrar o crear mi cuenta" },
     }));
+    return location.replace(LOGIN());
   }
   document.getElementById("ap-account").hidden = false;
   state.api = createApi({ getToken: state.auth.getToken });

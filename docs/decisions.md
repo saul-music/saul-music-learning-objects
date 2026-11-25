@@ -209,3 +209,8 @@ Accesibilidad de Aprende: al avanzar o retroceder, el foco pasa al **título de 
 - **Las lecciones sin juego siguen soportadas** (`oa` opcional; no cuentan para estrellas) aunque hoy todas tienen uno, y `npm run dev:preview` abre Aprende sin sesión para revisar en local (solo si se define `VITE_LOCAL_PREVIEW`; el pipeline no la define).
 - **El servidor no cambia:** el avance acepta `intermedio` y los ids de lección (≤ 24 letras y guiones), y los límites (20 rutas, 200 lecciones) alcanzan.
 - **Sin comprobar:** el texto de las 60 diapositivas y la teoría de los juegos los revisa el usuario durante unas dos semanas de pruebas de punta a punta; los números de dedos de algunos diagramas (formas armadas a mano; en los complejos van sin dedos); el oído de las preguntas «de oído»; celular real e iPhone; la ruta con una cuenta real en producción.
+
+## O25 · Aprende sin sesión salta directo a entrar (2026-11-25)
+
+**Contexto:** sin sesión, Aprende mostraba «Entra para aprender» con un botón que llevaba a `/entrar.html`: dos pasos.
+**Decisión:** `main.js` redirige con `location.replace` a `/entrar.html?volver=/aprende/<ruta>`; la página de entrada devuelve a la misma ruta al terminar. La pantalla queda de respaldo. Sin cambio en «Un paso más» (falta aceptar el aviso) ni en «Entrar de nuevo» (sesión no reconocida), que explican algo. Comprobado con una compilación de prueba y Firebase simulado sin usuario: de `/aprende/` y de `/aprende/#/basico/ritmo` va a entrar con la ruta intacta.
